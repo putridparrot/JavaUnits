@@ -1,4 +1,4 @@
-name: Build # see https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs-or-python
+name: Build # see https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
 
 on:
   push:
