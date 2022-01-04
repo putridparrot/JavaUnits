@@ -6,8 +6,6 @@
 
 package com.putridparrot.units;
 
-import java.lang.Math;
-
 /**
  * Angle conversion functions
  */
