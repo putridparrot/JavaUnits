@@ -6,107 +6,180 @@
 
 package com.putridparrot.units;
 
-import org.junit.jupiter.api.Nested;
+import net.jqwik.api.constraints.DoubleRange;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import net.jqwik.api.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TemperatureTests {
-	@Nested
-	public class CelsiusTests {
-		@ParameterizedTest
-		@CsvSource({ "32.0,89.6","0.9,33.62","0.0,32.0" })
-		public void testConvertKnownCelsiusToFahrenheit(double input, double expectation) {
-			final double result = Temperature.Celsius.toFahrenheit(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "1.0,274.15","9.9,283.05","100.0,373.15" })
-		public void testConvertKnownCelsiusToKelvin(double input, double expectation) {
-			final double result = Temperature.Celsius.toKelvin(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "900.0,2111.67","12,513.27","-3,486.27" })
-		public void testConvertKnownCelsiusToRankine(double input, double expectation) {
-			final double result = Temperature.Celsius.toRankine(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
+	@Property(tries = 100)
+	public void testFromCelsiusToFahrenheitAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Temperature.Celsius.toFahrenheit(value);
+		final double convertBack = Temperature.Fahrenheit.toCelsius(convertTo);
+		assertEquals(value, convertBack, 0.01);
 	}
-	@Nested
-	public class FahrenheitTests {
-		@ParameterizedTest
-		@CsvSource({ "109.0,42.7778","56.9,13.83333","102.0,38.8889" })
-		public void testConvertKnownFahrenheitToCelsius(double input, double expectation) {
-			final double result = Temperature.Fahrenheit.toCelsius(input);
-			assertEquals(expectation, result, 0.01);
-		}
 
-		@ParameterizedTest
-		@CsvSource({ "34.5,274.5389","901.0,755.928","23.9,268.65" })
-		public void testConvertKnownFahrenheitToKelvin(double input, double expectation) {
-			final double result = Temperature.Fahrenheit.toKelvin(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "123.0,582.67","9.2,468.87","0.2,459.87" })
-		public void testConvertKnownFahrenheitToRankine(double input, double expectation) {
-			final double result = Temperature.Fahrenheit.toRankine(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
+	@ParameterizedTest
+	@CsvSource({ "32.0,89.6","0.9,33.62","0.0,32.0" })
+	public void testConvertKnownCelsiusToFahrenheit(double input, double expectation) {
+		final double result = Temperature.Celsius.toFahrenheit(input);
+		assertEquals(expectation, result, 0.01);
 	}
-	@Nested
-	public class KelvinTests {
-		@ParameterizedTest
-		@CsvSource({ "80.0,-193.15","0.9,-272.25","305.15,32.0" })
-		public void testConvertKnownKelvinToCelsius(double input, double expectation) {
-			final double result = Temperature.Kelvin.toCelsius(input);
-			assertEquals(expectation, result, 0.01);
-		}
 
-		@ParameterizedTest
-		@CsvSource({ "123.4,-237.55","800.0,980.33","99.999,-279.6718" })
-		public void testConvertKnownKelvinToFahrenheit(double input, double expectation) {
-			final double result = Temperature.Kelvin.toFahrenheit(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "156.0,280.8","8.2,14.76","0.8,1.44" })
-		public void testConvertKnownKelvinToRankine(double input, double expectation) {
-			final double result = Temperature.Kelvin.toRankine(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
+	@Property(tries = 100)
+	public void testFromCelsiusToKelvinAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Temperature.Celsius.toKelvin(value);
+		final double convertBack = Temperature.Kelvin.toCelsius(convertTo);
+		assertEquals(value, convertBack, 0.01);
 	}
-	@Nested
-	public class RankineTests {
-		@ParameterizedTest
-		@CsvSource({ "190.0,-167.59444444","0.7,-272.76111111","900.0,226.85" })
-		public void testConvertKnownRankineToCelsius(double input, double expectation) {
-			final double result = Temperature.Rankine.toCelsius(input);
-			assertEquals(expectation, result, 0.01);
-		}
 
-		@ParameterizedTest
-		@CsvSource({ "109.0,-350.67","3567.0,3107.33","9.0,-450.67" })
-		public void testConvertKnownRankineToFahrenheit(double input, double expectation) {
-			final double result = Temperature.Rankine.toFahrenheit(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "123.0,68.333333333","0.9,0.5","23.0,12.777777778" })
-		public void testConvertKnownRankineToKelvin(double input, double expectation) {
-			final double result = Temperature.Rankine.toKelvin(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
+	@ParameterizedTest
+	@CsvSource({ "1.0,274.15","9.9,283.05","100.0,373.15" })
+	public void testConvertKnownCelsiusToKelvin(double input, double expectation) {
+		final double result = Temperature.Celsius.toKelvin(input);
+		assertEquals(expectation, result, 0.01);
 	}
+
+	@Property(tries = 100)
+	public void testFromCelsiusToRankineAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Temperature.Celsius.toRankine(value);
+		final double convertBack = Temperature.Rankine.toCelsius(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "900.0,2111.67","12,513.27","-3,486.27" })
+	public void testConvertKnownCelsiusToRankine(double input, double expectation) {
+		final double result = Temperature.Celsius.toRankine(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromFahrenheitToCelsiusAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Temperature.Fahrenheit.toCelsius(value);
+		final double convertBack = Temperature.Celsius.toFahrenheit(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "109.0,42.7778","56.9,13.83333","102.0,38.8889" })
+	public void testConvertKnownFahrenheitToCelsius(double input, double expectation) {
+		final double result = Temperature.Fahrenheit.toCelsius(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromFahrenheitToKelvinAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Temperature.Fahrenheit.toKelvin(value);
+		final double convertBack = Temperature.Kelvin.toFahrenheit(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "34.5,274.5389","901.0,755.928","23.9,268.65" })
+	public void testConvertKnownFahrenheitToKelvin(double input, double expectation) {
+		final double result = Temperature.Fahrenheit.toKelvin(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromFahrenheitToRankineAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Temperature.Fahrenheit.toRankine(value);
+		final double convertBack = Temperature.Rankine.toFahrenheit(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "123.0,582.67","9.2,468.87","0.2,459.87" })
+	public void testConvertKnownFahrenheitToRankine(double input, double expectation) {
+		final double result = Temperature.Fahrenheit.toRankine(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromKelvinToCelsiusAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Temperature.Kelvin.toCelsius(value);
+		final double convertBack = Temperature.Celsius.toKelvin(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "80.0,-193.15","0.9,-272.25","305.15,32.0" })
+	public void testConvertKnownKelvinToCelsius(double input, double expectation) {
+		final double result = Temperature.Kelvin.toCelsius(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromKelvinToFahrenheitAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Temperature.Kelvin.toFahrenheit(value);
+		final double convertBack = Temperature.Fahrenheit.toKelvin(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "123.4,-237.55","800.0,980.33","99.999,-279.6718" })
+	public void testConvertKnownKelvinToFahrenheit(double input, double expectation) {
+		final double result = Temperature.Kelvin.toFahrenheit(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromKelvinToRankineAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Temperature.Kelvin.toRankine(value);
+		final double convertBack = Temperature.Rankine.toKelvin(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "156.0,280.8","8.2,14.76","0.8,1.44" })
+	public void testConvertKnownKelvinToRankine(double input, double expectation) {
+		final double result = Temperature.Kelvin.toRankine(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromRankineToCelsiusAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Temperature.Rankine.toCelsius(value);
+		final double convertBack = Temperature.Celsius.toRankine(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "190.0,-167.59444444","0.7,-272.76111111","900.0,226.85" })
+	public void testConvertKnownRankineToCelsius(double input, double expectation) {
+		final double result = Temperature.Rankine.toCelsius(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromRankineToFahrenheitAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Temperature.Rankine.toFahrenheit(value);
+		final double convertBack = Temperature.Fahrenheit.toRankine(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "109.0,-350.67","3567.0,3107.33","9.0,-450.67" })
+	public void testConvertKnownRankineToFahrenheit(double input, double expectation) {
+		final double result = Temperature.Rankine.toFahrenheit(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromRankineToKelvinAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Temperature.Rankine.toKelvin(value);
+		final double convertBack = Temperature.Kelvin.toRankine(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "123.0,68.333333333","0.9,0.5","23.0,12.777777778" })
+	public void testConvertKnownRankineToKelvin(double input, double expectation) {
+		final double result = Temperature.Rankine.toKelvin(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
 }

@@ -6,427 +6,796 @@
 
 package com.putridparrot.units;
 
-import org.junit.jupiter.api.Nested;
+import net.jqwik.api.constraints.DoubleRange;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import net.jqwik.api.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AreaTests {
-	@Nested
-	public class AcresTests {
-		@ParameterizedTest
-		@CsvSource({ "100.0,0.404686","90.0,0.364217","1800.0,7.284342" })
-		public void testConvertKnownAcresToSquareKilometres(double input, double expectation) {
-			final double result = Area.Acres.toSquareKilometres(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "1.2,4856.23","0.8,3237.49","5.6,22662.416" })
-		public void testConvertKnownAcresToSquareMetres(double input, double expectation) {
-			final double result = Area.Acres.toSquareMetres(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "1009.0,1.576562","90.0,0.140625","765.0,1.19531" })
-		public void testConvertKnownAcresToSquareMiles(double input, double expectation) {
-			final double result = Area.Acres.toSquareMiles(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "3.4,16456.0","0.7,3388.0","0.01,48.4" })
-		public void testConvertKnownAcresToSquareYards(double input, double expectation) {
-			final double result = Area.Acres.toSquareYards(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "0.01,435.6","12.0,522720.0","0.67,29185.2" })
-		public void testConvertKnownAcresToSquareFeet(double input, double expectation) {
-			final double result = Area.Acres.toSquareFeet(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "0.09,564537.6","0.005,31363.2","0.012,75271.68" })
-		public void testConvertKnownAcresToSquareInches(double input, double expectation) {
-			final double result = Area.Acres.toSquareInches(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "1109.0,448.7964","5.6,2.26624","1.23,0.4977633" })
-		public void testConvertKnownAcresToHectares(double input, double expectation) {
-			final double result = Area.Acres.toHectares(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
+	@Property(tries = 100)
+	public void testFromAcresToSquareKilometresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Area.Acres.toSquareKilometres(value);
+		final double convertBack = Area.SquareKilometres.toAcres(convertTo);
+		assertEquals(value, convertBack, 0.01);
 	}
-	@Nested
-	public class HectaresTests {
-		@ParameterizedTest
-		@CsvSource({ "15000.0,150.0","300.0,3.0","45.6,0.456" })
-		public void testConvertKnownHectaresToSquareKilometres(double input, double expectation) {
-			final double result = Area.Hectares.toSquareKilometres(input);
-			assertEquals(expectation, result, 0.01);
-		}
 
-		@ParameterizedTest
-		@CsvSource({ "1.4,14000.0","0.9,9000.0","0.012,120.0" })
-		public void testConvertKnownHectaresToSquareMetres(double input, double expectation) {
-			final double result = Area.Hectares.toSquareMetres(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "1102.0,4.254846","4500.0,17.3746","90.0,0.347492" })
-		public void testConvertKnownHectaresToSquareMiles(double input, double expectation) {
-			final double result = Area.Hectares.toSquareMiles(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "1.2,14351.8805556","0.8,9567.92","34.0,406636.615" })
-		public void testConvertKnownHectaresToSquareYards(double input, double expectation) {
-			final double result = Area.Hectares.toSquareYards(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "3.4,365972.599","0.09,9687.519","1.2,129166.7999" })
-		public void testConvertKnownHectaresToSquareFeet(double input, double expectation) {
-			final double result = Area.Hectares.toSquareFeet(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "0.009,139500.28","0.01,155000.31","0.0061,94550.1891" })
-		public void testConvertKnownHectaresToSquareInches(double input, double expectation) {
-			final double result = Area.Hectares.toSquareInches(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "1.2,2.96526","0.8,1.97684","4.2,10.3784" })
-		public void testConvertKnownHectaresToAcres(double input, double expectation) {
-			final double result = Area.Hectares.toAcres(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
+	@ParameterizedTest
+	@CsvSource({ "100.0,0.404686","90.0,0.364217","1800.0,7.284342" })
+	public void testConvertKnownAcresToSquareKilometres(double input, double expectation) {
+		final double result = Area.Acres.toSquareKilometres(input);
+		assertEquals(expectation, result, 0.01);
 	}
-	@Nested
-	public class SquareFeetTests {
-		@ParameterizedTest
-		@CsvSource({ "88997766.0,8.2681630146","10009002.0,0.92986671317","987654321.0,91.75608889" })
-		public void testConvertKnownSquareFeetToSquareKilometres(double input, double expectation) {
-			final double result = Area.SquareFeet.toSquareKilometres(input);
-			assertEquals(expectation, result, 0.01);
-		}
 
-		@ParameterizedTest
-		@CsvSource({ "900.0,83.6127","799.123,74.24095603","500.0,46.4515" })
-		public void testConvertKnownSquareFeetToSquareMetres(double input, double expectation) {
-			final double result = Area.SquareFeet.toSquareMetres(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "12000000.0,0.43044077135","987654321.0,35.4272239799","900800700.0,32.3117790117" })
-		public void testConvertKnownSquareFeetToSquareMiles(double input, double expectation) {
-			final double result = Area.SquareFeet.toSquareMiles(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "909.0,101.0","123.456,13.71733333","8009.0,889.8889" })
-		public void testConvertKnownSquareFeetToSquareYards(double input, double expectation) {
-			final double result = Area.SquareFeet.toSquareYards(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "6.7,964.8","1.5,216.0","0.9,129.6" })
-		public void testConvertKnownSquareFeetToSquareInches(double input, double expectation) {
-			final double result = Area.SquareFeet.toSquareInches(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "90000.0,0.83612736","120120.0,1.11595132","90071.0,0.83678697" })
-		public void testConvertKnownSquareFeetToHectares(double input, double expectation) {
-			final double result = Area.SquareFeet.toHectares(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "90000.0,2.0661157","123456.0,2.83415978","8809.0,0.2022268" })
-		public void testConvertKnownSquareFeetToAcres(double input, double expectation) {
-			final double result = Area.SquareFeet.toAcres(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
+	@Property(tries = 100)
+	public void testFromAcresToSquareMetresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Area.Acres.toSquareMetres(value);
+		final double convertBack = Area.SquareMetres.toAcres(convertTo);
+		assertEquals(value, convertBack, 0.01);
 	}
-	@Nested
-	public class SquareInchesTests {
-		@ParameterizedTest
-		@CsvSource({ "678900000.0,0.437999124","10000000000.0,6.4516","9e12,5806.44" })
-		public void testConvertKnownSquareInchesToSquareKilometres(double input, double expectation) {
-			final double result = Area.SquareInches.toSquareKilometres(input);
-			assertEquals(expectation, result, 0.01);
-		}
 
-		@ParameterizedTest
-		@CsvSource({ "1090.0,0.7032244","1.3e6,838.708","9988.0,6.443858" })
-		public void testConvertKnownSquareInchesToSquareMetres(double input, double expectation) {
-			final double result = Area.SquareInches.toSquareMetres(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "1007008000.0,0.2508433450668","1.2e12,298.9172023262932","250e7,0.6227441715131" })
-		public void testConvertKnownSquareInchesToSquareMiles(double input, double expectation) {
-			final double result = Area.SquareInches.toSquareMiles(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "900.0,0.694444","15000.0,11.574074","3e6,2314.814815" })
-		public void testConvertKnownSquareInchesToSquareYards(double input, double expectation) {
-			final double result = Area.SquareInches.toSquareYards(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "34.0,0.236111","1002.0,6.958333","890.0,6.18056" })
-		public void testConvertKnownSquareInchesToSquareFeet(double input, double expectation) {
-			final double result = Area.SquareInches.toSquareFeet(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "9000000.0,0.580644","12345678.0,0.79649376185","99887766.0,6.4443591113" })
-		public void testConvertKnownSquareInchesToHectares(double input, double expectation) {
-			final double result = Area.SquareInches.toHectares(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "900100.0,0.143496199","5e6,0.7971125395","12345678.0,1.9681789486" })
-		public void testConvertKnownSquareInchesToAcres(double input, double expectation) {
-			final double result = Area.SquareInches.toAcres(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
+	@ParameterizedTest
+	@CsvSource({ "1.2,4856.23","0.8,3237.49","5.6,22662.416" })
+	public void testConvertKnownAcresToSquareMetres(double input, double expectation) {
+		final double result = Area.Acres.toSquareMetres(input);
+		assertEquals(expectation, result, 0.01);
 	}
-	@Nested
-	public class SquareKilometresTests {
-		@ParameterizedTest
-		@CsvSource({ "0.12,120000.0","0.9,900000.0","8.123456,8123456.0" })
-		public void testConvertKnownSquareKilometresToSquareMetres(double input, double expectation) {
-			final double result = Area.SquareKilometres.toSquareMetres(input);
-			assertEquals(expectation, result, 0.01);
-		}
 
-		@ParameterizedTest
-		@CsvSource({ "492.098,190.0","23.3099,9.0","4661.979,1800.0" })
-		public void testConvertKnownSquareKilometresToSquareMiles(double input, double expectation) {
-			final double result = Area.SquareKilometres.toSquareMiles(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "0.158028071,189000.0005","8.361272764,9999999.0310","0.6,717594.030" })
-		public void testConvertKnownSquareKilometresToSquareYards(double input, double expectation) {
-			final double result = Area.SquareKilometres.toSquareYards(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "0.009,96875.194","0.08,861112.833","0.123,1323960.9812553" })
-		public void testConvertKnownSquareKilometresToSquareFeet(double input, double expectation) {
-			final double result = Area.SquareKilometres.toSquareFeet(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "0.0008,1240002.48","0.00123,1906503.813","0.000045,69750.1395" })
-		public void testConvertKnownSquareKilometresToSquareInches(double input, double expectation) {
-			final double result = Area.SquareKilometres.toSquareInches(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "190.0,19000.0","55.67,5567.0","0.9,90.0" })
-		public void testConvertKnownSquareKilometresToHectares(double input, double expectation) {
-			final double result = Area.SquareKilometres.toHectares(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "30.393962,7510.4999900100","54.1,13368.3805","90.67,22405.0103" })
-		public void testConvertKnownSquareKilometresToAcres(double input, double expectation) {
-			final double result = Area.SquareKilometres.toAcres(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
+	@Property(tries = 100)
+	public void testFromAcresToSquareMilesAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Area.Acres.toSquareMiles(value);
+		final double convertBack = Area.SquareMiles.toAcres(convertTo);
+		assertEquals(value, convertBack, 0.01);
 	}
-	@Nested
-	public class SquareMetresTests {
-		@ParameterizedTest
-		@CsvSource({ "19000.0,0.019","123456.0,0.123456","900100.0,0.9001" })
-		public void testConvertKnownSquareMetresToSquareKilometres(double input, double expectation) {
-			final double result = Area.SquareMetres.toSquareKilometres(input);
-			assertEquals(expectation, result, 0.01);
-		}
 
-		@ParameterizedTest
-		@CsvSource({ "190009.0,0.073362885","12345678.0,4.7666929245","777666.0,0.300258521" })
-		public void testConvertKnownSquareMetresToSquareMiles(double input, double expectation) {
-			final double result = Area.SquareMetres.toSquareMiles(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "5.0,5.97995","1.23,1.471068","700.0,837.193" })
-		public void testConvertKnownSquareMetresToSquareYards(double input, double expectation) {
-			final double result = Area.SquareMetres.toSquareYards(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "90.0,968.752","180.0,1937.52","123.4,1328.2775" })
-		public void testConvertKnownSquareMetresToSquareFeet(double input, double expectation) {
-			final double result = Area.SquareMetres.toSquareFeet(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "8.0,12400.0","1.23,1906.504","0.9,1395.0" })
-		public void testConvertKnownSquareMetresToSquareInches(double input, double expectation) {
-			final double result = Area.SquareMetres.toSquareInches(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "1234.0,0.1234","560.9,0.05609","100900.0,10.09" })
-		public void testConvertKnownSquareMetresToHectares(double input, double expectation) {
-			final double result = Area.SquareMetres.toHectares(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "986.0,0.243646","1020.0,0.2520475","666111.0,164.599613" })
-		public void testConvertKnownSquareMetresToAcres(double input, double expectation) {
-			final double result = Area.SquareMetres.toAcres(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
+	@ParameterizedTest
+	@CsvSource({ "1009.0,1.576562","90.0,0.140625","765.0,1.19531" })
+	public void testConvertKnownAcresToSquareMiles(double input, double expectation) {
+		final double result = Area.Acres.toSquareMiles(input);
+		assertEquals(expectation, result, 0.01);
 	}
-	@Nested
-	public class SquareMilesTests {
-		@ParameterizedTest
-		@CsvSource({ "3.0,7.76996","0.9,2.33099","100.0,258.999" })
-		public void testConvertKnownSquareMilesToSquareKilometres(double input, double expectation) {
-			final double result = Area.SquareMiles.toSquareKilometres(input);
-			assertEquals(expectation, result, 0.01);
-		}
 
-		@ParameterizedTest
-		@CsvSource({ "0.009,23309.893","0.010,25899.88","0.0006,1553.99287" })
-		public void testConvertKnownSquareMilesToSquareMetres(double input, double expectation) {
-			final double result = Area.SquareMiles.toSquareMetres(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "0.01,30976.0","0.00123,3810.048","0.09,278784.0" })
-		public void testConvertKnownSquareMilesToSquareYards(double input, double expectation) {
-			final double result = Area.SquareMiles.toSquareYards(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "0.01,278784.0","0.005,139392.0","0.08,2230272.0" })
-		public void testConvertKnownSquareMilesToSquareFeet(double input, double expectation) {
-			final double result = Area.SquareMiles.toSquareFeet(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "0.0001,401448.96","0.00098,3934199.808","0.000007,28101.4272" })
-		public void testConvertKnownSquareMilesToSquareInches(double input, double expectation) {
-			final double result = Area.SquareMiles.toSquareInches(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "100.0,25900.0","2.3,595.697","0.9,233.099" })
-		public void testConvertKnownSquareMilesToHectares(double input, double expectation) {
-			final double result = Area.SquareMiles.toHectares(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "2.0,1280.0","0.1,64.0","4.6,2944.0" })
-		public void testConvertKnownSquareMilesToAcres(double input, double expectation) {
-			final double result = Area.SquareMiles.toAcres(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
+	@Property(tries = 100)
+	public void testFromAcresToSquareYardsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Area.Acres.toSquareYards(value);
+		final double convertBack = Area.SquareYards.toAcres(convertTo);
+		assertEquals(value, convertBack, 0.01);
 	}
-	@Nested
-	public class SquareYardsTests {
-		@ParameterizedTest
-		@CsvSource({ "900000.0,0.752514624","190190.0,0.159023063","7000000.0,5.85289152" })
-		public void testConvertKnownSquareYardsToSquareKilometres(double input, double expectation) {
-			final double result = Area.SquareYards.toSquareKilometres(input);
-			assertEquals(expectation, result, 0.01);
-		}
 
-		@ParameterizedTest
-		@CsvSource({ "700.0,585.289","12.0,10.0335","9.1,7.60876" })
-		public void testConvertKnownSquareYardsToSquareMetres(double input, double expectation) {
-			final double result = Area.SquareYards.toSquareMetres(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "98700.0,0.031863378","8888888.0,2.869604855","100200300.0,32.3477208161" })
-		public void testConvertKnownSquareYardsToSquareMiles(double input, double expectation) {
-			final double result = Area.SquareYards.toSquareMiles(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "12.0,108.0","5.6,50.4","102.5,922.5" })
-		public void testConvertKnownSquareYardsToSquareFeet(double input, double expectation) {
-			final double result = Area.SquareYards.toSquareFeet(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "56.7,73483.2","1.8,2332.8","0.2,259.2" })
-		public void testConvertKnownSquareYardsToSquareInches(double input, double expectation) {
-			final double result = Area.SquareYards.toSquareInches(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "10090.0,0.84365251","98765.0,8.2580119","3090.09,0.2583634" })
-		public void testConvertKnownSquareYardsToHectares(double input, double expectation) {
-			final double result = Area.SquareYards.toHectares(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "1000.0,0.206612","899.0,0.185744","5678.0,1.17314" })
-		public void testConvertKnownSquareYardsToAcres(double input, double expectation) {
-			final double result = Area.SquareYards.toAcres(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
+	@ParameterizedTest
+	@CsvSource({ "3.4,16456.0","0.7,3388.0","0.01,48.4" })
+	public void testConvertKnownAcresToSquareYards(double input, double expectation) {
+		final double result = Area.Acres.toSquareYards(input);
+		assertEquals(expectation, result, 0.01);
 	}
+
+	@Property(tries = 100)
+	public void testFromAcresToSquareFeetAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Area.Acres.toSquareFeet(value);
+		final double convertBack = Area.SquareFeet.toAcres(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.01,435.6","12.0,522720.0","0.67,29185.2" })
+	public void testConvertKnownAcresToSquareFeet(double input, double expectation) {
+		final double result = Area.Acres.toSquareFeet(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromAcresToSquareInchesAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Area.Acres.toSquareInches(value);
+		final double convertBack = Area.SquareInches.toAcres(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.09,564537.6","0.005,31363.2","0.012,75271.68" })
+	public void testConvertKnownAcresToSquareInches(double input, double expectation) {
+		final double result = Area.Acres.toSquareInches(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromAcresToHectaresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Area.Acres.toHectares(value);
+		final double convertBack = Area.Hectares.toAcres(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "1109.0,448.7964","5.6,2.26624","1.23,0.4977633" })
+	public void testConvertKnownAcresToHectares(double input, double expectation) {
+		final double result = Area.Acres.toHectares(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromHectaresToSquareKilometresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Area.Hectares.toSquareKilometres(value);
+		final double convertBack = Area.SquareKilometres.toHectares(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "15000.0,150.0","300.0,3.0","45.6,0.456" })
+	public void testConvertKnownHectaresToSquareKilometres(double input, double expectation) {
+		final double result = Area.Hectares.toSquareKilometres(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromHectaresToSquareMetresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Area.Hectares.toSquareMetres(value);
+		final double convertBack = Area.SquareMetres.toHectares(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "1.4,14000.0","0.9,9000.0","0.012,120.0" })
+	public void testConvertKnownHectaresToSquareMetres(double input, double expectation) {
+		final double result = Area.Hectares.toSquareMetres(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromHectaresToSquareMilesAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Area.Hectares.toSquareMiles(value);
+		final double convertBack = Area.SquareMiles.toHectares(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "1102.0,4.254846","4500.0,17.3746","90.0,0.347492" })
+	public void testConvertKnownHectaresToSquareMiles(double input, double expectation) {
+		final double result = Area.Hectares.toSquareMiles(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromHectaresToSquareYardsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Area.Hectares.toSquareYards(value);
+		final double convertBack = Area.SquareYards.toHectares(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "1.2,14351.8805556","0.8,9567.92","34.0,406636.615" })
+	public void testConvertKnownHectaresToSquareYards(double input, double expectation) {
+		final double result = Area.Hectares.toSquareYards(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromHectaresToSquareFeetAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Area.Hectares.toSquareFeet(value);
+		final double convertBack = Area.SquareFeet.toHectares(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "3.4,365972.599","0.09,9687.519","1.2,129166.7999" })
+	public void testConvertKnownHectaresToSquareFeet(double input, double expectation) {
+		final double result = Area.Hectares.toSquareFeet(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromHectaresToSquareInchesAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Area.Hectares.toSquareInches(value);
+		final double convertBack = Area.SquareInches.toHectares(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.009,139500.28","0.01,155000.31","0.0061,94550.1891" })
+	public void testConvertKnownHectaresToSquareInches(double input, double expectation) {
+		final double result = Area.Hectares.toSquareInches(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromHectaresToAcresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Area.Hectares.toAcres(value);
+		final double convertBack = Area.Acres.toHectares(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "1.2,2.96526","0.8,1.97684","4.2,10.3784" })
+	public void testConvertKnownHectaresToAcres(double input, double expectation) {
+		final double result = Area.Hectares.toAcres(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromSquareFeetToSquareKilometresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Area.SquareFeet.toSquareKilometres(value);
+		final double convertBack = Area.SquareKilometres.toSquareFeet(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "88997766.0,8.2681630146","10009002.0,0.92986671317","987654321.0,91.75608889" })
+	public void testConvertKnownSquareFeetToSquareKilometres(double input, double expectation) {
+		final double result = Area.SquareFeet.toSquareKilometres(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromSquareFeetToSquareMetresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Area.SquareFeet.toSquareMetres(value);
+		final double convertBack = Area.SquareMetres.toSquareFeet(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "900.0,83.6127","799.123,74.24095603","500.0,46.4515" })
+	public void testConvertKnownSquareFeetToSquareMetres(double input, double expectation) {
+		final double result = Area.SquareFeet.toSquareMetres(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromSquareFeetToSquareMilesAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Area.SquareFeet.toSquareMiles(value);
+		final double convertBack = Area.SquareMiles.toSquareFeet(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "12000000.0,0.43044077135","987654321.0,35.4272239799","900800700.0,32.3117790117" })
+	public void testConvertKnownSquareFeetToSquareMiles(double input, double expectation) {
+		final double result = Area.SquareFeet.toSquareMiles(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromSquareFeetToSquareYardsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Area.SquareFeet.toSquareYards(value);
+		final double convertBack = Area.SquareYards.toSquareFeet(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "909.0,101.0","123.456,13.71733333","8009.0,889.8889" })
+	public void testConvertKnownSquareFeetToSquareYards(double input, double expectation) {
+		final double result = Area.SquareFeet.toSquareYards(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromSquareFeetToSquareInchesAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Area.SquareFeet.toSquareInches(value);
+		final double convertBack = Area.SquareInches.toSquareFeet(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "6.7,964.8","1.5,216.0","0.9,129.6" })
+	public void testConvertKnownSquareFeetToSquareInches(double input, double expectation) {
+		final double result = Area.SquareFeet.toSquareInches(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromSquareFeetToHectaresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Area.SquareFeet.toHectares(value);
+		final double convertBack = Area.Hectares.toSquareFeet(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "90000.0,0.83612736","120120.0,1.11595132","90071.0,0.83678697" })
+	public void testConvertKnownSquareFeetToHectares(double input, double expectation) {
+		final double result = Area.SquareFeet.toHectares(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromSquareFeetToAcresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Area.SquareFeet.toAcres(value);
+		final double convertBack = Area.Acres.toSquareFeet(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "90000.0,2.0661157","123456.0,2.83415978","8809.0,0.2022268" })
+	public void testConvertKnownSquareFeetToAcres(double input, double expectation) {
+		final double result = Area.SquareFeet.toAcres(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromSquareInchesToSquareKilometresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Area.SquareInches.toSquareKilometres(value);
+		final double convertBack = Area.SquareKilometres.toSquareInches(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "678900000.0,0.437999124","10000000000.0,6.4516","9e12,5806.44" })
+	public void testConvertKnownSquareInchesToSquareKilometres(double input, double expectation) {
+		final double result = Area.SquareInches.toSquareKilometres(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromSquareInchesToSquareMetresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Area.SquareInches.toSquareMetres(value);
+		final double convertBack = Area.SquareMetres.toSquareInches(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "1090.0,0.7032244","1.3e6,838.708","9988.0,6.443858" })
+	public void testConvertKnownSquareInchesToSquareMetres(double input, double expectation) {
+		final double result = Area.SquareInches.toSquareMetres(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromSquareInchesToSquareMilesAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Area.SquareInches.toSquareMiles(value);
+		final double convertBack = Area.SquareMiles.toSquareInches(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "1007008000.0,0.2508433450668","1.2e12,298.9172023262932","250e7,0.6227441715131" })
+	public void testConvertKnownSquareInchesToSquareMiles(double input, double expectation) {
+		final double result = Area.SquareInches.toSquareMiles(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromSquareInchesToSquareYardsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Area.SquareInches.toSquareYards(value);
+		final double convertBack = Area.SquareYards.toSquareInches(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "900.0,0.694444","15000.0,11.574074","3e6,2314.814815" })
+	public void testConvertKnownSquareInchesToSquareYards(double input, double expectation) {
+		final double result = Area.SquareInches.toSquareYards(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromSquareInchesToSquareFeetAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Area.SquareInches.toSquareFeet(value);
+		final double convertBack = Area.SquareFeet.toSquareInches(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "34.0,0.236111","1002.0,6.958333","890.0,6.18056" })
+	public void testConvertKnownSquareInchesToSquareFeet(double input, double expectation) {
+		final double result = Area.SquareInches.toSquareFeet(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromSquareInchesToHectaresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Area.SquareInches.toHectares(value);
+		final double convertBack = Area.Hectares.toSquareInches(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "9000000.0,0.580644","12345678.0,0.79649376185","99887766.0,6.4443591113" })
+	public void testConvertKnownSquareInchesToHectares(double input, double expectation) {
+		final double result = Area.SquareInches.toHectares(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromSquareInchesToAcresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Area.SquareInches.toAcres(value);
+		final double convertBack = Area.Acres.toSquareInches(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "900100.0,0.143496199","5e6,0.7971125395","12345678.0,1.9681789486" })
+	public void testConvertKnownSquareInchesToAcres(double input, double expectation) {
+		final double result = Area.SquareInches.toAcres(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromSquareKilometresToSquareMetresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Area.SquareKilometres.toSquareMetres(value);
+		final double convertBack = Area.SquareMetres.toSquareKilometres(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.12,120000.0","0.9,900000.0","8.123456,8123456.0" })
+	public void testConvertKnownSquareKilometresToSquareMetres(double input, double expectation) {
+		final double result = Area.SquareKilometres.toSquareMetres(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromSquareKilometresToSquareMilesAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Area.SquareKilometres.toSquareMiles(value);
+		final double convertBack = Area.SquareMiles.toSquareKilometres(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "492.098,190.0","23.3099,9.0","4661.979,1800.0" })
+	public void testConvertKnownSquareKilometresToSquareMiles(double input, double expectation) {
+		final double result = Area.SquareKilometres.toSquareMiles(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromSquareKilometresToSquareYardsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Area.SquareKilometres.toSquareYards(value);
+		final double convertBack = Area.SquareYards.toSquareKilometres(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.158028071,189000.0005","8.361272764,9999999.0310","0.6,717594.030" })
+	public void testConvertKnownSquareKilometresToSquareYards(double input, double expectation) {
+		final double result = Area.SquareKilometres.toSquareYards(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromSquareKilometresToSquareFeetAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Area.SquareKilometres.toSquareFeet(value);
+		final double convertBack = Area.SquareFeet.toSquareKilometres(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.009,96875.194","0.08,861112.833","0.123,1323960.9812553" })
+	public void testConvertKnownSquareKilometresToSquareFeet(double input, double expectation) {
+		final double result = Area.SquareKilometres.toSquareFeet(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromSquareKilometresToSquareInchesAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Area.SquareKilometres.toSquareInches(value);
+		final double convertBack = Area.SquareInches.toSquareKilometres(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.0008,1240002.48","0.00123,1906503.813","0.000045,69750.1395" })
+	public void testConvertKnownSquareKilometresToSquareInches(double input, double expectation) {
+		final double result = Area.SquareKilometres.toSquareInches(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromSquareKilometresToHectaresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Area.SquareKilometres.toHectares(value);
+		final double convertBack = Area.Hectares.toSquareKilometres(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "190.0,19000.0","55.67,5567.0","0.9,90.0" })
+	public void testConvertKnownSquareKilometresToHectares(double input, double expectation) {
+		final double result = Area.SquareKilometres.toHectares(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromSquareKilometresToAcresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Area.SquareKilometres.toAcres(value);
+		final double convertBack = Area.Acres.toSquareKilometres(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "30.393962,7510.4999900100","54.1,13368.3805","90.67,22405.0103" })
+	public void testConvertKnownSquareKilometresToAcres(double input, double expectation) {
+		final double result = Area.SquareKilometres.toAcres(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromSquareMetresToSquareKilometresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Area.SquareMetres.toSquareKilometres(value);
+		final double convertBack = Area.SquareKilometres.toSquareMetres(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "19000.0,0.019","123456.0,0.123456","900100.0,0.9001" })
+	public void testConvertKnownSquareMetresToSquareKilometres(double input, double expectation) {
+		final double result = Area.SquareMetres.toSquareKilometres(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromSquareMetresToSquareMilesAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Area.SquareMetres.toSquareMiles(value);
+		final double convertBack = Area.SquareMiles.toSquareMetres(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "190009.0,0.073362885","12345678.0,4.7666929245","777666.0,0.300258521" })
+	public void testConvertKnownSquareMetresToSquareMiles(double input, double expectation) {
+		final double result = Area.SquareMetres.toSquareMiles(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromSquareMetresToSquareYardsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Area.SquareMetres.toSquareYards(value);
+		final double convertBack = Area.SquareYards.toSquareMetres(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "5.0,5.97995","1.23,1.471068","700.0,837.193" })
+	public void testConvertKnownSquareMetresToSquareYards(double input, double expectation) {
+		final double result = Area.SquareMetres.toSquareYards(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromSquareMetresToSquareFeetAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Area.SquareMetres.toSquareFeet(value);
+		final double convertBack = Area.SquareFeet.toSquareMetres(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "90.0,968.752","180.0,1937.52","123.4,1328.2775" })
+	public void testConvertKnownSquareMetresToSquareFeet(double input, double expectation) {
+		final double result = Area.SquareMetres.toSquareFeet(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromSquareMetresToSquareInchesAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Area.SquareMetres.toSquareInches(value);
+		final double convertBack = Area.SquareInches.toSquareMetres(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "8.0,12400.0","1.23,1906.504","0.9,1395.0" })
+	public void testConvertKnownSquareMetresToSquareInches(double input, double expectation) {
+		final double result = Area.SquareMetres.toSquareInches(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromSquareMetresToHectaresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Area.SquareMetres.toHectares(value);
+		final double convertBack = Area.Hectares.toSquareMetres(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "1234.0,0.1234","560.9,0.05609","100900.0,10.09" })
+	public void testConvertKnownSquareMetresToHectares(double input, double expectation) {
+		final double result = Area.SquareMetres.toHectares(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromSquareMetresToAcresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Area.SquareMetres.toAcres(value);
+		final double convertBack = Area.Acres.toSquareMetres(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "986.0,0.243646","1020.0,0.2520475","666111.0,164.599613" })
+	public void testConvertKnownSquareMetresToAcres(double input, double expectation) {
+		final double result = Area.SquareMetres.toAcres(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromSquareMilesToSquareKilometresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Area.SquareMiles.toSquareKilometres(value);
+		final double convertBack = Area.SquareKilometres.toSquareMiles(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "3.0,7.76996","0.9,2.33099","100.0,258.999" })
+	public void testConvertKnownSquareMilesToSquareKilometres(double input, double expectation) {
+		final double result = Area.SquareMiles.toSquareKilometres(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromSquareMilesToSquareMetresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Area.SquareMiles.toSquareMetres(value);
+		final double convertBack = Area.SquareMetres.toSquareMiles(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.009,23309.893","0.010,25899.88","0.0006,1553.99287" })
+	public void testConvertKnownSquareMilesToSquareMetres(double input, double expectation) {
+		final double result = Area.SquareMiles.toSquareMetres(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromSquareMilesToSquareYardsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Area.SquareMiles.toSquareYards(value);
+		final double convertBack = Area.SquareYards.toSquareMiles(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.01,30976.0","0.00123,3810.048","0.09,278784.0" })
+	public void testConvertKnownSquareMilesToSquareYards(double input, double expectation) {
+		final double result = Area.SquareMiles.toSquareYards(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromSquareMilesToSquareFeetAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Area.SquareMiles.toSquareFeet(value);
+		final double convertBack = Area.SquareFeet.toSquareMiles(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.01,278784.0","0.005,139392.0","0.08,2230272.0" })
+	public void testConvertKnownSquareMilesToSquareFeet(double input, double expectation) {
+		final double result = Area.SquareMiles.toSquareFeet(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromSquareMilesToSquareInchesAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Area.SquareMiles.toSquareInches(value);
+		final double convertBack = Area.SquareInches.toSquareMiles(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.0001,401448.96","0.00098,3934199.808","0.000007,28101.4272" })
+	public void testConvertKnownSquareMilesToSquareInches(double input, double expectation) {
+		final double result = Area.SquareMiles.toSquareInches(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromSquareMilesToHectaresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Area.SquareMiles.toHectares(value);
+		final double convertBack = Area.Hectares.toSquareMiles(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "100.0,25900.0","2.3,595.697","0.9,233.099" })
+	public void testConvertKnownSquareMilesToHectares(double input, double expectation) {
+		final double result = Area.SquareMiles.toHectares(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromSquareMilesToAcresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Area.SquareMiles.toAcres(value);
+		final double convertBack = Area.Acres.toSquareMiles(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "2.0,1280.0","0.1,64.0","4.6,2944.0" })
+	public void testConvertKnownSquareMilesToAcres(double input, double expectation) {
+		final double result = Area.SquareMiles.toAcres(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromSquareYardsToSquareKilometresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Area.SquareYards.toSquareKilometres(value);
+		final double convertBack = Area.SquareKilometres.toSquareYards(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "900000.0,0.752514624","190190.0,0.159023063","7000000.0,5.85289152" })
+	public void testConvertKnownSquareYardsToSquareKilometres(double input, double expectation) {
+		final double result = Area.SquareYards.toSquareKilometres(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromSquareYardsToSquareMetresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Area.SquareYards.toSquareMetres(value);
+		final double convertBack = Area.SquareMetres.toSquareYards(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "700.0,585.289","12.0,10.0335","9.1,7.60876" })
+	public void testConvertKnownSquareYardsToSquareMetres(double input, double expectation) {
+		final double result = Area.SquareYards.toSquareMetres(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromSquareYardsToSquareMilesAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Area.SquareYards.toSquareMiles(value);
+		final double convertBack = Area.SquareMiles.toSquareYards(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "98700.0,0.031863378","8888888.0,2.869604855","100200300.0,32.3477208161" })
+	public void testConvertKnownSquareYardsToSquareMiles(double input, double expectation) {
+		final double result = Area.SquareYards.toSquareMiles(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromSquareYardsToSquareFeetAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Area.SquareYards.toSquareFeet(value);
+		final double convertBack = Area.SquareFeet.toSquareYards(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "12.0,108.0","5.6,50.4","102.5,922.5" })
+	public void testConvertKnownSquareYardsToSquareFeet(double input, double expectation) {
+		final double result = Area.SquareYards.toSquareFeet(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromSquareYardsToSquareInchesAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Area.SquareYards.toSquareInches(value);
+		final double convertBack = Area.SquareInches.toSquareYards(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "56.7,73483.2","1.8,2332.8","0.2,259.2" })
+	public void testConvertKnownSquareYardsToSquareInches(double input, double expectation) {
+		final double result = Area.SquareYards.toSquareInches(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromSquareYardsToHectaresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Area.SquareYards.toHectares(value);
+		final double convertBack = Area.Hectares.toSquareYards(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "10090.0,0.84365251","98765.0,8.2580119","3090.09,0.2583634" })
+	public void testConvertKnownSquareYardsToHectares(double input, double expectation) {
+		final double result = Area.SquareYards.toHectares(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromSquareYardsToAcresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Area.SquareYards.toAcres(value);
+		final double convertBack = Area.Acres.toSquareYards(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "1000.0,0.206612","899.0,0.185744","5678.0,1.17314" })
+	public void testConvertKnownSquareYardsToAcres(double input, double expectation) {
+		final double result = Area.SquareYards.toAcres(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
 }

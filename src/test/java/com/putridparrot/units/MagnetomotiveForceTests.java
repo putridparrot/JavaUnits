@@ -6,31 +6,40 @@
 
 package com.putridparrot.units;
 
-import org.junit.jupiter.api.Nested;
+import net.jqwik.api.constraints.DoubleRange;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import net.jqwik.api.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MagnetomotiveForceTests {
-	@Nested
-	public class AmpereturnsTests {
-		@ParameterizedTest
-		@CsvSource({ "400.0,502.6548248","6.7,8.4194683154","0.8,1.0053096496" })
-		public void testConvertKnownAmpereturnsToGilberts(double input, double expectation) {
-			final double result = MagnetomotiveForce.Ampereturns.toGilberts(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
+	@Property(tries = 100)
+	public void testFromAmpereturnsToGilbertsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = MagnetomotiveForce.Ampereturns.toGilberts(value);
+		final double convertBack = MagnetomotiveForce.Gilberts.toAmpereturns(convertTo);
+		assertEquals(value, convertBack, 0.01);
 	}
-	@Nested
-	public class GilbertsTests {
-		@ParameterizedTest
-		@CsvSource({ "0.8,0.6366197721","67.0,53.316905912","2.3,1.8302818447" })
-		public void testConvertKnownGilbertsToAmpereturns(double input, double expectation) {
-			final double result = MagnetomotiveForce.Gilberts.toAmpereturns(input);
-			assertEquals(expectation, result, 0.01);
-		}
 
+	@ParameterizedTest
+	@CsvSource({ "400.0,502.6548248","6.7,8.4194683154","0.8,1.0053096496" })
+	public void testConvertKnownAmpereturnsToGilberts(double input, double expectation) {
+		final double result = MagnetomotiveForce.Ampereturns.toGilberts(input);
+		assertEquals(expectation, result, 0.01);
 	}
+
+	@Property(tries = 100)
+	public void testFromGilbertsToAmpereturnsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = MagnetomotiveForce.Gilberts.toAmpereturns(value);
+		final double convertBack = MagnetomotiveForce.Ampereturns.toGilberts(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.8,0.6366197721","67.0,53.316905912","2.3,1.8302818447" })
+	public void testConvertKnownGilbertsToAmpereturns(double input, double expectation) {
+		final double result = MagnetomotiveForce.Gilberts.toAmpereturns(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
 }

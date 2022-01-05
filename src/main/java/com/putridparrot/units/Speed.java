@@ -20,7 +20,7 @@ public final class Speed {
 		 * @return The value in Miles Per Hour
 		 */
 		public static double toMilesPerHour(double value) {
-			return value * 0.681818;
+			return value / 1.46667;
 		}
 		/**
 		 * Converts the supplied Feet Per Second value to Kilometres Per Hour
@@ -36,7 +36,7 @@ public final class Speed {
 		 * @return The value in Metres Per Second
 		 */
 		public static double toMetresPerSecond(double value) {
-			return value * 0.3048;
+			return value / 3.28084;
 		}
 		/**
 		 * Converts the supplied Feet Per Second value to Knots
@@ -44,7 +44,7 @@ public final class Speed {
 		 * @return The value in Knots
 		 */
 		public static double toKnots(double value) {
-			return value * 0.592484;
+			return value / 1.68781;
 		}
 	}
 	/**
@@ -57,7 +57,7 @@ public final class Speed {
 		 * @return The value in Miles Per Hour
 		 */
 		public static double toMilesPerHour(double value) {
-			return value * 0.621371;
+			return value / 1.60934;
 		}
 		/**
 		 * Converts the supplied Kilometres Per Hour value to Feet Per Second
@@ -65,7 +65,7 @@ public final class Speed {
 		 * @return The value in Feet Per Second
 		 */
 		public static double toFeetPerSecond(double value) {
-			return value * 0.911344;
+			return value / 1.09728;
 		}
 		/**
 		 * Converts the supplied Kilometres Per Hour value to Metres Per Second
@@ -73,7 +73,7 @@ public final class Speed {
 		 * @return The value in Metres Per Second
 		 */
 		public static double toMetresPerSecond(double value) {
-			return value * 0.277778;
+			return value / 3.6;
 		}
 		/**
 		 * Converts the supplied Kilometres Per Hour value to Knots
@@ -81,7 +81,7 @@ public final class Speed {
 		 * @return The value in Knots
 		 */
 		public static double toKnots(double value) {
-			return value * 0.539957;
+			return value / 1.852;
 		}
 	}
 	/**
@@ -118,7 +118,7 @@ public final class Speed {
 		 * @return The value in Metres Per Second
 		 */
 		public static double toMetresPerSecond(double value) {
-			return value * 0.514444;
+			return value / 1.94384;
 		}
 	}
 	/**
@@ -184,7 +184,7 @@ public final class Speed {
 		 * @return The value in Metres Per Second
 		 */
 		public static double toMetresPerSecond(double value) {
-			return value * 0.44704;
+			return value / 2.23694;
 		}
 		/**
 		 * Converts the supplied Miles Per Hour value to Knots
@@ -192,7 +192,7 @@ public final class Speed {
 		 * @return The value in Knots
 		 */
 		public static double toKnots(double value) {
-			return value * 0.868976;
+			return value / 1.15078;
 		}
 	}
 }

@@ -36,7 +36,7 @@ public final class Angle {
 		 * @return The value in Milliradians
 		 */
 		public static double toMilliradians(double value) {
-			return value * 17.4533;
+			return value * (1000.0 * Math.PI)/180.0;
 		}
 		/**
 		 * Converts the supplied Degrees value to Minute Of Arc
@@ -81,7 +81,7 @@ public final class Angle {
 		 * @return The value in Milliradians
 		 */
 		public static double toMilliradians(double value) {
-			return value * 15.708;
+			return value * (1000.0*Math.PI)/200.0;
 		}
 		/**
 		 * Converts the supplied Gradians value to Minute Of Arc

@@ -248,7 +248,7 @@ public final class Energy {
 		 * @return The value in Btu
 		 */
 		public static double toBtu(double value) {
-			return value / 1055.0;
+			return value / 1055.06;
 		}
 		/**
 		 * Converts the supplied Joules value to Calories

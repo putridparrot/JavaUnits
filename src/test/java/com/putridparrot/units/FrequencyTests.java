@@ -6,107 +6,180 @@
 
 package com.putridparrot.units;
 
-import org.junit.jupiter.api.Nested;
+import net.jqwik.api.constraints.DoubleRange;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import net.jqwik.api.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class FrequencyTests {
-	@Nested
-	public class GigahertzTests {
-		@ParameterizedTest
-		@CsvSource({ "0.009,9000000.0","0.000123,123000.0","0.0000456,45600.0" })
-		public void testConvertKnownGigahertzToHertz(double input, double expectation) {
-			final double result = Frequency.Gigahertz.toHertz(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "0.009,9000.0","1e-5,10.0","0.000065,65.0" })
-		public void testConvertKnownGigahertzToKilohertz(double input, double expectation) {
-			final double result = Frequency.Gigahertz.toKilohertz(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "0.9,900.0","0.0123,12.3","5.0,5000.0" })
-		public void testConvertKnownGigahertzToMegahertz(double input, double expectation) {
-			final double result = Frequency.Gigahertz.toMegahertz(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
+	@Property(tries = 100)
+	public void testFromGigahertzToHertzAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Frequency.Gigahertz.toHertz(value);
+		final double convertBack = Frequency.Hertz.toGigahertz(convertTo);
+		assertEquals(value, convertBack, 0.01);
 	}
-	@Nested
-	public class HertzTests {
-		@ParameterizedTest
-		@CsvSource({ "800.0,0.8","1506.9,1.5069","5000.0,5.0" })
-		public void testConvertKnownHertzToKilohertz(double input, double expectation) {
-			final double result = Frequency.Hertz.toKilohertz(input);
-			assertEquals(expectation, result, 0.01);
-		}
 
-		@ParameterizedTest
-		@CsvSource({ "900009.0,0.900009","160000.0,0.16","888888.0,0.888888" })
-		public void testConvertKnownHertzToMegahertz(double input, double expectation) {
-			final double result = Frequency.Hertz.toMegahertz(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "100900900.0,0.1009009","9.0,9e-9","90909090.0,0.09090909" })
-		public void testConvertKnownHertzToGigahertz(double input, double expectation) {
-			final double result = Frequency.Hertz.toGigahertz(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
+	@ParameterizedTest
+	@CsvSource({ "0.009,9000000.0","0.000123,123000.0","0.0000456,45600.0" })
+	public void testConvertKnownGigahertzToHertz(double input, double expectation) {
+		final double result = Frequency.Gigahertz.toHertz(input);
+		assertEquals(expectation, result, 0.01);
 	}
-	@Nested
-	public class KilohertzTests {
-		@ParameterizedTest
-		@CsvSource({ "90.90909,90909.09","0.12345,123.45","500.0,500000.0" })
-		public void testConvertKnownKilohertzToHertz(double input, double expectation) {
-			final double result = Frequency.Kilohertz.toHertz(input);
-			assertEquals(expectation, result, 0.01);
-		}
 
-		@ParameterizedTest
-		@CsvSource({ "909.0,0.909","123456.0,123.456","900.0,0.9" })
-		public void testConvertKnownKilohertzToMegahertz(double input, double expectation) {
-			final double result = Frequency.Kilohertz.toMegahertz(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "987654.0,0.987654","10000.0,0.01","90090.0,0.09009" })
-		public void testConvertKnownKilohertzToGigahertz(double input, double expectation) {
-			final double result = Frequency.Kilohertz.toGigahertz(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
+	@Property(tries = 100)
+	public void testFromGigahertzToKilohertzAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Frequency.Gigahertz.toKilohertz(value);
+		final double convertBack = Frequency.Kilohertz.toGigahertz(convertTo);
+		assertEquals(value, convertBack, 0.01);
 	}
-	@Nested
-	public class MegahertzTests {
-		@ParameterizedTest
-		@CsvSource({ "0.9,900000.0","0.001,1000.0","0.091,91000.0" })
-		public void testConvertKnownMegahertzToHertz(double input, double expectation) {
-			final double result = Frequency.Megahertz.toHertz(input);
-			assertEquals(expectation, result, 0.01);
-		}
 
-		@ParameterizedTest
-		@CsvSource({ "0.87,870.0","12.0,12000.0","88.1,88100.0" })
-		public void testConvertKnownMegahertzToKilohertz(double input, double expectation) {
-			final double result = Frequency.Megahertz.toKilohertz(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "798.0,0.798","900.0,0.9","579.1,0.5791" })
-		public void testConvertKnownMegahertzToGigahertz(double input, double expectation) {
-			final double result = Frequency.Megahertz.toGigahertz(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
+	@ParameterizedTest
+	@CsvSource({ "0.009,9000.0","1e-5,10.0","0.000065,65.0" })
+	public void testConvertKnownGigahertzToKilohertz(double input, double expectation) {
+		final double result = Frequency.Gigahertz.toKilohertz(input);
+		assertEquals(expectation, result, 0.01);
 	}
+
+	@Property(tries = 100)
+	public void testFromGigahertzToMegahertzAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Frequency.Gigahertz.toMegahertz(value);
+		final double convertBack = Frequency.Megahertz.toGigahertz(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.9,900.0","0.0123,12.3","5.0,5000.0" })
+	public void testConvertKnownGigahertzToMegahertz(double input, double expectation) {
+		final double result = Frequency.Gigahertz.toMegahertz(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromHertzToKilohertzAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Frequency.Hertz.toKilohertz(value);
+		final double convertBack = Frequency.Kilohertz.toHertz(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "800.0,0.8","1506.9,1.5069","5000.0,5.0" })
+	public void testConvertKnownHertzToKilohertz(double input, double expectation) {
+		final double result = Frequency.Hertz.toKilohertz(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromHertzToMegahertzAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Frequency.Hertz.toMegahertz(value);
+		final double convertBack = Frequency.Megahertz.toHertz(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "900009.0,0.900009","160000.0,0.16","888888.0,0.888888" })
+	public void testConvertKnownHertzToMegahertz(double input, double expectation) {
+		final double result = Frequency.Hertz.toMegahertz(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromHertzToGigahertzAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Frequency.Hertz.toGigahertz(value);
+		final double convertBack = Frequency.Gigahertz.toHertz(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "100900900.0,0.1009009","9.0,9e-9","90909090.0,0.09090909" })
+	public void testConvertKnownHertzToGigahertz(double input, double expectation) {
+		final double result = Frequency.Hertz.toGigahertz(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromKilohertzToHertzAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Frequency.Kilohertz.toHertz(value);
+		final double convertBack = Frequency.Hertz.toKilohertz(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "90.90909,90909.09","0.12345,123.45","500.0,500000.0" })
+	public void testConvertKnownKilohertzToHertz(double input, double expectation) {
+		final double result = Frequency.Kilohertz.toHertz(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromKilohertzToMegahertzAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Frequency.Kilohertz.toMegahertz(value);
+		final double convertBack = Frequency.Megahertz.toKilohertz(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "909.0,0.909","123456.0,123.456","900.0,0.9" })
+	public void testConvertKnownKilohertzToMegahertz(double input, double expectation) {
+		final double result = Frequency.Kilohertz.toMegahertz(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromKilohertzToGigahertzAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Frequency.Kilohertz.toGigahertz(value);
+		final double convertBack = Frequency.Gigahertz.toKilohertz(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "987654.0,0.987654","10000.0,0.01","90090.0,0.09009" })
+	public void testConvertKnownKilohertzToGigahertz(double input, double expectation) {
+		final double result = Frequency.Kilohertz.toGigahertz(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromMegahertzToHertzAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Frequency.Megahertz.toHertz(value);
+		final double convertBack = Frequency.Hertz.toMegahertz(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.9,900000.0","0.001,1000.0","0.091,91000.0" })
+	public void testConvertKnownMegahertzToHertz(double input, double expectation) {
+		final double result = Frequency.Megahertz.toHertz(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromMegahertzToKilohertzAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Frequency.Megahertz.toKilohertz(value);
+		final double convertBack = Frequency.Kilohertz.toMegahertz(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.87,870.0","12.0,12000.0","88.1,88100.0" })
+	public void testConvertKnownMegahertzToKilohertz(double input, double expectation) {
+		final double result = Frequency.Megahertz.toKilohertz(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromMegahertzToGigahertzAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Frequency.Megahertz.toGigahertz(value);
+		final double convertBack = Frequency.Gigahertz.toMegahertz(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "798.0,0.798","900.0,0.9","579.1,0.5791" })
+	public void testConvertKnownMegahertzToGigahertz(double input, double expectation) {
+		final double result = Frequency.Megahertz.toGigahertz(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
 }

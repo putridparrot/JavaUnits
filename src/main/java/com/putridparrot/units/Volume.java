@@ -161,7 +161,7 @@ public final class Volume {
 		 * @return The value in Kilolitres
 		 */
 		public static double toKilolitres(double value) {
-			return value * 0.004546091879;
+			return value * 0.0045460918799;
 		}
 		/**
 		 * Converts the supplied Gallons value to Teaspoons

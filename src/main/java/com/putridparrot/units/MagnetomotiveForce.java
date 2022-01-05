@@ -20,7 +20,7 @@ public final class MagnetomotiveForce {
 		 * @return The value in Gilberts
 		 */
 		public static double toGilberts(double value) {
-			return value * 1.256637061436;
+			return value / 0.7957747154595;
 		}
 	}
 	/**

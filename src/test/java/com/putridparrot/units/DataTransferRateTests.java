@@ -6,814 +6,1552 @@
 
 package com.putridparrot.units;
 
-import org.junit.jupiter.api.Nested;
+import net.jqwik.api.constraints.DoubleRange;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import net.jqwik.api.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DataTransferRateTests {
-	@Nested
-	public class BitsPerSecondTests {
-		@ParameterizedTest
-		@CsvSource({ "100.0,0.1","6021.0,6.021","9100.0,9.1" })
-		public void testConvertKnownBitsPerSecondToKiloBitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.BitsPerSecond.toKiloBitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "9000000.0,9.0","123456.0,0.123456","1900000.0,1.9" })
-		public void testConvertKnownBitsPerSecondToMegaBitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.BitsPerSecond.toMegaBitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "190000000.0,0.19","8009.0,8.009e-6","987654321.0,0.987654321" })
-		public void testConvertKnownBitsPerSecondToGigaBitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.BitsPerSecond.toGigaBitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "987654321234.0,0.987654321234","1234567890123456.0,1234.567890123455982","999888777666555.0,999.888777666555029" })
-		public void testConvertKnownBitsPerSecondToTeraBitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.BitsPerSecond.toTeraBitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "900.0,0.1125","12345.0,1.543125","6000.9,0.7501125" })
-		public void testConvertKnownBitsPerSecondToKiloBytesPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.BitsPerSecond.toKiloBytesPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "123456.0,0.015432","900800.0,0.1126","999888777.0,124.986097125" })
-		public void testConvertKnownBitsPerSecondToMegaBytesPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.BitsPerSecond.toMegaBytesPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "999888777.0,0.124986097125","1.9e+9,0.2375","80090077.0,0.010011259625" })
-		public void testConvertKnownBitsPerSecondToGigaBytesPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.BitsPerSecond.toGigaBytesPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "999888777666.0,0.12498609720825","12345678912345.0,1.5432098640431251","111999222888333.0,13.9999028610416243" })
-		public void testConvertKnownBitsPerSecondToTeraBytesPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.BitsPerSecond.toTeraBytesPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "1800.0,1.757813","888.0,0.867188","7687.0,7.506836" })
-		public void testConvertKnownBitsPerSecondToKibibitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.BitsPerSecond.toKibibitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "999888.0,0.953567505","1234567.0,1.17737484","900800.0,0.859069824" })
-		public void testConvertKnownBitsPerSecondToMebibitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.BitsPerSecond.toMebibitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
+	@Property(tries = 100)
+	public void testFromBitsPerSecondToKiloBitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.BitsPerSecond.toKiloBitsPerSecond(value);
+		final double convertBack = DataTransferRate.KiloBitsPerSecond.toBitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
 	}
-	@Nested
-	public class GigaBitsPerSecondTests {
-		@ParameterizedTest
-		@CsvSource({ "0.0009,900000.0","0.00007,70000.0","1.2e-5,12000.0" })
-		public void testConvertKnownGigaBitsPerSecondToBitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.GigaBitsPerSecond.toBitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
 
-		@ParameterizedTest
-		@CsvSource({ "0.01,10000.0","0.91,910000.0","6.1,6.1e+6" })
-		public void testConvertKnownGigaBitsPerSecondToKiloBitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.GigaBitsPerSecond.toKiloBitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "6.1,6100.0","0.961,961.0","1.2e-3,1.2" })
-		public void testConvertKnownGigaBitsPerSecondToMegaBitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.GigaBitsPerSecond.toMegaBitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "1200.0,1.2","90012.0,90.012","8000.0,8.0" })
-		public void testConvertKnownGigaBitsPerSecondToTeraBitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.GigaBitsPerSecond.toTeraBitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "1.2,150000.0","0.9,112500.0","0.001,125.0" })
-		public void testConvertKnownGigaBitsPerSecondToKiloBytesPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.GigaBitsPerSecond.toKiloBytesPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "0.9,112.5","1.2,150.0","80.1,10012.5" })
-		public void testConvertKnownGigaBitsPerSecondToMegaBytesPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.GigaBitsPerSecond.toMegaBytesPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "99.0,12.375","123.123,15.390375","8000.9,1000.1125" })
-		public void testConvertKnownGigaBitsPerSecondToGigaBytesPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.GigaBitsPerSecond.toGigaBytesPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "9000.0,1.125","1234567.0,154.320875","613.0,0.076625" })
-		public void testConvertKnownGigaBitsPerSecondToTeraBytesPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.GigaBitsPerSecond.toTeraBytesPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "0.8,781250.4","0.012,11718.75","0.002,1953.125" })
-		public void testConvertKnownGigaBitsPerSecondToKibibitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.GigaBitsPerSecond.toKibibitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "0.002,1.9073486","0.9,858.6","6.1,5819.4" })
-		public void testConvertKnownGigaBitsPerSecondToMebibitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.GigaBitsPerSecond.toMebibitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
+	@ParameterizedTest
+	@CsvSource({ "100.0,0.1","6021.0,6.021","9100.0,9.1" })
+	public void testConvertKnownBitsPerSecondToKiloBitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.BitsPerSecond.toKiloBitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
 	}
-	@Nested
-	public class GigaBytesPerSecondTests {
-		@ParameterizedTest
-		@CsvSource({ "0.004,32000000.0","0.012,96000000","3e-9,24.0" })
-		public void testConvertKnownGigaBytesPerSecondToBitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.GigaBytesPerSecond.toBitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
 
-		@ParameterizedTest
-		@CsvSource({ "0.009,72000.0","1.2e-4,960.0","0.0078,62400.0" })
-		public void testConvertKnownGigaBytesPerSecondToKiloBitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.GigaBytesPerSecond.toKiloBitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "0.0078,62.4","0.01,80.0","0.001234,9.872" })
-		public void testConvertKnownGigaBytesPerSecondToMegaBitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.GigaBytesPerSecond.toMegaBitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "5.0,40.0","1.2,9.6","0.01,0.08" })
-		public void testConvertKnownGigaBytesPerSecondToGigaBitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.GigaBytesPerSecond.toGigaBitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "70.0,0.56","9001.0,72.008","768123.9,6144.9912" })
-		public void testConvertKnownGigaBytesPerSecondToTeraBitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.GigaBytesPerSecond.toTeraBitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "0.2,200000.0","0.009,9000.0","0.00123,1230.0" })
-		public void testConvertKnownGigaBytesPerSecondToKiloBytesPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.GigaBytesPerSecond.toKiloBytesPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "0.9,900.0","12.0,12000.0","35.6,35600.0" })
-		public void testConvertKnownGigaBytesPerSecondToMegaBytesPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.GigaBytesPerSecond.toMegaBytesPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "35.6,0.0356","100.23,0.10023","900100.0,900.1" })
-		public void testConvertKnownGigaBytesPerSecondToTeraBytesPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.GigaBytesPerSecond.toTeraBytesPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "0.05,390625.0","0.008,62500.0","0.00123,9609.375" })
-		public void testConvertKnownGigaBytesPerSecondToKibibitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.GigaBytesPerSecond.toKibibitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "0.009,68.66451","1.2,9155.268","19.2,146484.288" })
-		public void testConvertKnownGigaBytesPerSecondToMebibitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.GigaBytesPerSecond.toMebibitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
+	@Property(tries = 100)
+	public void testFromBitsPerSecondToMegaBitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.BitsPerSecond.toMegaBitsPerSecond(value);
+		final double convertBack = DataTransferRate.MegaBitsPerSecond.toBitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
 	}
-	@Nested
-	public class KibibitsPerSecondTests {
-		@ParameterizedTest
-		@CsvSource({ "2.0,2048.0","9.0,9216.0","17.8,18227.2" })
-		public void testConvertKnownKibibitsPerSecondToBitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.KibibitsPerSecond.toBitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
 
-		@ParameterizedTest
-		@CsvSource({ "6.2,6.3488","0.9,0.9216","87.0,89.088" })
-		public void testConvertKnownKibibitsPerSecondToKiloBitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.KibibitsPerSecond.toKiloBitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "87.0,0.089088","12.34,0.01263616","123456.0,126.418879" })
-		public void testConvertKnownKibibitsPerSecondToMegaBitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.KibibitsPerSecond.toMegaBitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "123456.0,0.126418944","8000000.0,8.192","1276876,1.307521024" })
-		public void testConvertKnownKibibitsPerSecondToGigaBitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.KibibitsPerSecond.toGigaBitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "800000000.0,0.8192","1.5e12,1536.0","9999999.0,0.01023999898" })
-		public void testConvertKnownKibibitsPerSecondToTeraBitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.KibibitsPerSecond.toTeraBitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "919.0,117.632","77.4,9.9072","109.109,13.965952" })
-		public void testConvertKnownKibibitsPerSecondToKiloBytesPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.KibibitsPerSecond.toKiloBytesPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "1000.0,0.128","800.123,0.102415744","123456.0,15.802368" })
-		public void testConvertKnownKibibitsPerSecondToMegaBytesPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.KibibitsPerSecond.toMegaBytesPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "12345678.0,1.580347926","8e12,1024000.00","1.2e5,0.01536" })
-		public void testConvertKnownKibibitsPerSecondToGigaBytesPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.KibibitsPerSecond.toGigaBytesPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "120000000.0,0.01536","88e12,11264.0","9000000.0,0.009216" })
-		public void testConvertKnownKibibitsPerSecondToTeraBytesPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.KibibitsPerSecond.toTeraBytesPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "600.0,0.5859375","12345.0,12.055664","101.0,0.0986328" })
-		public void testConvertKnownKibibitsPerSecondToMebibitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.KibibitsPerSecond.toMebibitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
+	@ParameterizedTest
+	@CsvSource({ "9000000.0,9.0","123456.0,0.123456","1900000.0,1.9" })
+	public void testConvertKnownBitsPerSecondToMegaBitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.BitsPerSecond.toMegaBitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
 	}
-	@Nested
-	public class KiloBitsPerSecondTests {
-		@ParameterizedTest
-		@CsvSource({ "9.0,9000.0","6.7,6700.0","1.2345,1234.5" })
-		public void testConvertKnownKiloBitsPerSecondToBitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.KiloBitsPerSecond.toBitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
 
-		@ParameterizedTest
-		@CsvSource({ "900.0,0.9","12345.0,12.345","9988.0,9.988" })
-		public void testConvertKnownKiloBitsPerSecondToMegaBitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.KiloBitsPerSecond.toMegaBitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "123456.0,0.123456","8000700.0,8.0007","191987578.0,191.987578" })
-		public void testConvertKnownKiloBitsPerSecondToGigaBitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.KiloBitsPerSecond.toGigaBitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "191987578,0.191987578","9010081903.0,9.010081903","123456789.0,0.123456789" })
-		public void testConvertKnownKiloBitsPerSecondToTeraBitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.KiloBitsPerSecond.toTeraBitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "80.0,10.0","15.67,1.95875","8007.09,1000.88625" })
-		public void testConvertKnownKiloBitsPerSecondToKiloBytesPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.KiloBitsPerSecond.toKiloBytesPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "123456.0,15.432","998877.0,124.859625","10090.0,1.26125" })
-		public void testConvertKnownKiloBitsPerSecondToMegaBytesPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.KiloBitsPerSecond.toMegaBytesPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "1828972.0,0.2286215","879860.8,0.1099826","78178971.0,9.772371375" })
-		public void testConvertKnownKiloBitsPerSecondToGigaBytesPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.KiloBitsPerSecond.toGigaBytesPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "1234567891.0,0.154320986375","999999098.0,0.12499988725","84618364142.0,10.57729551775" })
-		public void testConvertKnownKiloBitsPerSecondToTeraBytesPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.KiloBitsPerSecond.toTeraBytesPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "89.1,87.01172","7.1,6.93359","438.0,427.734" })
-		public void testConvertKnownKiloBitsPerSecondToKibibitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.KiloBitsPerSecond.toKibibitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "77790.0,74.186325","123456.0,117.736816","23972.0,22.861481" })
-		public void testConvertKnownKiloBitsPerSecondToMebibitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.KiloBitsPerSecond.toMebibitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
+	@Property(tries = 100)
+	public void testFromBitsPerSecondToGigaBitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.BitsPerSecond.toGigaBitsPerSecond(value);
+		final double convertBack = DataTransferRate.GigaBitsPerSecond.toBitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
 	}
-	@Nested
-	public class KiloBytesPerSecondTests {
-		@ParameterizedTest
-		@CsvSource({ "123.456,987648.0","900.0,7.2e+6","100200.0,801600000" })
-		public void testConvertKnownKiloBytesPerSecondToBitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.KiloBytesPerSecond.toBitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
 
-		@ParameterizedTest
-		@CsvSource({ "4.0,32.0","1.2,9.6","88.1,704.8" })
-		public void testConvertKnownKiloBytesPerSecondToKiloBitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.KiloBytesPerSecond.toKiloBitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "88.1,0.7048","7.1,0.0568","12.8,0.1024" })
-		public void testConvertKnownKiloBytesPerSecondToMegaBitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.KiloBytesPerSecond.toMegaBitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "10080.0,0.08064","4.5e+9,36000.0","271279.0,2.170232" })
-		public void testConvertKnownKiloBytesPerSecondToGigaBitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.KiloBytesPerSecond.toGigaBitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "9009000.0,0.072072","7.2e9,57.6","100100100900.0,800.8008072" })
-		public void testConvertKnownKiloBytesPerSecondToTeraBitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.KiloBytesPerSecond.toTeraBitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "1009.0,1.009","8899.0,8.899","619.0,0.619" })
-		public void testConvertKnownKiloBytesPerSecondToMegaBytesPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.KiloBytesPerSecond.toMegaBytesPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "900800.0,0.9008","1234567.0,1.234567","7.9e9,7900.0" })
-		public void testConvertKnownKiloBytesPerSecondToGigaBytesPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.KiloBytesPerSecond.toGigaBytesPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "0.9,9e-10","140000000,0.14","7.0,7e-9" })
-		public void testConvertKnownKiloBytesPerSecondToTeraBytesPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.KiloBytesPerSecond.toTeraBytesPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "0.009,0.0703125","6e+3,46872.0","1.23,9.609375" })
-		public void testConvertKnownKiloBytesPerSecondToKibibitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.KiloBytesPerSecond.toKibibitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "70.0,0.534058","9.0,0.0686646","10022.0,76.461792" })
-		public void testConvertKnownKiloBytesPerSecondToMebibitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.KiloBytesPerSecond.toMebibitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
+	@ParameterizedTest
+	@CsvSource({ "190000000.0,0.19","8009.0,8.009e-6","987654321.0,0.987654321" })
+	public void testConvertKnownBitsPerSecondToGigaBitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.BitsPerSecond.toGigaBitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
 	}
-	@Nested
-	public class MebibitsPerSecondTests {
-		@ParameterizedTest
-		@CsvSource({ "0.9,943718.4","0.006,6291.456","2.0,2097152.0" })
-		public void testConvertKnownMebibitsPerSecondToBitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.MebibitsPerSecond.toBitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
 
-		@ParameterizedTest
-		@CsvSource({ "0.8,838.861","2.0,2097.15","0.23,241.1725" })
-		public void testConvertKnownMebibitsPerSecondToKiloBitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.MebibitsPerSecond.toKiloBitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "0.9,0.943718","12.3,12.89748","8.1,8.49347" })
-		public void testConvertKnownMebibitsPerSecondToMegaBitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.MebibitsPerSecond.toMegaBitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "12345.0,12.944671","100.0,0.104858","999.9,1.0484711" })
-		public void testConvertKnownMebibitsPerSecondToGigaBitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.MebibitsPerSecond.toGigaBitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "100009.0,0.104867037","9876543.0,10.35630595","1000900.0,1.049519718" })
-		public void testConvertKnownMebibitsPerSecondToTeraBitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.MebibitsPerSecond.toTeraBitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "4.0,524.288","1.45,190.0544","88.11,11548.754" })
-		public void testConvertKnownMebibitsPerSecondToKiloBytesPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.MebibitsPerSecond.toKiloBytesPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "109.0,14.2868","55.67,7.2967782","45678.0,5987.1068" })
-		public void testConvertKnownMebibitsPerSecondToMegaBytesPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.MebibitsPerSecond.toMegaBytesPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "4000.0,0.524288311","90100.0,11.80959421","1009.0,0.132251727" })
-		public void testConvertKnownMebibitsPerSecondToGigaBytesPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.MebibitsPerSecond.toGigaBytesPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "1000009.0,0.1310731796","90808080.0,11.902396662","5.2e12,681574.4" })
-		public void testConvertKnownMebibitsPerSecondToTeraBytesPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.MebibitsPerSecond.toTeraBytesPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "5.0,5120.0","1234.56,1264189.44","505.0,517120.0" })
-		public void testConvertKnownMebibitsPerSecondToKibibitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.MebibitsPerSecond.toKibibitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
+	@Property(tries = 100)
+	public void testFromBitsPerSecondToTeraBitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.BitsPerSecond.toTeraBitsPerSecond(value);
+		final double convertBack = DataTransferRate.TeraBitsPerSecond.toBitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
 	}
-	@Nested
-	public class MegaBitsPerSecondTests {
-		@ParameterizedTest
-		@CsvSource({ "0.34,340000.0","9.12,9120000.0","0.987,987000.0" })
-		public void testConvertKnownMegaBitsPerSecondToBitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.MegaBitsPerSecond.toBitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
 
-		@ParameterizedTest
-		@CsvSource({ "0.77,770.0","5.0,5000.0","0.987,987.0" })
-		public void testConvertKnownMegaBitsPerSecondToKiloBitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.MegaBitsPerSecond.toKiloBitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "900.0,0.9","12345.0,12.345","189.1,0.1891" })
-		public void testConvertKnownMegaBitsPerSecondToGigaBitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.MegaBitsPerSecond.toGigaBitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "100200300.0,100.2003","99887777.0,99.887777","80009.0,0.080009" })
-		public void testConvertKnownMegaBitsPerSecondToTeraBitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.MegaBitsPerSecond.toTeraBitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "9.0,1125.0","1.23,153.75","98.1,12262.5" })
-		public void testConvertKnownMegaBitsPerSecondToKiloBytesPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.MegaBitsPerSecond.toKiloBytesPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "98.1,12.2625","10.9,1.3625","888.123,111.015375" })
-		public void testConvertKnownMegaBitsPerSecondToMegaBytesPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.MegaBitsPerSecond.toMegaBytesPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "900.0,0.1125","10123.0,1.265375","9988.0,1.2485" })
-		public void testConvertKnownMegaBitsPerSecondToGigaBytesPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.MegaBitsPerSecond.toGigaBytesPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "998877.0,0.124859625","100200400.0,12.5250375","9008877.0,1.126109625" })
-		public void testConvertKnownMegaBitsPerSecondToTeraBytesPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.MegaBitsPerSecond.toTeraBytesPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "12.0,11718.756","0.9,878.906","1.23,1201.172" })
-		public void testConvertKnownMegaBitsPerSecondToKibibitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.MegaBitsPerSecond.toKibibitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "4.5,4.29153","0.8,0.762939","900.0,858.307" })
-		public void testConvertKnownMegaBitsPerSecondToMebibitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.MegaBitsPerSecond.toMebibitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
+	@ParameterizedTest
+	@CsvSource({ "987654321234.0,0.987654321234","1234567890123456.0,1234.567890123455982","999888777666555.0,999.888777666555029" })
+	public void testConvertKnownBitsPerSecondToTeraBitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.BitsPerSecond.toTeraBitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
 	}
-	@Nested
-	public class MegaBytesPerSecondTests {
-		@ParameterizedTest
-		@CsvSource({ "0.04,320000.0","0.0091,72800.0","3e-5,240.0" })
-		public void testConvertKnownMegaBytesPerSecondToBitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.MegaBytesPerSecond.toBitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
 
-		@ParameterizedTest
-		@CsvSource({ "6.0,48000.0","0.3,2400.0","0.009,72.0" })
-		public void testConvertKnownMegaBytesPerSecondToKiloBitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.MegaBytesPerSecond.toKiloBitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "3.0,24.0","0.9,7.2","13.0,104.0" })
-		public void testConvertKnownMegaBytesPerSecondToMegaBitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.MegaBytesPerSecond.toMegaBitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "13.0,0.104","900.0,7.2","18000.0,144.0" })
-		public void testConvertKnownMegaBytesPerSecondToGigaBitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.MegaBytesPerSecond.toGigaBitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "18000.0,0.144","9718290.0,77.74632","9e12,72000000.0" })
-		public void testConvertKnownMegaBytesPerSecondToTeraBitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.MegaBytesPerSecond.toTeraBitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "6.0,6000.0","0.9,900.0","123.4,123400.0" })
-		public void testConvertKnownMegaBytesPerSecondToKiloBytesPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.MegaBytesPerSecond.toKiloBytesPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "123.4,0.1234","900.0,0.9","8e6,8000.0" })
-		public void testConvertKnownMegaBytesPerSecondToGigaBytesPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.MegaBytesPerSecond.toGigaBytesPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "80000.0,0.08","12345678.0,12.345678","900800.0,0.9008" })
-		public void testConvertKnownMegaBytesPerSecondToTeraBytesPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.MegaBytesPerSecond.toTeraBytesPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "6.0,46875.0","0.9,7031.25","0.03,234.375" })
-		public void testConvertKnownMegaBytesPerSecondToKibibitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.MegaBytesPerSecond.toKibibitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "0.03,0.2288818","4.5,34.3323","80.1,611.1145" })
-		public void testConvertKnownMegaBytesPerSecondToMebibitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.MegaBytesPerSecond.toMebibitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
+	@Property(tries = 100)
+	public void testFromBitsPerSecondToKiloBytesPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.BitsPerSecond.toKiloBytesPerSecond(value);
+		final double convertBack = DataTransferRate.KiloBytesPerSecond.toBitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
 	}
-	@Nested
-	public class TeraBitsPerSecondTests {
-		@ParameterizedTest
-		@CsvSource({ "0.0007,700000000.0","1.23e-6,1230000.0","0.00098,980000000.0" })
-		public void testConvertKnownTeraBitsPerSecondToBitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.TeraBitsPerSecond.toBitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
 
-		@ParameterizedTest
-		@CsvSource({ "0.001,1000000.0","6.1e-6,6100.0","0.00009,90000.0" })
-		public void testConvertKnownTeraBitsPerSecondToKiloBitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.TeraBitsPerSecond.toKiloBitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "0.09,90000.0","3.5e-4,350.0","0.0123,12300.0" })
-		public void testConvertKnownTeraBitsPerSecondToMegaBitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.TeraBitsPerSecond.toMegaBitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "0.9,900.0","1.45,1450.0","8.19,8190.0" })
-		public void testConvertKnownTeraBitsPerSecondToGigaBitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.TeraBitsPerSecond.toGigaBitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "0.0009,112500.0","3.14e-6,392.5","0.001,125000.0" })
-		public void testConvertKnownTeraBitsPerSecondToKiloBytesPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.TeraBitsPerSecond.toKiloBytesPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "0.4,50000.0","3.9e-3,487.5","0.007,875.0" })
-		public void testConvertKnownTeraBitsPerSecondToMegaBytesPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.TeraBitsPerSecond.toMegaBytesPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "0.009,1.125","0.00123,0.15375","8.1e-3,1.0125" })
-		public void testConvertKnownTeraBitsPerSecondToGigaBytesPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.TeraBitsPerSecond.toGigaBytesPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "0.3,0.0375","14.0,1.75","0.8,0.1" })
-		public void testConvertKnownTeraBitsPerSecondToTeraBytesPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.TeraBitsPerSecond.toTeraBytesPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "0.0009,878906.25","6.1e-6,5957.031","12e-9,11.71875" })
-		public void testConvertKnownTeraBitsPerSecondToKibibitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.TeraBitsPerSecond.toKibibitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "0.9,858306.59999","4.6e-3,4386.9","0.00123,1173.0194092" })
-		public void testConvertKnownTeraBitsPerSecondToMebibitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.TeraBitsPerSecond.toMebibitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
+	@ParameterizedTest
+	@CsvSource({ "900.0,0.1125","12345.0,1.543125","6000.9,0.7501125" })
+	public void testConvertKnownBitsPerSecondToKiloBytesPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.BitsPerSecond.toKiloBytesPerSecond(input);
+		assertEquals(expectation, result, 0.01);
 	}
-	@Nested
-	public class TeraBytesPerSecondTests {
-		@ParameterizedTest
-		@CsvSource({ "0.00008,640000000.0","1.2e-12,9.6","9.0,7.2e+13" })
-		public void testConvertKnownTeraBytesPerSecondToBitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.TeraBytesPerSecond.toBitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
 
-		@ParameterizedTest
-		@CsvSource({ "0.009,72000000.0","1.4e-6,11200.0","6.1e-5,488000.0" })
-		public void testConvertKnownTeraBytesPerSecondToKiloBitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.TeraBytesPerSecond.toKiloBitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "0.005,40000.0","0.000123,984.0","0.00006,480.0" })
-		public void testConvertKnownTeraBytesPerSecondToMegaBitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.TeraBytesPerSecond.toMegaBitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "0.008,64.0","3e-7,0.0024","0.00023,1.84" })
-		public void testConvertKnownTeraBytesPerSecondToGigaBitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.TeraBytesPerSecond.toGigaBitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "5.0,40.0","1.23,9.84","800.0,6400.0" })
-		public void testConvertKnownTeraBytesPerSecondToTeraBitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.TeraBytesPerSecond.toTeraBitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "0.0009,900000.0","3.14e-7,314.0","0.00063,630000.0" })
-		public void testConvertKnownTeraBytesPerSecondToKiloBytesPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.TeraBytesPerSecond.toKiloBytesPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "0.009,9000.0","0.234,234000.0","2.0,2e+6" })
-		public void testConvertKnownTeraBytesPerSecondToMegaBytesPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.TeraBytesPerSecond.toMegaBytesPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "2.7,2700.0","0.9,900.0","0.0123,12.3" })
-		public void testConvertKnownTeraBytesPerSecondToGigaBytesPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.TeraBytesPerSecond.toGigaBytesPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "0.0009,7031250.0","1.23e-5,96093.75","0.0001,781250.0" })
-		public void testConvertKnownTeraBytesPerSecondToKibibitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.TeraBytesPerSecond.toKibibitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
-		@ParameterizedTest
-		@CsvSource({ "0.01,76293.95","0.008,61035.156","2.0,15258789.0625" })
-		public void testConvertKnownTeraBytesPerSecondToMebibitsPerSecond(double input, double expectation) {
-			final double result = DataTransferRate.TeraBytesPerSecond.toMebibitsPerSecond(input);
-			assertEquals(expectation, result, 0.01);
-		}
-
+	@Property(tries = 100)
+	public void testFromBitsPerSecondToMegaBytesPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.BitsPerSecond.toMegaBytesPerSecond(value);
+		final double convertBack = DataTransferRate.MegaBytesPerSecond.toBitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
 	}
+
+	@ParameterizedTest
+	@CsvSource({ "123456.0,0.015432","900800.0,0.1126","999888777.0,124.986097125" })
+	public void testConvertKnownBitsPerSecondToMegaBytesPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.BitsPerSecond.toMegaBytesPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromBitsPerSecondToGigaBytesPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.BitsPerSecond.toGigaBytesPerSecond(value);
+		final double convertBack = DataTransferRate.GigaBytesPerSecond.toBitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "999888777.0,0.124986097125","1.9e+9,0.2375","80090077.0,0.010011259625" })
+	public void testConvertKnownBitsPerSecondToGigaBytesPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.BitsPerSecond.toGigaBytesPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromBitsPerSecondToTeraBytesPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.BitsPerSecond.toTeraBytesPerSecond(value);
+		final double convertBack = DataTransferRate.TeraBytesPerSecond.toBitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "999888777666.0,0.12498609720825","12345678912345.0,1.5432098640431251","111999222888333.0,13.9999028610416243" })
+	public void testConvertKnownBitsPerSecondToTeraBytesPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.BitsPerSecond.toTeraBytesPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromBitsPerSecondToKibibitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.BitsPerSecond.toKibibitsPerSecond(value);
+		final double convertBack = DataTransferRate.KibibitsPerSecond.toBitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "1800.0,1.757813","888.0,0.867188","7687.0,7.506836" })
+	public void testConvertKnownBitsPerSecondToKibibitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.BitsPerSecond.toKibibitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromBitsPerSecondToMebibitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.BitsPerSecond.toMebibitsPerSecond(value);
+		final double convertBack = DataTransferRate.MebibitsPerSecond.toBitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "999888.0,0.953567505","1234567.0,1.17737484","900800.0,0.859069824" })
+	public void testConvertKnownBitsPerSecondToMebibitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.BitsPerSecond.toMebibitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromGigaBitsPerSecondToBitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.GigaBitsPerSecond.toBitsPerSecond(value);
+		final double convertBack = DataTransferRate.BitsPerSecond.toGigaBitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.0009,900000.0","0.00007,70000.0","1.2e-5,12000.0" })
+	public void testConvertKnownGigaBitsPerSecondToBitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.GigaBitsPerSecond.toBitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromGigaBitsPerSecondToKiloBitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.GigaBitsPerSecond.toKiloBitsPerSecond(value);
+		final double convertBack = DataTransferRate.KiloBitsPerSecond.toGigaBitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.01,10000.0","0.91,910000.0","6.1,6.1e+6" })
+	public void testConvertKnownGigaBitsPerSecondToKiloBitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.GigaBitsPerSecond.toKiloBitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromGigaBitsPerSecondToMegaBitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.GigaBitsPerSecond.toMegaBitsPerSecond(value);
+		final double convertBack = DataTransferRate.MegaBitsPerSecond.toGigaBitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "6.1,6100.0","0.961,961.0","1.2e-3,1.2" })
+	public void testConvertKnownGigaBitsPerSecondToMegaBitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.GigaBitsPerSecond.toMegaBitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromGigaBitsPerSecondToTeraBitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.GigaBitsPerSecond.toTeraBitsPerSecond(value);
+		final double convertBack = DataTransferRate.TeraBitsPerSecond.toGigaBitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "1200.0,1.2","90012.0,90.012","8000.0,8.0" })
+	public void testConvertKnownGigaBitsPerSecondToTeraBitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.GigaBitsPerSecond.toTeraBitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromGigaBitsPerSecondToKiloBytesPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.GigaBitsPerSecond.toKiloBytesPerSecond(value);
+		final double convertBack = DataTransferRate.KiloBytesPerSecond.toGigaBitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "1.2,150000.0","0.9,112500.0","0.001,125.0" })
+	public void testConvertKnownGigaBitsPerSecondToKiloBytesPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.GigaBitsPerSecond.toKiloBytesPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromGigaBitsPerSecondToMegaBytesPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.GigaBitsPerSecond.toMegaBytesPerSecond(value);
+		final double convertBack = DataTransferRate.MegaBytesPerSecond.toGigaBitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.9,112.5","1.2,150.0","80.1,10012.5" })
+	public void testConvertKnownGigaBitsPerSecondToMegaBytesPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.GigaBitsPerSecond.toMegaBytesPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromGigaBitsPerSecondToGigaBytesPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.GigaBitsPerSecond.toGigaBytesPerSecond(value);
+		final double convertBack = DataTransferRate.GigaBytesPerSecond.toGigaBitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "99.0,12.375","123.123,15.390375","8000.9,1000.1125" })
+	public void testConvertKnownGigaBitsPerSecondToGigaBytesPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.GigaBitsPerSecond.toGigaBytesPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromGigaBitsPerSecondToTeraBytesPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.GigaBitsPerSecond.toTeraBytesPerSecond(value);
+		final double convertBack = DataTransferRate.TeraBytesPerSecond.toGigaBitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "9000.0,1.125","1234567.0,154.320875","613.0,0.076625" })
+	public void testConvertKnownGigaBitsPerSecondToTeraBytesPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.GigaBitsPerSecond.toTeraBytesPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromGigaBitsPerSecondToKibibitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.GigaBitsPerSecond.toKibibitsPerSecond(value);
+		final double convertBack = DataTransferRate.KibibitsPerSecond.toGigaBitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.8,781250.0","0.012,11718.75","0.002,1953.125" })
+	public void testConvertKnownGigaBitsPerSecondToKibibitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.GigaBitsPerSecond.toKibibitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromGigaBitsPerSecondToMebibitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.GigaBitsPerSecond.toMebibitsPerSecond(value);
+		final double convertBack = DataTransferRate.MebibitsPerSecond.toGigaBitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.002,1.9073486","0.9,858.6","6.1,5819.4" })
+	public void testConvertKnownGigaBitsPerSecondToMebibitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.GigaBitsPerSecond.toMebibitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromGigaBytesPerSecondToBitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.GigaBytesPerSecond.toBitsPerSecond(value);
+		final double convertBack = DataTransferRate.BitsPerSecond.toGigaBytesPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.004,32000000.0","0.012,96000000","3e-9,24.0" })
+	public void testConvertKnownGigaBytesPerSecondToBitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.GigaBytesPerSecond.toBitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromGigaBytesPerSecondToKiloBitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.GigaBytesPerSecond.toKiloBitsPerSecond(value);
+		final double convertBack = DataTransferRate.KiloBitsPerSecond.toGigaBytesPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.009,72000.0","1.2e-4,960.0","0.0078,62400.0" })
+	public void testConvertKnownGigaBytesPerSecondToKiloBitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.GigaBytesPerSecond.toKiloBitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromGigaBytesPerSecondToMegaBitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.GigaBytesPerSecond.toMegaBitsPerSecond(value);
+		final double convertBack = DataTransferRate.MegaBitsPerSecond.toGigaBytesPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.0078,62.4","0.01,80.0","0.001234,9.872" })
+	public void testConvertKnownGigaBytesPerSecondToMegaBitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.GigaBytesPerSecond.toMegaBitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromGigaBytesPerSecondToGigaBitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.GigaBytesPerSecond.toGigaBitsPerSecond(value);
+		final double convertBack = DataTransferRate.GigaBitsPerSecond.toGigaBytesPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "5.0,40.0","1.2,9.6","0.01,0.08" })
+	public void testConvertKnownGigaBytesPerSecondToGigaBitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.GigaBytesPerSecond.toGigaBitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromGigaBytesPerSecondToTeraBitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.GigaBytesPerSecond.toTeraBitsPerSecond(value);
+		final double convertBack = DataTransferRate.TeraBitsPerSecond.toGigaBytesPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "70.0,0.56","9001.0,72.008","768123.9,6144.9912" })
+	public void testConvertKnownGigaBytesPerSecondToTeraBitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.GigaBytesPerSecond.toTeraBitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromGigaBytesPerSecondToKiloBytesPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.GigaBytesPerSecond.toKiloBytesPerSecond(value);
+		final double convertBack = DataTransferRate.KiloBytesPerSecond.toGigaBytesPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.2,200000.0","0.009,9000.0","0.00123,1230.0" })
+	public void testConvertKnownGigaBytesPerSecondToKiloBytesPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.GigaBytesPerSecond.toKiloBytesPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromGigaBytesPerSecondToMegaBytesPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.GigaBytesPerSecond.toMegaBytesPerSecond(value);
+		final double convertBack = DataTransferRate.MegaBytesPerSecond.toGigaBytesPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.9,900.0","12.0,12000.0","35.6,35600.0" })
+	public void testConvertKnownGigaBytesPerSecondToMegaBytesPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.GigaBytesPerSecond.toMegaBytesPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromGigaBytesPerSecondToTeraBytesPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.GigaBytesPerSecond.toTeraBytesPerSecond(value);
+		final double convertBack = DataTransferRate.TeraBytesPerSecond.toGigaBytesPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "35.6,0.0356","100.23,0.10023","900100.0,900.1" })
+	public void testConvertKnownGigaBytesPerSecondToTeraBytesPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.GigaBytesPerSecond.toTeraBytesPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromGigaBytesPerSecondToKibibitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.GigaBytesPerSecond.toKibibitsPerSecond(value);
+		final double convertBack = DataTransferRate.KibibitsPerSecond.toGigaBytesPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.05,390625.0","0.008,62500.0","0.00123,9609.375" })
+	public void testConvertKnownGigaBytesPerSecondToKibibitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.GigaBytesPerSecond.toKibibitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromGigaBytesPerSecondToMebibitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.GigaBytesPerSecond.toMebibitsPerSecond(value);
+		final double convertBack = DataTransferRate.MebibitsPerSecond.toGigaBytesPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.009,68.66451","1.2,9155.268","19.2,146484.288" })
+	public void testConvertKnownGigaBytesPerSecondToMebibitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.GigaBytesPerSecond.toMebibitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromKibibitsPerSecondToBitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.KibibitsPerSecond.toBitsPerSecond(value);
+		final double convertBack = DataTransferRate.BitsPerSecond.toKibibitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "2.0,2048.0","9.0,9216.0","17.8,18227.2" })
+	public void testConvertKnownKibibitsPerSecondToBitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.KibibitsPerSecond.toBitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromKibibitsPerSecondToKiloBitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.KibibitsPerSecond.toKiloBitsPerSecond(value);
+		final double convertBack = DataTransferRate.KiloBitsPerSecond.toKibibitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "6.2,6.3488","0.9,0.9216","87.0,89.088" })
+	public void testConvertKnownKibibitsPerSecondToKiloBitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.KibibitsPerSecond.toKiloBitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromKibibitsPerSecondToMegaBitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.KibibitsPerSecond.toMegaBitsPerSecond(value);
+		final double convertBack = DataTransferRate.MegaBitsPerSecond.toKibibitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "87.0,0.089088","12.34,0.01263616","123456.0,126.418879" })
+	public void testConvertKnownKibibitsPerSecondToMegaBitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.KibibitsPerSecond.toMegaBitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromKibibitsPerSecondToGigaBitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.KibibitsPerSecond.toGigaBitsPerSecond(value);
+		final double convertBack = DataTransferRate.GigaBitsPerSecond.toKibibitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "123456.0,0.126418944","8000000.0,8.192","1276876,1.307521024" })
+	public void testConvertKnownKibibitsPerSecondToGigaBitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.KibibitsPerSecond.toGigaBitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromKibibitsPerSecondToTeraBitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.KibibitsPerSecond.toTeraBitsPerSecond(value);
+		final double convertBack = DataTransferRate.TeraBitsPerSecond.toKibibitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "800000000.0,0.8192","1.5e12,1536.0","9999999.0,0.01023999898" })
+	public void testConvertKnownKibibitsPerSecondToTeraBitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.KibibitsPerSecond.toTeraBitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromKibibitsPerSecondToKiloBytesPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.KibibitsPerSecond.toKiloBytesPerSecond(value);
+		final double convertBack = DataTransferRate.KiloBytesPerSecond.toKibibitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "919.0,117.632","77.4,9.9072","109.109,13.965952" })
+	public void testConvertKnownKibibitsPerSecondToKiloBytesPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.KibibitsPerSecond.toKiloBytesPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromKibibitsPerSecondToMegaBytesPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.KibibitsPerSecond.toMegaBytesPerSecond(value);
+		final double convertBack = DataTransferRate.MegaBytesPerSecond.toKibibitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "1000.0,0.128","800.123,0.102415744","123456.0,15.802368" })
+	public void testConvertKnownKibibitsPerSecondToMegaBytesPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.KibibitsPerSecond.toMegaBytesPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromKibibitsPerSecondToGigaBytesPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.KibibitsPerSecond.toGigaBytesPerSecond(value);
+		final double convertBack = DataTransferRate.GigaBytesPerSecond.toKibibitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "12345678.0,1.580347926","8e12,1024000.00","1.2e5,0.01536" })
+	public void testConvertKnownKibibitsPerSecondToGigaBytesPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.KibibitsPerSecond.toGigaBytesPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromKibibitsPerSecondToTeraBytesPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.KibibitsPerSecond.toTeraBytesPerSecond(value);
+		final double convertBack = DataTransferRate.TeraBytesPerSecond.toKibibitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "120000000.0,0.01536","88e12,11264.0","9000000.0,0.009216" })
+	public void testConvertKnownKibibitsPerSecondToTeraBytesPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.KibibitsPerSecond.toTeraBytesPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromKibibitsPerSecondToMebibitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.KibibitsPerSecond.toMebibitsPerSecond(value);
+		final double convertBack = DataTransferRate.MebibitsPerSecond.toKibibitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "600.0,0.5859375","12345.0,12.055664","101.0,0.0986328" })
+	public void testConvertKnownKibibitsPerSecondToMebibitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.KibibitsPerSecond.toMebibitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromKiloBitsPerSecondToBitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.KiloBitsPerSecond.toBitsPerSecond(value);
+		final double convertBack = DataTransferRate.BitsPerSecond.toKiloBitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "9.0,9000.0","6.7,6700.0","1.2345,1234.5" })
+	public void testConvertKnownKiloBitsPerSecondToBitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.KiloBitsPerSecond.toBitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromKiloBitsPerSecondToMegaBitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.KiloBitsPerSecond.toMegaBitsPerSecond(value);
+		final double convertBack = DataTransferRate.MegaBitsPerSecond.toKiloBitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "900.0,0.9","12345.0,12.345","9988.0,9.988" })
+	public void testConvertKnownKiloBitsPerSecondToMegaBitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.KiloBitsPerSecond.toMegaBitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromKiloBitsPerSecondToGigaBitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.KiloBitsPerSecond.toGigaBitsPerSecond(value);
+		final double convertBack = DataTransferRate.GigaBitsPerSecond.toKiloBitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "123456.0,0.123456","8000700.0,8.0007","191987578.0,191.987578" })
+	public void testConvertKnownKiloBitsPerSecondToGigaBitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.KiloBitsPerSecond.toGigaBitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromKiloBitsPerSecondToTeraBitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.KiloBitsPerSecond.toTeraBitsPerSecond(value);
+		final double convertBack = DataTransferRate.TeraBitsPerSecond.toKiloBitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "191987578,0.191987578","9010081903.0,9.010081903","123456789.0,0.123456789" })
+	public void testConvertKnownKiloBitsPerSecondToTeraBitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.KiloBitsPerSecond.toTeraBitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromKiloBitsPerSecondToKiloBytesPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.KiloBitsPerSecond.toKiloBytesPerSecond(value);
+		final double convertBack = DataTransferRate.KiloBytesPerSecond.toKiloBitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "80.0,10.0","15.67,1.95875","8007.09,1000.88625" })
+	public void testConvertKnownKiloBitsPerSecondToKiloBytesPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.KiloBitsPerSecond.toKiloBytesPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromKiloBitsPerSecondToMegaBytesPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.KiloBitsPerSecond.toMegaBytesPerSecond(value);
+		final double convertBack = DataTransferRate.MegaBytesPerSecond.toKiloBitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "123456.0,15.432","998877.0,124.859625","10090.0,1.26125" })
+	public void testConvertKnownKiloBitsPerSecondToMegaBytesPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.KiloBitsPerSecond.toMegaBytesPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromKiloBitsPerSecondToGigaBytesPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.KiloBitsPerSecond.toGigaBytesPerSecond(value);
+		final double convertBack = DataTransferRate.GigaBytesPerSecond.toKiloBitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "1828972.0,0.2286215","879860.8,0.1099826","78178971.0,9.772371375" })
+	public void testConvertKnownKiloBitsPerSecondToGigaBytesPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.KiloBitsPerSecond.toGigaBytesPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromKiloBitsPerSecondToTeraBytesPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.KiloBitsPerSecond.toTeraBytesPerSecond(value);
+		final double convertBack = DataTransferRate.TeraBytesPerSecond.toKiloBitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "1234567891.0,0.154320986375","999999098.0,0.12499988725","84618364142.0,10.57729551775" })
+	public void testConvertKnownKiloBitsPerSecondToTeraBytesPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.KiloBitsPerSecond.toTeraBytesPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromKiloBitsPerSecondToKibibitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.KiloBitsPerSecond.toKibibitsPerSecond(value);
+		final double convertBack = DataTransferRate.KibibitsPerSecond.toKiloBitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "89.1,87.01172","7.1,6.93359","438.0,427.734" })
+	public void testConvertKnownKiloBitsPerSecondToKibibitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.KiloBitsPerSecond.toKibibitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromKiloBitsPerSecondToMebibitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.KiloBitsPerSecond.toMebibitsPerSecond(value);
+		final double convertBack = DataTransferRate.MebibitsPerSecond.toKiloBitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "77790.0,74.186325","123456.0,117.736816","23972.0,22.861481" })
+	public void testConvertKnownKiloBitsPerSecondToMebibitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.KiloBitsPerSecond.toMebibitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromKiloBytesPerSecondToBitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.KiloBytesPerSecond.toBitsPerSecond(value);
+		final double convertBack = DataTransferRate.BitsPerSecond.toKiloBytesPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "123.456,987648.0","900.0,7.2e+6","100200.0,801600000" })
+	public void testConvertKnownKiloBytesPerSecondToBitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.KiloBytesPerSecond.toBitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromKiloBytesPerSecondToKiloBitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.KiloBytesPerSecond.toKiloBitsPerSecond(value);
+		final double convertBack = DataTransferRate.KiloBitsPerSecond.toKiloBytesPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "4.0,32.0","1.2,9.6","88.1,704.8" })
+	public void testConvertKnownKiloBytesPerSecondToKiloBitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.KiloBytesPerSecond.toKiloBitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromKiloBytesPerSecondToMegaBitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.KiloBytesPerSecond.toMegaBitsPerSecond(value);
+		final double convertBack = DataTransferRate.MegaBitsPerSecond.toKiloBytesPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "88.1,0.7048","7.1,0.0568","12.8,0.1024" })
+	public void testConvertKnownKiloBytesPerSecondToMegaBitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.KiloBytesPerSecond.toMegaBitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromKiloBytesPerSecondToGigaBitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.KiloBytesPerSecond.toGigaBitsPerSecond(value);
+		final double convertBack = DataTransferRate.GigaBitsPerSecond.toKiloBytesPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "10080.0,0.08064","4.5e+9,36000.0","271279.0,2.170232" })
+	public void testConvertKnownKiloBytesPerSecondToGigaBitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.KiloBytesPerSecond.toGigaBitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromKiloBytesPerSecondToTeraBitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.KiloBytesPerSecond.toTeraBitsPerSecond(value);
+		final double convertBack = DataTransferRate.TeraBitsPerSecond.toKiloBytesPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "9009000.0,0.072072","7.2e9,57.6","100100100900.0,800.8008072" })
+	public void testConvertKnownKiloBytesPerSecondToTeraBitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.KiloBytesPerSecond.toTeraBitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromKiloBytesPerSecondToMegaBytesPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.KiloBytesPerSecond.toMegaBytesPerSecond(value);
+		final double convertBack = DataTransferRate.MegaBytesPerSecond.toKiloBytesPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "1009.0,1.009","8899.0,8.899","619.0,0.619" })
+	public void testConvertKnownKiloBytesPerSecondToMegaBytesPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.KiloBytesPerSecond.toMegaBytesPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromKiloBytesPerSecondToGigaBytesPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.KiloBytesPerSecond.toGigaBytesPerSecond(value);
+		final double convertBack = DataTransferRate.GigaBytesPerSecond.toKiloBytesPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "900800.0,0.9008","1234567.0,1.234567","7.9e9,7900.0" })
+	public void testConvertKnownKiloBytesPerSecondToGigaBytesPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.KiloBytesPerSecond.toGigaBytesPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromKiloBytesPerSecondToTeraBytesPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.KiloBytesPerSecond.toTeraBytesPerSecond(value);
+		final double convertBack = DataTransferRate.TeraBytesPerSecond.toKiloBytesPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.9,9e-10","140000000,0.14","7.0,7e-9" })
+	public void testConvertKnownKiloBytesPerSecondToTeraBytesPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.KiloBytesPerSecond.toTeraBytesPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromKiloBytesPerSecondToKibibitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.KiloBytesPerSecond.toKibibitsPerSecond(value);
+		final double convertBack = DataTransferRate.KibibitsPerSecond.toKiloBytesPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.009,0.0703125","6e+3,46872.0","1.23,9.609375" })
+	public void testConvertKnownKiloBytesPerSecondToKibibitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.KiloBytesPerSecond.toKibibitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromKiloBytesPerSecondToMebibitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.KiloBytesPerSecond.toMebibitsPerSecond(value);
+		final double convertBack = DataTransferRate.MebibitsPerSecond.toKiloBytesPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "70.0,0.534058","9.0,0.0686646","10022.0,76.461792" })
+	public void testConvertKnownKiloBytesPerSecondToMebibitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.KiloBytesPerSecond.toMebibitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromMebibitsPerSecondToBitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.MebibitsPerSecond.toBitsPerSecond(value);
+		final double convertBack = DataTransferRate.BitsPerSecond.toMebibitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.9,943718.4","0.006,6291.456","2.0,2097152.0" })
+	public void testConvertKnownMebibitsPerSecondToBitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.MebibitsPerSecond.toBitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromMebibitsPerSecondToKiloBitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.MebibitsPerSecond.toKiloBitsPerSecond(value);
+		final double convertBack = DataTransferRate.KiloBitsPerSecond.toMebibitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.8,838.861","2.0,2097.15","0.23,241.1725" })
+	public void testConvertKnownMebibitsPerSecondToKiloBitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.MebibitsPerSecond.toKiloBitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromMebibitsPerSecondToMegaBitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.MebibitsPerSecond.toMegaBitsPerSecond(value);
+		final double convertBack = DataTransferRate.MegaBitsPerSecond.toMebibitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.9,0.943718","12.3,12.89748","8.1,8.49347" })
+	public void testConvertKnownMebibitsPerSecondToMegaBitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.MebibitsPerSecond.toMegaBitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromMebibitsPerSecondToGigaBitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.MebibitsPerSecond.toGigaBitsPerSecond(value);
+		final double convertBack = DataTransferRate.GigaBitsPerSecond.toMebibitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "12345.0,12.944671","100.0,0.104858","999.9,1.0484711" })
+	public void testConvertKnownMebibitsPerSecondToGigaBitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.MebibitsPerSecond.toGigaBitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromMebibitsPerSecondToTeraBitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.MebibitsPerSecond.toTeraBitsPerSecond(value);
+		final double convertBack = DataTransferRate.TeraBitsPerSecond.toMebibitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "100009.0,0.104867037","9876543.0,10.35630595","1000900.0,1.049519718" })
+	public void testConvertKnownMebibitsPerSecondToTeraBitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.MebibitsPerSecond.toTeraBitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromMebibitsPerSecondToKiloBytesPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.MebibitsPerSecond.toKiloBytesPerSecond(value);
+		final double convertBack = DataTransferRate.KiloBytesPerSecond.toMebibitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "4.0,524.288","1.45,190.0544","88.11,11548.754" })
+	public void testConvertKnownMebibitsPerSecondToKiloBytesPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.MebibitsPerSecond.toKiloBytesPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromMebibitsPerSecondToMegaBytesPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.MebibitsPerSecond.toMegaBytesPerSecond(value);
+		final double convertBack = DataTransferRate.MegaBytesPerSecond.toMebibitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "109.0,14.2868","55.67,7.2967782","45678.0,5987.1068" })
+	public void testConvertKnownMebibitsPerSecondToMegaBytesPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.MebibitsPerSecond.toMegaBytesPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromMebibitsPerSecondToGigaBytesPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.MebibitsPerSecond.toGigaBytesPerSecond(value);
+		final double convertBack = DataTransferRate.GigaBytesPerSecond.toMebibitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "4000.0,0.524288311","90100.0,11.80959421","1009.0,0.132251727" })
+	public void testConvertKnownMebibitsPerSecondToGigaBytesPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.MebibitsPerSecond.toGigaBytesPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromMebibitsPerSecondToTeraBytesPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.MebibitsPerSecond.toTeraBytesPerSecond(value);
+		final double convertBack = DataTransferRate.TeraBytesPerSecond.toMebibitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "1000009.0,0.1310731796","90808080.0,11.902396662","5.2e12,681574.4" })
+	public void testConvertKnownMebibitsPerSecondToTeraBytesPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.MebibitsPerSecond.toTeraBytesPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromMebibitsPerSecondToKibibitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.MebibitsPerSecond.toKibibitsPerSecond(value);
+		final double convertBack = DataTransferRate.KibibitsPerSecond.toMebibitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "5.0,5120.0","1234.56,1264189.44","505.0,517120.0" })
+	public void testConvertKnownMebibitsPerSecondToKibibitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.MebibitsPerSecond.toKibibitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromMegaBitsPerSecondToBitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.MegaBitsPerSecond.toBitsPerSecond(value);
+		final double convertBack = DataTransferRate.BitsPerSecond.toMegaBitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.34,340000.0","9.12,9120000.0","0.987,987000.0" })
+	public void testConvertKnownMegaBitsPerSecondToBitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.MegaBitsPerSecond.toBitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromMegaBitsPerSecondToKiloBitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.MegaBitsPerSecond.toKiloBitsPerSecond(value);
+		final double convertBack = DataTransferRate.KiloBitsPerSecond.toMegaBitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.77,770.0","5.0,5000.0","0.987,987.0" })
+	public void testConvertKnownMegaBitsPerSecondToKiloBitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.MegaBitsPerSecond.toKiloBitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromMegaBitsPerSecondToGigaBitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.MegaBitsPerSecond.toGigaBitsPerSecond(value);
+		final double convertBack = DataTransferRate.GigaBitsPerSecond.toMegaBitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "900.0,0.9","12345.0,12.345","189.1,0.1891" })
+	public void testConvertKnownMegaBitsPerSecondToGigaBitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.MegaBitsPerSecond.toGigaBitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromMegaBitsPerSecondToTeraBitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.MegaBitsPerSecond.toTeraBitsPerSecond(value);
+		final double convertBack = DataTransferRate.TeraBitsPerSecond.toMegaBitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "100200300.0,100.2003","99887777.0,99.887777","80009.0,0.080009" })
+	public void testConvertKnownMegaBitsPerSecondToTeraBitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.MegaBitsPerSecond.toTeraBitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromMegaBitsPerSecondToKiloBytesPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.MegaBitsPerSecond.toKiloBytesPerSecond(value);
+		final double convertBack = DataTransferRate.KiloBytesPerSecond.toMegaBitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "9.0,1125.0","1.23,153.75","98.1,12262.5" })
+	public void testConvertKnownMegaBitsPerSecondToKiloBytesPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.MegaBitsPerSecond.toKiloBytesPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromMegaBitsPerSecondToMegaBytesPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.MegaBitsPerSecond.toMegaBytesPerSecond(value);
+		final double convertBack = DataTransferRate.MegaBytesPerSecond.toMegaBitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "98.1,12.2625","10.9,1.3625","888.123,111.015375" })
+	public void testConvertKnownMegaBitsPerSecondToMegaBytesPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.MegaBitsPerSecond.toMegaBytesPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromMegaBitsPerSecondToGigaBytesPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.MegaBitsPerSecond.toGigaBytesPerSecond(value);
+		final double convertBack = DataTransferRate.GigaBytesPerSecond.toMegaBitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "900.0,0.1125","10123.0,1.265375","9988.0,1.2485" })
+	public void testConvertKnownMegaBitsPerSecondToGigaBytesPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.MegaBitsPerSecond.toGigaBytesPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromMegaBitsPerSecondToTeraBytesPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.MegaBitsPerSecond.toTeraBytesPerSecond(value);
+		final double convertBack = DataTransferRate.TeraBytesPerSecond.toMegaBitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "998877.0,0.124859625","100200400.0,12.5250375","9008877.0,1.126109625" })
+	public void testConvertKnownMegaBitsPerSecondToTeraBytesPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.MegaBitsPerSecond.toTeraBytesPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromMegaBitsPerSecondToKibibitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.MegaBitsPerSecond.toKibibitsPerSecond(value);
+		final double convertBack = DataTransferRate.KibibitsPerSecond.toMegaBitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "12.0,11718.756","0.9,878.906","1.23,1201.172" })
+	public void testConvertKnownMegaBitsPerSecondToKibibitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.MegaBitsPerSecond.toKibibitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromMegaBitsPerSecondToMebibitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.MegaBitsPerSecond.toMebibitsPerSecond(value);
+		final double convertBack = DataTransferRate.MebibitsPerSecond.toMegaBitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "4.5,4.29153","0.8,0.762939","900.0,858.307" })
+	public void testConvertKnownMegaBitsPerSecondToMebibitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.MegaBitsPerSecond.toMebibitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromMegaBytesPerSecondToBitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.MegaBytesPerSecond.toBitsPerSecond(value);
+		final double convertBack = DataTransferRate.BitsPerSecond.toMegaBytesPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.04,320000.0","0.0091,72800.0","3e-5,240.0" })
+	public void testConvertKnownMegaBytesPerSecondToBitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.MegaBytesPerSecond.toBitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromMegaBytesPerSecondToKiloBitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.MegaBytesPerSecond.toKiloBitsPerSecond(value);
+		final double convertBack = DataTransferRate.KiloBitsPerSecond.toMegaBytesPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "6.0,48000.0","0.3,2400.0","0.009,72.0" })
+	public void testConvertKnownMegaBytesPerSecondToKiloBitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.MegaBytesPerSecond.toKiloBitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromMegaBytesPerSecondToMegaBitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.MegaBytesPerSecond.toMegaBitsPerSecond(value);
+		final double convertBack = DataTransferRate.MegaBitsPerSecond.toMegaBytesPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "3.0,24.0","0.9,7.2","13.0,104.0" })
+	public void testConvertKnownMegaBytesPerSecondToMegaBitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.MegaBytesPerSecond.toMegaBitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromMegaBytesPerSecondToGigaBitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.MegaBytesPerSecond.toGigaBitsPerSecond(value);
+		final double convertBack = DataTransferRate.GigaBitsPerSecond.toMegaBytesPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "13.0,0.104","900.0,7.2","18000.0,144.0" })
+	public void testConvertKnownMegaBytesPerSecondToGigaBitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.MegaBytesPerSecond.toGigaBitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromMegaBytesPerSecondToTeraBitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.MegaBytesPerSecond.toTeraBitsPerSecond(value);
+		final double convertBack = DataTransferRate.TeraBitsPerSecond.toMegaBytesPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "18000.0,0.144","9718290.0,77.74632","9e12,72000000.0" })
+	public void testConvertKnownMegaBytesPerSecondToTeraBitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.MegaBytesPerSecond.toTeraBitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromMegaBytesPerSecondToKiloBytesPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.MegaBytesPerSecond.toKiloBytesPerSecond(value);
+		final double convertBack = DataTransferRate.KiloBytesPerSecond.toMegaBytesPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "6.0,6000.0","0.9,900.0","123.4,123400.0" })
+	public void testConvertKnownMegaBytesPerSecondToKiloBytesPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.MegaBytesPerSecond.toKiloBytesPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromMegaBytesPerSecondToGigaBytesPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.MegaBytesPerSecond.toGigaBytesPerSecond(value);
+		final double convertBack = DataTransferRate.GigaBytesPerSecond.toMegaBytesPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "123.4,0.1234","900.0,0.9","8e6,8000.0" })
+	public void testConvertKnownMegaBytesPerSecondToGigaBytesPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.MegaBytesPerSecond.toGigaBytesPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromMegaBytesPerSecondToTeraBytesPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.MegaBytesPerSecond.toTeraBytesPerSecond(value);
+		final double convertBack = DataTransferRate.TeraBytesPerSecond.toMegaBytesPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "80000.0,0.08","12345678.0,12.345678","900800.0,0.9008" })
+	public void testConvertKnownMegaBytesPerSecondToTeraBytesPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.MegaBytesPerSecond.toTeraBytesPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromMegaBytesPerSecondToKibibitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.MegaBytesPerSecond.toKibibitsPerSecond(value);
+		final double convertBack = DataTransferRate.KibibitsPerSecond.toMegaBytesPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "6.0,46875.0","0.9,7031.25","0.03,234.375" })
+	public void testConvertKnownMegaBytesPerSecondToKibibitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.MegaBytesPerSecond.toKibibitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromMegaBytesPerSecondToMebibitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.MegaBytesPerSecond.toMebibitsPerSecond(value);
+		final double convertBack = DataTransferRate.MebibitsPerSecond.toMegaBytesPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.03,0.2288818","4.5,34.3323","80.1,611.1145" })
+	public void testConvertKnownMegaBytesPerSecondToMebibitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.MegaBytesPerSecond.toMebibitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromTeraBitsPerSecondToBitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.TeraBitsPerSecond.toBitsPerSecond(value);
+		final double convertBack = DataTransferRate.BitsPerSecond.toTeraBitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.0007,700000000.0","1.23e-6,1230000.0","0.00098,980000000.0" })
+	public void testConvertKnownTeraBitsPerSecondToBitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.TeraBitsPerSecond.toBitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromTeraBitsPerSecondToKiloBitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.TeraBitsPerSecond.toKiloBitsPerSecond(value);
+		final double convertBack = DataTransferRate.KiloBitsPerSecond.toTeraBitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.001,1000000.0","6.1e-6,6100.0","0.00009,90000.0" })
+	public void testConvertKnownTeraBitsPerSecondToKiloBitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.TeraBitsPerSecond.toKiloBitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromTeraBitsPerSecondToMegaBitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.TeraBitsPerSecond.toMegaBitsPerSecond(value);
+		final double convertBack = DataTransferRate.MegaBitsPerSecond.toTeraBitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.09,90000.0","3.5e-4,350.0","0.0123,12300.0" })
+	public void testConvertKnownTeraBitsPerSecondToMegaBitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.TeraBitsPerSecond.toMegaBitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromTeraBitsPerSecondToGigaBitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.TeraBitsPerSecond.toGigaBitsPerSecond(value);
+		final double convertBack = DataTransferRate.GigaBitsPerSecond.toTeraBitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.9,900.0","1.45,1450.0","8.19,8190.0" })
+	public void testConvertKnownTeraBitsPerSecondToGigaBitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.TeraBitsPerSecond.toGigaBitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromTeraBitsPerSecondToKiloBytesPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.TeraBitsPerSecond.toKiloBytesPerSecond(value);
+		final double convertBack = DataTransferRate.KiloBytesPerSecond.toTeraBitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.0009,112500.0","3.14e-6,392.5","0.001,125000.0" })
+	public void testConvertKnownTeraBitsPerSecondToKiloBytesPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.TeraBitsPerSecond.toKiloBytesPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromTeraBitsPerSecondToMegaBytesPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.TeraBitsPerSecond.toMegaBytesPerSecond(value);
+		final double convertBack = DataTransferRate.MegaBytesPerSecond.toTeraBitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.4,50000.0","3.9e-3,487.5","0.007,875.0" })
+	public void testConvertKnownTeraBitsPerSecondToMegaBytesPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.TeraBitsPerSecond.toMegaBytesPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromTeraBitsPerSecondToGigaBytesPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.TeraBitsPerSecond.toGigaBytesPerSecond(value);
+		final double convertBack = DataTransferRate.GigaBytesPerSecond.toTeraBitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.009,1.125","0.00123,0.15375","8.1e-3,1.0125" })
+	public void testConvertKnownTeraBitsPerSecondToGigaBytesPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.TeraBitsPerSecond.toGigaBytesPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromTeraBitsPerSecondToTeraBytesPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.TeraBitsPerSecond.toTeraBytesPerSecond(value);
+		final double convertBack = DataTransferRate.TeraBytesPerSecond.toTeraBitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.3,0.0375","14.0,1.75","0.8,0.1" })
+	public void testConvertKnownTeraBitsPerSecondToTeraBytesPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.TeraBitsPerSecond.toTeraBytesPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromTeraBitsPerSecondToKibibitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.TeraBitsPerSecond.toKibibitsPerSecond(value);
+		final double convertBack = DataTransferRate.KibibitsPerSecond.toTeraBitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.0009,878906.25","6.1e-6,5957.031","12e-9,11.71875" })
+	public void testConvertKnownTeraBitsPerSecondToKibibitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.TeraBitsPerSecond.toKibibitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromTeraBitsPerSecondToMebibitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.TeraBitsPerSecond.toMebibitsPerSecond(value);
+		final double convertBack = DataTransferRate.MebibitsPerSecond.toTeraBitsPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.9,858306.59999","4.6e-3,4386.9","0.00123,1173.0194092" })
+	public void testConvertKnownTeraBitsPerSecondToMebibitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.TeraBitsPerSecond.toMebibitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromTeraBytesPerSecondToBitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.TeraBytesPerSecond.toBitsPerSecond(value);
+		final double convertBack = DataTransferRate.BitsPerSecond.toTeraBytesPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.00008,640000000.0","1.2e-12,9.6","9.0,7.2e+13" })
+	public void testConvertKnownTeraBytesPerSecondToBitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.TeraBytesPerSecond.toBitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromTeraBytesPerSecondToKiloBitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.TeraBytesPerSecond.toKiloBitsPerSecond(value);
+		final double convertBack = DataTransferRate.KiloBitsPerSecond.toTeraBytesPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.009,72000000.0","1.4e-6,11200.0","6.1e-5,488000.0" })
+	public void testConvertKnownTeraBytesPerSecondToKiloBitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.TeraBytesPerSecond.toKiloBitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromTeraBytesPerSecondToMegaBitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.TeraBytesPerSecond.toMegaBitsPerSecond(value);
+		final double convertBack = DataTransferRate.MegaBitsPerSecond.toTeraBytesPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.005,40000.0","0.000123,984.0","0.00006,480.0" })
+	public void testConvertKnownTeraBytesPerSecondToMegaBitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.TeraBytesPerSecond.toMegaBitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromTeraBytesPerSecondToGigaBitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.TeraBytesPerSecond.toGigaBitsPerSecond(value);
+		final double convertBack = DataTransferRate.GigaBitsPerSecond.toTeraBytesPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.008,64.0","3e-7,0.0024","0.00023,1.84" })
+	public void testConvertKnownTeraBytesPerSecondToGigaBitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.TeraBytesPerSecond.toGigaBitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromTeraBytesPerSecondToTeraBitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.TeraBytesPerSecond.toTeraBitsPerSecond(value);
+		final double convertBack = DataTransferRate.TeraBitsPerSecond.toTeraBytesPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "5.0,40.0","1.23,9.84","800.0,6400.0" })
+	public void testConvertKnownTeraBytesPerSecondToTeraBitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.TeraBytesPerSecond.toTeraBitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromTeraBytesPerSecondToKiloBytesPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.TeraBytesPerSecond.toKiloBytesPerSecond(value);
+		final double convertBack = DataTransferRate.KiloBytesPerSecond.toTeraBytesPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.0009,900000.0","3.14e-7,314.0","0.00063,630000.0" })
+	public void testConvertKnownTeraBytesPerSecondToKiloBytesPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.TeraBytesPerSecond.toKiloBytesPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromTeraBytesPerSecondToMegaBytesPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.TeraBytesPerSecond.toMegaBytesPerSecond(value);
+		final double convertBack = DataTransferRate.MegaBytesPerSecond.toTeraBytesPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.009,9000.0","0.234,234000.0","2.0,2e+6" })
+	public void testConvertKnownTeraBytesPerSecondToMegaBytesPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.TeraBytesPerSecond.toMegaBytesPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromTeraBytesPerSecondToGigaBytesPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.TeraBytesPerSecond.toGigaBytesPerSecond(value);
+		final double convertBack = DataTransferRate.GigaBytesPerSecond.toTeraBytesPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "2.7,2700.0","0.9,900.0","0.0123,12.3" })
+	public void testConvertKnownTeraBytesPerSecondToGigaBytesPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.TeraBytesPerSecond.toGigaBytesPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromTeraBytesPerSecondToKibibitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.TeraBytesPerSecond.toKibibitsPerSecond(value);
+		final double convertBack = DataTransferRate.KibibitsPerSecond.toTeraBytesPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.0009,7031250.0","1.23e-5,96093.75","0.0001,781250.0" })
+	public void testConvertKnownTeraBytesPerSecondToKibibitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.TeraBytesPerSecond.toKibibitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromTeraBytesPerSecondToMebibitsPerSecondAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = DataTransferRate.TeraBytesPerSecond.toMebibitsPerSecond(value);
+		final double convertBack = DataTransferRate.MebibitsPerSecond.toTeraBytesPerSecond(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.01,76293.95","0.008,61035.156","2.0,15258789.0625" })
+	public void testConvertKnownTeraBytesPerSecondToMebibitsPerSecond(double input, double expectation) {
+		final double result = DataTransferRate.TeraBytesPerSecond.toMebibitsPerSecond(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
 }

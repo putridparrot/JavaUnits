@@ -70,7 +70,7 @@ public final class FuelEconomy {
 		 * @return The value in Miles Per Gallon
 		 */
 		public static double toMilesPerGallon(double value) {
-			return value * 1.201;
+			return value * 1.20095;
 		}
 	}
 }

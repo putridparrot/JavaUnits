@@ -113,7 +113,7 @@ public final class Mass {
 		 * @return The value in Stones
 		 */
 		public static double toStones(double value) {
-			return value * 0.157473;
+			return value / 6.35029;
 		}
 	}
 	/**
@@ -195,7 +195,7 @@ public final class Mass {
 		 * @return The value in Kilograms
 		 */
 		public static double toKilograms(double value) {
-			return value * 0.0283495;
+			return value / 35.274;
 		}
 		/**
 		 * Converts the supplied Ounces value to Tonnes
@@ -219,7 +219,7 @@ public final class Mass {
 		 * @return The value in Stones
 		 */
 		public static double toStones(double value) {
-			return value * 0.00446429;
+			return value / 224.0;
 		}
 	}
 	/**
@@ -248,7 +248,7 @@ public final class Mass {
 		 * @return The value in Kilograms
 		 */
 		public static double toKilograms(double value) {
-			return value * 0.453592;
+			return value / 2.20462;
 		}
 		/**
 		 * Converts the supplied Pounds value to Tonnes
@@ -309,7 +309,7 @@ public final class Mass {
 		 * @return The value in Tonnes
 		 */
 		public static double toTonnes(double value) {
-			return value * 0.00635029;
+			return value / 157.473;
 		}
 		/**
 		 * Converts the supplied Stones value to Ounces
