@@ -11,6 +11,67 @@ package com.putridparrot.units;
  */
 public final class Mass {
 	/**
+	 * Carats conversion functions
+	 */
+	public static class Carats {
+		/**
+		 * Converts the supplied Carats value to Milligrams
+		 * @param value The Carats input value
+		 * @return The value in Milligrams
+		 */
+		public static double toMilligrams(double value) {
+			return value * 200.0;
+		}
+		/**
+		 * Converts the supplied Carats value to Grams
+		 * @param value The Carats input value
+		 * @return The value in Grams
+		 */
+		public static double toGrams(double value) {
+			return value / 5.0;
+		}
+		/**
+		 * Converts the supplied Carats value to Kilograms
+		 * @param value The Carats input value
+		 * @return The value in Kilograms
+		 */
+		public static double toKilograms(double value) {
+			return value / 5000.0;
+		}
+		/**
+		 * Converts the supplied Carats value to Tonnes
+		 * @param value The Carats input value
+		 * @return The value in Tonnes
+		 */
+		public static double toTonnes(double value) {
+			return value / 5e+6;
+		}
+		/**
+		 * Converts the supplied Carats value to Ounces
+		 * @param value The Carats input value
+		 * @return The value in Ounces
+		 */
+		public static double toOunces(double value) {
+			return value * 0.00705479;
+		}
+		/**
+		 * Converts the supplied Carats value to Pounds
+		 * @param value The Carats input value
+		 * @return The value in Pounds
+		 */
+		public static double toPounds(double value) {
+			return value * 0.000440925;
+		}
+		/**
+		 * Converts the supplied Carats value to Stones
+		 * @param value The Carats input value
+		 * @return The value in Stones
+		 */
+		public static double toStones(double value) {
+			return value * 3.1495e-5;
+		}
+	}
+	/**
 	 * Grams conversion functions
 	 */
 	public static class Grams {
@@ -61,6 +122,14 @@ public final class Mass {
 		 */
 		public static double toStones(double value) {
 			return value / 6350.29318;
+		}
+		/**
+		 * Converts the supplied Grams value to Carats
+		 * @param value The Grams input value
+		 * @return The value in Carats
+		 */
+		public static double toCarats(double value) {
+			return value * 5.0;
 		}
 	}
 	/**
@@ -115,6 +184,14 @@ public final class Mass {
 		public static double toStones(double value) {
 			return value / 6.35029;
 		}
+		/**
+		 * Converts the supplied Kilograms value to Carats
+		 * @param value The Kilograms input value
+		 * @return The value in Carats
+		 */
+		public static double toCarats(double value) {
+			return value * 5000.0;
+		}
 	}
 	/**
 	 * Milligrams conversion functions
@@ -167,6 +244,14 @@ public final class Mass {
 		 */
 		public static double toStones(double value) {
 			return value / 6350293.18;
+		}
+		/**
+		 * Converts the supplied Milligrams value to Carats
+		 * @param value The Milligrams input value
+		 * @return The value in Carats
+		 */
+		public static double toCarats(double value) {
+			return value / 200.0;
 		}
 	}
 	/**
@@ -221,6 +306,14 @@ public final class Mass {
 		public static double toStones(double value) {
 			return value / 224.0;
 		}
+		/**
+		 * Converts the supplied Ounces value to Carats
+		 * @param value The Ounces input value
+		 * @return The value in Carats
+		 */
+		public static double toCarats(double value) {
+			return value / 0.00705479;
+		}
 	}
 	/**
 	 * Pounds conversion functions
@@ -273,6 +366,14 @@ public final class Mass {
 		 */
 		public static double toStones(double value) {
 			return value / 14.0;
+		}
+		/**
+		 * Converts the supplied Pounds value to Carats
+		 * @param value The Pounds input value
+		 * @return The value in Carats
+		 */
+		public static double toCarats(double value) {
+			return value / 0.000440925;
 		}
 	}
 	/**
@@ -327,6 +428,14 @@ public final class Mass {
 		public static double toPounds(double value) {
 			return value * 14.0;
 		}
+		/**
+		 * Converts the supplied Stones value to Carats
+		 * @param value The Stones input value
+		 * @return The value in Carats
+		 */
+		public static double toCarats(double value) {
+			return value / 3.1495e-5;
+		}
 	}
 	/**
 	 * Tonnes conversion functions
@@ -379,6 +488,14 @@ public final class Mass {
 		 */
 		public static double toStones(double value) {
 			return value * 157.473;
+		}
+		/**
+		 * Converts the supplied Tonnes value to Carats
+		 * @param value The Tonnes input value
+		 * @return The value in Carats
+		 */
+		public static double toCarats(double value) {
+			return value * 5e+6;
 		}
 	}
 }

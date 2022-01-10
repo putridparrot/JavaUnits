@@ -15,6 +15,104 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MassTests {
 	@Property(tries = 100)
+	public void testFromCaratsToMilligramsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Mass.Carats.toMilligrams(value);
+		final double convertBack = Mass.Milligrams.toCarats(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "2.1,420.0","123.0,24600.0","0.8,160.0" })
+	public void testConvertKnownCaratsToMilligrams(double input, double expectation) {
+		final double result = Mass.Carats.toMilligrams(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromCaratsToGramsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Mass.Carats.toGrams(value);
+		final double convertBack = Mass.Grams.toCarats(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.8,0.16","1.5,0.3","12.0,2.4" })
+	public void testConvertKnownCaratsToGrams(double input, double expectation) {
+		final double result = Mass.Carats.toGrams(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromCaratsToKilogramsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Mass.Carats.toKilograms(value);
+		final double convertBack = Mass.Kilograms.toCarats(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "1009.0,0.2018","999.0,0.1998","1234.5,0.2469" })
+	public void testConvertKnownCaratsToKilograms(double input, double expectation) {
+		final double result = Mass.Carats.toKilograms(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromCaratsToTonnesAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Mass.Carats.toTonnes(value);
+		final double convertBack = Mass.Tonnes.toCarats(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "1234567.0,0.2469134","9999999.0,1.9999998","998877.99,0.199775598" })
+	public void testConvertKnownCaratsToTonnes(double input, double expectation) {
+		final double result = Mass.Carats.toTonnes(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromCaratsToOuncesAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Mass.Carats.toOunces(value);
+		final double convertBack = Mass.Ounces.toCarats(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "900.0,6.34931","123.45,0.870914121","800.0,5.64383" })
+	public void testConvertKnownCaratsToOunces(double input, double expectation) {
+		final double result = Mass.Carats.toOunces(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromCaratsToPoundsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Mass.Carats.toPounds(value);
+		final double convertBack = Mass.Pounds.toCarats(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "1000.0,0.440925","123456.0,54.4347781","800.0,0.35274" })
+	public void testConvertKnownCaratsToPounds(double input, double expectation) {
+		final double result = Mass.Carats.toPounds(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromCaratsToStonesAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Mass.Carats.toStones(value);
+		final double convertBack = Mass.Stones.toCarats(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "9000.0,0.2834515","123456.0,3.88819843","80000.8,2.519593906" })
+	public void testConvertKnownCaratsToStones(double input, double expectation) {
+		final double result = Mass.Carats.toStones(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
 	public void testFromGramsToMilligramsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
 		final double convertTo = Mass.Grams.toMilligrams(value);
 		final double convertBack = Mass.Milligrams.toGrams(convertTo);
@@ -95,6 +193,20 @@ public class MassTests {
 	@CsvSource({ "8000.0,1.259784","12345.0,1.9440047","900.0,0.141726" })
 	public void testConvertKnownGramsToStones(double input, double expectation) {
 		final double result = Mass.Grams.toStones(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromGramsToCaratsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Mass.Grams.toCarats(value);
+		final double convertBack = Mass.Carats.toGrams(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "123.0,615.0","90.1,450.5","5000.0,25000.0" })
+	public void testConvertKnownGramsToCarats(double input, double expectation) {
+		final double result = Mass.Grams.toCarats(input);
 		assertEquals(expectation, result, 0.01);
 	}
 
@@ -183,6 +295,20 @@ public class MassTests {
 	}
 
 	@Property(tries = 100)
+	public void testFromKilogramsToCaratsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Mass.Kilograms.toCarats(value);
+		final double convertBack = Mass.Carats.toKilograms(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.1,500.0","0.08,400.0","2.0,10000.0" })
+	public void testConvertKnownKilogramsToCarats(double input, double expectation) {
+		final double result = Mass.Kilograms.toCarats(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
 	public void testFromMilligramsToGramsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
 		final double convertTo = Mass.Milligrams.toGrams(value);
 		final double convertBack = Mass.Grams.toMilligrams(convertTo);
@@ -263,6 +389,20 @@ public class MassTests {
 	@CsvSource({ "900000.0,0.14172574","12345678.0,1.9441115001","800100.0,0.125994183" })
 	public void testConvertKnownMilligramsToStones(double input, double expectation) {
 		final double result = Mass.Milligrams.toStones(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromMilligramsToCaratsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Mass.Milligrams.toCarats(value);
+		final double convertBack = Mass.Carats.toMilligrams(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "600.0,3.0","1234.0,6.17","9090.0,45.45" })
+	public void testConvertKnownMilligramsToCarats(double input, double expectation) {
+		final double result = Mass.Milligrams.toCarats(input);
 		assertEquals(expectation, result, 0.01);
 	}
 
@@ -351,6 +491,20 @@ public class MassTests {
 	}
 
 	@Property(tries = 100)
+	public void testFromOuncesToCaratsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Mass.Ounces.toCarats(value);
+		final double convertBack = Mass.Carats.toOunces(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.0012,0.170097139","4.0,566.99","1.4,198.447" })
+	public void testConvertKnownOuncesToCarats(double input, double expectation) {
+		final double result = Mass.Ounces.toCarats(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
 	public void testFromPoundsToMilligramsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
 		final double convertTo = Mass.Pounds.toMilligrams(value);
 		final double convertBack = Mass.Milligrams.toPounds(convertTo);
@@ -431,6 +585,20 @@ public class MassTests {
 	@CsvSource({ "89.1,6.364286","1.2,0.0857143","789.0,56.3571" })
 	public void testConvertKnownPoundsToStones(double input, double expectation) {
 		final double result = Mass.Pounds.toStones(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromPoundsToCaratsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Mass.Pounds.toCarats(value);
+		final double convertBack = Mass.Carats.toPounds(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "80.0,181436.7522","2.34,5307.031","0.9,2041.17" })
+	public void testConvertKnownPoundsToCarats(double input, double expectation) {
+		final double result = Mass.Pounds.toCarats(input);
 		assertEquals(expectation, result, 0.01);
 	}
 
@@ -519,6 +687,20 @@ public class MassTests {
 	}
 
 	@Property(tries = 100)
+	public void testFromStonesToCaratsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Mass.Stones.toCarats(value);
+		final double convertBack = Mass.Carats.toStones(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.01,317.5147","0.006,190.5088","2.1,66677.25" })
+	public void testConvertKnownStonesToCarats(double input, double expectation) {
+		final double result = Mass.Stones.toCarats(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
 	public void testFromTonnesToMilligramsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
 		final double convertTo = Mass.Tonnes.toMilligrams(value);
 		final double convertBack = Mass.Milligrams.toTonnes(convertTo);
@@ -599,6 +781,20 @@ public class MassTests {
 	@CsvSource({ "12.0,1889.68","8.4,1322.77","0.3,47.2419" })
 	public void testConvertKnownTonnesToStones(double input, double expectation) {
 		final double result = Mass.Tonnes.toStones(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromTonnesToCaratsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Mass.Tonnes.toCarats(value);
+		final double convertBack = Mass.Carats.toTonnes(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.003,15000.0","0.09,450000.0","0.0012,6000.0" })
+	public void testConvertKnownTonnesToCarats(double input, double expectation) {
+		final double result = Mass.Tonnes.toCarats(input);
 		assertEquals(expectation, result, 0.01);
 	}
 
