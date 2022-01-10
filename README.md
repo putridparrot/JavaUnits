@@ -9,10 +9,11 @@ The main aim for this project is to produce conversion functions for the various
 
 ### Unit conversions also available for 
 
-[F#](https://github.com/putridparrot/FSharp.Units)  
 [C#](https://github.com/putridparrot/PutridParrot.Units)  
-[TypeScript](https://github.com/putridparrot/unit-conversions)  
+[F#](https://github.com/putridparrot/FSharp.Units)  
+[Rust](https://github.com/putridparrot/RustUnits)   
 [Swift](https://github.com/putridparrot/SwiftUnits)  
+[TypeScript](https://github.com/putridparrot/unit-conversions)  
 
 ### Example
 
