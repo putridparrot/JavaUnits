@@ -330,7 +330,7 @@ public class TimeTests {
 	}
 
 	@ParameterizedTest
-	@CsvSource({ "90.0,5400","0.9,54.0","123.0,7380.0" })
+	@CsvSource({ "90.0,5400.0","0.9,54.0","123.0,7380.0" })
 	public void testConvertKnownMinutesToSeconds(double input, double expectation) {
 		final double result = Time.Minutes.toSeconds(input);
 		assertEquals(expectation, result, 0.01);

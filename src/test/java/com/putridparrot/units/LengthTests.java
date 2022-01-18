@@ -386,7 +386,7 @@ public class LengthTests {
 	}
 
 	@ParameterizedTest
-	@CsvSource({ "0.8,800.0","45.0,45000.0","1.2,1200" })
+	@CsvSource({ "0.8,800.0","45.0,45000.0","1.2,1200.0" })
 	public void testConvertKnownKilometresToMetres(double input, double expectation) {
 		final double result = Length.Kilometres.toMetres(input);
 		assertEquals(expectation, result, 0.01);
@@ -400,7 +400,7 @@ public class LengthTests {
 	}
 
 	@ParameterizedTest
-	@CsvSource({ "1.2,47244.1","0.65,25590.55","5.0,196850.3937" })
+	@CsvSource({ "1.2,47244.094488","0.65,25590.551181","5.0,196850.3937" })
 	public void testConvertKnownKilometresToInches(double input, double expectation) {
 		final double result = Length.Kilometres.toInches(input);
 		assertEquals(expectation, result, 0.01);

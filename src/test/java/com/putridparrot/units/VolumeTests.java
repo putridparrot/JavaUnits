@@ -1380,7 +1380,7 @@ public class VolumeTests {
 	}
 
 	@ParameterizedTest
-	@CsvSource({ "67.6,2704","1009.0,40360.0","6.2,248.0" })
+	@CsvSource({ "67.6,2704.0","1009.0,40360.0","6.2,248.0" })
 	public void testConvertKnownQuartsToFluidOunces(double input, double expectation) {
 		final double result = Volume.Quarts.toFluidOunces(input);
 		assertEquals(expectation, result, 0.01);

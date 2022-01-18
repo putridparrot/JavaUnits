@@ -50,7 +50,7 @@ public class TemperatureTests {
 	}
 
 	@ParameterizedTest
-	@CsvSource({ "900.0,2111.67","12,513.27","-3,486.27" })
+	@CsvSource({ "900.0,2111.67","12.0,513.27","-3.0,486.27" })
 	public void testConvertKnownCelsiusToRankine(double input, double expectation) {
 		final double result = Temperature.Celsius.toRankine(input);
 		assertEquals(expectation, result, 0.01);

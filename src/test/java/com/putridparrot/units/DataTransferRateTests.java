@@ -302,7 +302,7 @@ public class DataTransferRateTests {
 	}
 
 	@ParameterizedTest
-	@CsvSource({ "0.004,32000000.0","0.012,96000000","3e-9,24.0" })
+	@CsvSource({ "0.004,32000000.0","0.012,96000000.0","3e-9,24.0" })
 	public void testConvertKnownGigaBytesPerSecondToBitsPerSecond(double input, double expectation) {
 		final double result = DataTransferRate.GigaBytesPerSecond.toBitsPerSecond(input);
 		assertEquals(expectation, result, 0.01);
@@ -484,7 +484,7 @@ public class DataTransferRateTests {
 	}
 
 	@ParameterizedTest
-	@CsvSource({ "123456.0,0.126418944","8000000.0,8.192","1276876,1.307521024" })
+	@CsvSource({ "123456.0,0.126418944","8000000.0,8.192","1276876.0,1.307521024" })
 	public void testConvertKnownKibibitsPerSecondToGigaBitsPerSecond(double input, double expectation) {
 		final double result = DataTransferRate.KibibitsPerSecond.toGigaBitsPerSecond(input);
 		assertEquals(expectation, result, 0.01);
@@ -624,7 +624,7 @@ public class DataTransferRateTests {
 	}
 
 	@ParameterizedTest
-	@CsvSource({ "191987578,0.191987578","9010081903.0,9.010081903","123456789.0,0.123456789" })
+	@CsvSource({ "191987578.0,0.191987578","9010081903.0,9.010081903","123456789.0,0.123456789" })
 	public void testConvertKnownKiloBitsPerSecondToTeraBitsPerSecond(double input, double expectation) {
 		final double result = DataTransferRate.KiloBitsPerSecond.toTeraBitsPerSecond(input);
 		assertEquals(expectation, result, 0.01);
@@ -722,7 +722,7 @@ public class DataTransferRateTests {
 	}
 
 	@ParameterizedTest
-	@CsvSource({ "123.456,987648.0","900.0,7.2e+6","100200.0,801600000" })
+	@CsvSource({ "123.456,987648.0","900.0,7.2e+6","100200.0,801600000.0" })
 	public void testConvertKnownKiloBytesPerSecondToBitsPerSecond(double input, double expectation) {
 		final double result = DataTransferRate.KiloBytesPerSecond.toBitsPerSecond(input);
 		assertEquals(expectation, result, 0.01);
@@ -820,7 +820,7 @@ public class DataTransferRateTests {
 	}
 
 	@ParameterizedTest
-	@CsvSource({ "0.9,9e-10","140000000,0.14","7.0,7e-9" })
+	@CsvSource({ "0.9,9e-10","140000000.0,0.14","7.0,7e-9" })
 	public void testConvertKnownKiloBytesPerSecondToTeraBytesPerSecond(double input, double expectation) {
 		final double result = DataTransferRate.KiloBytesPerSecond.toTeraBytesPerSecond(input);
 		assertEquals(expectation, result, 0.01);

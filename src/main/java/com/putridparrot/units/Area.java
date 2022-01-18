@@ -97,7 +97,7 @@ public final class Area {
 		 * @return The value in Square Miles
 		 */
 		public static double toSquareMiles(double value) {
-			return value / 259.0;
+			return value / 258.99881103;
 		}
 		/**
 		 * Converts the supplied Hectares value to Square Yards
@@ -150,7 +150,7 @@ public final class Area {
 		 * @return The value in Square Metres
 		 */
 		public static double toSquareMetres(double value) {
-			return value / 10.764;
+			return value / 10.76391042;
 		}
 		/**
 		 * Converts the supplied Square Feet value to Square Miles
@@ -341,7 +341,7 @@ public final class Area {
 		 * @return The value in Square Yards
 		 */
 		public static double toSquareYards(double value) {
-			return value * 1.196;
+			return value * 1.1959900463;
 		}
 		/**
 		 * Converts the supplied Square Metres value to Square Feet
@@ -349,7 +349,7 @@ public final class Area {
 		 * @return The value in Square Feet
 		 */
 		public static double toSquareFeet(double value) {
-			return value * 10.764;
+			return value * 10.76391042;
 		}
 		/**
 		 * Converts the supplied Square Metres value to Square Inches
@@ -426,7 +426,7 @@ public final class Area {
 		 * @return The value in Hectares
 		 */
 		public static double toHectares(double value) {
-			return value * 259.0;
+			return value * 258.99881103;
 		}
 		/**
 		 * Converts the supplied Square Miles value to Acres
@@ -455,7 +455,7 @@ public final class Area {
 		 * @return The value in Square Metres
 		 */
 		public static double toSquareMetres(double value) {
-			return value / 1.196;
+			return value / 1.1959900463;
 		}
 		/**
 		 * Converts the supplied Square Yards value to Square Miles

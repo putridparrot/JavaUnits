@@ -174,7 +174,7 @@ public final class Length {
 		 * @return The value in Metres
 		 */
 		public static double toMetres(double value) {
-			return value * 0.0254;
+			return value / 39.3701;
 		}
 		/**
 		 * Converts the supplied Inches value to Kilometres
@@ -182,7 +182,7 @@ public final class Length {
 		 * @return The value in Kilometres
 		 */
 		public static double toKilometres(double value) {
-			return value * 0.0000254;
+			return value / 39370.07874;
 		}
 		/**
 		 * Converts the supplied Inches value to Feet
@@ -251,7 +251,7 @@ public final class Length {
 		 * @return The value in Inches
 		 */
 		public static double toInches(double value) {
-			return value / 0.0000254;
+			return value * 39370.07874;
 		}
 		/**
 		 * Converts the supplied Kilometres value to Feet
@@ -320,7 +320,7 @@ public final class Length {
 		 * @return The value in Inches
 		 */
 		public static double toInches(double value) {
-			return value / 0.0254;
+			return value * 39.3701;
 		}
 		/**
 		 * Converts the supplied Metres value to Feet

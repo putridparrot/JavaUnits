@@ -36,7 +36,7 @@ public class LuminousEnergyTests {
 	}
 
 	@ParameterizedTest
-	@CsvSource({ "1.2,72.0","0.8,48.0","109.00,6540" })
+	@CsvSource({ "1.2,72.0","0.8,48.0","109.00,6540.0" })
 	public void testConvertKnownLumenHourToLumenMinute(double input, double expectation) {
 		final double result = LuminousEnergy.LumenHour.toLumenMinute(input);
 		assertEquals(expectation, result, 0.01);

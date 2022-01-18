@@ -78,7 +78,7 @@ public class AngleTests {
 	}
 
 	@ParameterizedTest
-	@CsvSource({ "12.0,43200.0","910.4,3277440","5.6,20160.0" })
+	@CsvSource({ "12.0,43200.0","910.4,3277440.0","5.6,20160.0" })
 	public void testConvertKnownDegreesToSecondsOfArc(double input, double expectation) {
 		final double result = Angle.Degrees.toSecondsOfArc(input);
 		assertEquals(expectation, result, 0.01);

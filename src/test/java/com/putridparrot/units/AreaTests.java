@@ -554,7 +554,7 @@ public class AreaTests {
 	}
 
 	@ParameterizedTest
-	@CsvSource({ "90.0,968.752","180.0,1937.52","123.4,1328.2775" })
+	@CsvSource({ "90.0,968.7519375","180.0,1937.503875","123.4,1328.2665454" })
 	public void testConvertKnownSquareMetresToSquareFeet(double input, double expectation) {
 		final double result = Area.SquareMetres.toSquareFeet(input);
 		assertEquals(expectation, result, 0.01);
@@ -680,7 +680,7 @@ public class AreaTests {
 	}
 
 	@ParameterizedTest
-	@CsvSource({ "100.0,25900.0","2.3,595.697","0.9,233.099" })
+	@CsvSource({ "100.0,25899.881103","2.3,595.697","0.9,233.099" })
 	public void testConvertKnownSquareMilesToHectares(double input, double expectation) {
 		final double result = Area.SquareMiles.toHectares(input);
 		assertEquals(expectation, result, 0.01);

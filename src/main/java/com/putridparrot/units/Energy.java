@@ -28,7 +28,7 @@ public final class Energy {
 		 * @return The value in Kilocalories
 		 */
 		public static double toKilocalories(double value) {
-			return value / 3.966;
+			return value / 3.9673727240424;
 		}
 		/**
 		 * Converts the supplied Btu value to Joules
@@ -317,7 +317,7 @@ public final class Energy {
 		 * @return The value in Btu
 		 */
 		public static double toBtu(double value) {
-			return value * 3.966;
+			return value * 3.9673727240424;
 		}
 		/**
 		 * Converts the supplied Kilocalories value to Calories
@@ -479,7 +479,7 @@ public final class Energy {
 		 * @return The value in US Therms
 		 */
 		public static double toUSTherms(double value) {
-			return value / 29.3;
+			return value / 29.3001;
 		}
 		/**
 		 * Converts the supplied Kilowatt Hours value to Watt Hours
@@ -556,7 +556,7 @@ public final class Energy {
 		 * @return The value in Kilowatt Hours
 		 */
 		public static double toKilowattHours(double value) {
-			return value * 29.3;
+			return value * 29.3001;
 		}
 		/**
 		 * Converts the supplied US Therms value to Foot Pounds

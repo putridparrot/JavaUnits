@@ -302,7 +302,7 @@ public class DataStorageTests {
 	}
 
 	@ParameterizedTest
-	@CsvSource({ "0.004,32000000.0","0.012,96000000","3e-9,24.0" })
+	@CsvSource({ "0.004,32000000.0","0.012,96000000.0","3e-9,24.0" })
 	public void testConvertKnownGigabytesToBits(double input, double expectation) {
 		final double result = DataStorage.Gigabytes.toBits(input);
 		assertEquals(expectation, result, 0.01);
@@ -484,7 +484,7 @@ public class DataStorageTests {
 	}
 
 	@ParameterizedTest
-	@CsvSource({ "123456.0,0.126418944","8000000.0,8.192","1276876,1.307521024" })
+	@CsvSource({ "123456.0,0.126418944","8000000.0,8.192","1276876.0,1.307521024" })
 	public void testConvertKnownKibibitsToGigabits(double input, double expectation) {
 		final double result = DataStorage.Kibibits.toGigabits(input);
 		assertEquals(expectation, result, 0.01);
@@ -624,7 +624,7 @@ public class DataStorageTests {
 	}
 
 	@ParameterizedTest
-	@CsvSource({ "191987578,0.191987578","9010081903.0,9.010081903","123456789.0,0.123456789" })
+	@CsvSource({ "191987578.0,0.191987578","9010081903.0,9.010081903","123456789.0,0.123456789" })
 	public void testConvertKnownKilobitsToTerabits(double input, double expectation) {
 		final double result = DataStorage.Kilobits.toTerabits(input);
 		assertEquals(expectation, result, 0.01);
@@ -722,7 +722,7 @@ public class DataStorageTests {
 	}
 
 	@ParameterizedTest
-	@CsvSource({ "123.456,987648.0","900.0,7.2e+6","100200.0,801600000" })
+	@CsvSource({ "123.456,987648.0","900.0,7.2e+6","100200.0,801600000.0" })
 	public void testConvertKnownKilobytesToBits(double input, double expectation) {
 		final double result = DataStorage.Kilobytes.toBits(input);
 		assertEquals(expectation, result, 0.01);
@@ -820,7 +820,7 @@ public class DataStorageTests {
 	}
 
 	@ParameterizedTest
-	@CsvSource({ "0.9,9e-10","140000000,0.14","7.0,7e-9" })
+	@CsvSource({ "0.9,9e-10","140000000.0,0.14","7.0,7e-9" })
 	public void testConvertKnownKilobytesToTerabytes(double input, double expectation) {
 		final double result = DataStorage.Kilobytes.toTerabytes(input);
 		assertEquals(expectation, result, 0.01);
