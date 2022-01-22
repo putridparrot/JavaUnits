@@ -78,6 +78,14 @@ public final class Energy {
 		public static double toFootPounds(double value) {
 			return value * 778.169;
 		}
+		/**
+		 * Converts the supplied Btu value to Electronvolts
+		 * @param value The Btu input value
+		 * @return The value in Electronvolts
+		 */
+		public static double toElectronvolts(double value) {
+			return value * 6585141385224143241216.00;
+		}
 	}
 	/**
 	 * Calories conversion functions
@@ -147,11 +155,91 @@ public final class Energy {
 		public static double toFootPounds(double value) {
 			return value * 3.08596;
 		}
+		/**
+		 * Converts the supplied Calories value to Electronvolts
+		 * @param value The Calories input value
+		 * @return The value in Electronvolts
+		 */
+		public static double toElectronvolts(double value) {
+			return value * 2.6131936951817e+19;
+		}
 	}
 	/**
-	 * ElectronVolts conversion functions
+	 * Electronvolts conversion functions
 	 */
-	public static class ElectronVolts {
+	public static class Electronvolts {
+		/**
+		 * Converts the supplied Electronvolts value to Kilojoules
+		 * @param value The Electronvolts input value
+		 * @return The value in Kilojoules
+		 */
+		public static double toKilojoules(double value) {
+			return value / 6241509744511500156928.00;
+		}
+		/**
+		 * Converts the supplied Electronvolts value to Kilocalories
+		 * @param value The Electronvolts input value
+		 * @return The value in Kilocalories
+		 */
+		public static double toKilocalories(double value) {
+			return value / 26131952998320305078272.00;
+		}
+		/**
+		 * Converts the supplied Electronvolts value to Joules
+		 * @param value The Electronvolts input value
+		 * @return The value in Joules
+		 */
+		public static double toJoules(double value) {
+			return value / 6241509343300000000.0;
+		}
+		/**
+		 * Converts the supplied Electronvolts value to Btu
+		 * @param value The Electronvolts input value
+		 * @return The value in Btu
+		 */
+		public static double toBtu(double value) {
+			return value / 6585141385224143241216.0;
+		}
+		/**
+		 * Converts the supplied Electronvolts value to Calories
+		 * @param value The Electronvolts input value
+		 * @return The value in Calories
+		 */
+		public static double toCalories(double value) {
+			return value / 2.6131936951817e+19;
+		}
+		/**
+		 * Converts the supplied Electronvolts value to US Therms
+		 * @param value The Electronvolts input value
+		 * @return The value in US Therms
+		 */
+		public static double toUSTherms(double value) {
+			return value / 6.5835660010911e+26;
+		}
+		/**
+		 * Converts the supplied Electronvolts value to Watt Hours
+		 * @param value The Electronvolts input value
+		 * @return The value in Watt Hours
+		 */
+		public static double toWattHours(double value) {
+			return value / 2.2469422907138e+22;
+		}
+		/**
+		 * Converts the supplied Electronvolts value to Kilowatt Hours
+		 * @param value The Electronvolts input value
+		 * @return The value in Kilowatt Hours
+		 */
+		public static double toKilowattHours(double value) {
+			return value / 2.246943e+25;
+		}
+		/**
+		 * Converts the supplied Electronvolts value to Foot Pounds
+		 * @param value The Electronvolts input value
+		 * @return The value in Foot Pounds
+		 */
+		public static double toFootPounds(double value) {
+			return value / 8462350936293971968.00;
+		}
 	}
 	/**
 	 * Foot Pounds conversion functions
@@ -220,6 +308,14 @@ public final class Energy {
 		 */
 		public static double toKilowattHours(double value) {
 			return value * 0.00000037662;
+		}
+		/**
+		 * Converts the supplied Foot Pounds value to Electronvolts
+		 * @param value The Foot Pounds input value
+		 * @return The value in Electronvolts
+		 */
+		public static double toElectronvolts(double value) {
+			return value * 8462350936293971968.00;
 		}
 	}
 	/**
@@ -290,6 +386,14 @@ public final class Energy {
 		public static double toFootPounds(double value) {
 			return value / 1.35582;
 		}
+		/**
+		 * Converts the supplied Joules value to Electronvolts
+		 * @param value The Joules input value
+		 * @return The value in Electronvolts
+		 */
+		public static double toElectronvolts(double value) {
+			return value * 6241509343300000000.0;
+		}
 	}
 	/**
 	 * Kilocalories conversion functions
@@ -358,6 +462,14 @@ public final class Energy {
 		 */
 		public static double toFootPounds(double value) {
 			return value * 3085.96;
+		}
+		/**
+		 * Converts the supplied Kilocalories value to Electronvolts
+		 * @param value The Kilocalories input value
+		 * @return The value in Electronvolts
+		 */
+		public static double toElectronvolts(double value) {
+			return value * 26131952998320305078272.00;
 		}
 	}
 	/**
@@ -428,6 +540,14 @@ public final class Energy {
 		public static double toFootPounds(double value) {
 			return value * 737.562;
 		}
+		/**
+		 * Converts the supplied Kilojoules value to Electronvolts
+		 * @param value The Kilojoules input value
+		 * @return The value in Electronvolts
+		 */
+		public static double toElectronvolts(double value) {
+			return value * 6241509744511500156928.00;
+		}
 	}
 	/**
 	 * Kilowatt Hours conversion functions
@@ -496,6 +616,14 @@ public final class Energy {
 		 */
 		public static double toFootPounds(double value) {
 			return value / 0.00000037662;
+		}
+		/**
+		 * Converts the supplied Kilowatt Hours value to Electronvolts
+		 * @param value The Kilowatt Hours input value
+		 * @return The value in Electronvolts
+		 */
+		public static double toElectronvolts(double value) {
+			return value * 2.246943e+25;
 		}
 	}
 	/**
@@ -566,6 +694,14 @@ public final class Energy {
 		public static double toFootPounds(double value) {
 			return value * 77816937.099186;
 		}
+		/**
+		 * Converts the supplied US Therms value to Electronvolts
+		 * @param value The US Therms input value
+		 * @return The value in Electronvolts
+		 */
+		public static double toElectronvolts(double value) {
+			return value * 6.5835660010911e+26;
+		}
 	}
 	/**
 	 * Watt Hours conversion functions
@@ -634,6 +770,14 @@ public final class Energy {
 		 */
 		public static double toFootPounds(double value) {
 			return value * 2655.22;
+		}
+		/**
+		 * Converts the supplied Watt Hours value to Electronvolts
+		 * @param value The Watt Hours input value
+		 * @return The value in Electronvolts
+		 */
+		public static double toElectronvolts(double value) {
+			return value * 2.2469422907138e+22;
 		}
 	}
 }

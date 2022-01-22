@@ -470,7 +470,7 @@ public class TimeTests {
 	}
 
 	@ParameterizedTest
-	@CsvSource({ "4.5,136.875","90.0,2737.53","0.4,12.1667" })
+	@CsvSource({ "4.5,136.875","90.0,2737.5029","0.4,12.1667" })
 	public void testConvertKnownMonthsToDays(double input, double expectation) {
 		final double result = Time.Months.toDays(input);
 		assertEquals(expectation, result, 0.01);
@@ -484,7 +484,7 @@ public class TimeTests {
 	}
 
 	@ParameterizedTest
-	@CsvSource({ "0.5,2.17262","88.0,382.359","12.6,54.75006" })
+	@CsvSource({ "0.5,2.17262","88.0,382.381120","12.6,54.75006" })
 	public void testConvertKnownMonthsToWeeks(double input, double expectation) {
 		final double result = Time.Months.toWeeks(input);
 		assertEquals(expectation, result, 0.01);
@@ -680,7 +680,7 @@ public class TimeTests {
 	}
 
 	@ParameterizedTest
-	@CsvSource({ "4.0,0.920547","900.0,207.134637","3.8,0.87452" })
+	@CsvSource({ "4.0,0.920547","900.0,207.12319687","3.8,0.87452" })
 	public void testConvertKnownWeeksToMonths(double input, double expectation) {
 		final double result = Time.Weeks.toMonths(input);
 		assertEquals(expectation, result, 0.01);

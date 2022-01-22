@@ -52,7 +52,7 @@ public final class Time {
 		 * @return The value in Weeks
 		 */
 		public static double toWeeks(double value) {
-			return value * 5214.0;
+			return value * 5214.29;
 		}
 		/**
 		 * Converts the supplied Centuries value to Months
@@ -121,7 +121,7 @@ public final class Time {
 		 * @return The value in Months
 		 */
 		public static double toMonths(double value) {
-			return value / 30.417;
+			return value / 30.4167;
 		}
 		/**
 		 * Converts the supplied Days value to Years
@@ -259,7 +259,7 @@ public final class Time {
 		 * @return The value in Months
 		 */
 		public static double toMonths(double value) {
-			return value / 730.0;
+			return value / 730.001;
 		}
 		/**
 		 * Converts the supplied Hours value to Years
@@ -381,7 +381,7 @@ public final class Time {
 		 * @return The value in Hours
 		 */
 		public static double toHours(double value) {
-			return value * 730.0;
+			return value * 730.001;
 		}
 		/**
 		 * Converts the supplied Months value to Days
@@ -389,7 +389,7 @@ public final class Time {
 		 * @return The value in Days
 		 */
 		public static double toDays(double value) {
-			return value * 30.417;
+			return value * 30.4167;
 		}
 		/**
 		 * Converts the supplied Months value to Weeks
@@ -397,7 +397,7 @@ public final class Time {
 		 * @return The value in Weeks
 		 */
 		public static double toWeeks(double value) {
-			return value * 4.345;
+			return value * 4.34524;
 		}
 		/**
 		 * Converts the supplied Months value to Years
@@ -535,7 +535,7 @@ public final class Time {
 		 * @return The value in Months
 		 */
 		public static double toMonths(double value) {
-			return value / 4.345;
+			return value / 4.34524;
 		}
 		/**
 		 * Converts the supplied Weeks value to Years
@@ -559,7 +559,7 @@ public final class Time {
 		 * @return The value in Centuries
 		 */
 		public static double toCenturies(double value) {
-			return value / 5214.0;
+			return value / 5214.29;
 		}
 	}
 	/**

@@ -24,3 +24,6 @@ hs_err_pid*
 /.idea
 /.jqwik-database
 /target
+
+.idea
+/src/main/java/com/putridparrot/units/*.iml

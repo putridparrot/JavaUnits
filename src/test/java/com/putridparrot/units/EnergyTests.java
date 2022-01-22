@@ -127,6 +127,20 @@ public class EnergyTests {
 	}
 
 	@Property(tries = 100)
+	public void testFromBtuToElectronvoltsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Energy.Btu.toElectronvolts(value);
+		final double convertBack = Energy.Electronvolts.toBtu(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.0000000789,519567655294184.88","0.000001002,6598311667994592.0","0.000000001,6585141385224.14" })
+	public void testConvertKnownBtuToElectronvolts(double input, double expectation) {
+		final double result = Energy.Btu.toElectronvolts(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
 	public void testFromCaloriesToKilojoulesAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
 		final double convertTo = Energy.Calories.toKilojoules(value);
 		final double convertBack = Energy.Kilojoules.toCalories(convertTo);
@@ -235,6 +249,146 @@ public class EnergyTests {
 	@CsvSource({ "123.0,379.573","9.01,27.8045","2.8,8.64069" })
 	public void testConvertKnownCaloriesToFootPounds(double input, double expectation) {
 		final double result = Energy.Calories.toFootPounds(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromCaloriesToElectronvoltsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Energy.Calories.toElectronvolts(value);
+		final double convertBack = Energy.Electronvolts.toCalories(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.0000091,237800626261534.66","0.0008,20905549561453600.0","0.00123,32142282450734908.0" })
+	public void testConvertKnownCaloriesToElectronvolts(double input, double expectation) {
+		final double result = Energy.Calories.toElectronvolts(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromElectronvoltsToKilojoulesAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Energy.Electronvolts.toKilojoules(value);
+		final double convertBack = Energy.Kilojoules.toElectronvolts(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "123456789.0,1.9779957413e-14","900900900.0,1.4434023094e-13","123456789123456789.0,1.977995743237493669e-5" })
+	public void testConvertKnownElectronvoltsToKilojoules(double input, double expectation) {
+		final double result = Energy.Electronvolts.toKilojoules(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromElectronvoltsToKilocaloriesAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Energy.Electronvolts.toKilocalories(value);
+		final double convertBack = Energy.Kilocalories.toElectronvolts(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "100200300400.0,1.6053857310684e-11","123456789.0,1.9779957413e-14","900800700600.0,1.4432417722369e-10" })
+	public void testConvertKnownElectronvoltsToKilocalories(double input, double expectation) {
+		final double result = Energy.Electronvolts.toKilocalories(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromElectronvoltsToJoulesAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Energy.Electronvolts.toJoules(value);
+		final double convertBack = Energy.Joules.toElectronvolts(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "123456789123.0,1.9779957432302e-8","900800700600.0,1.4432417722369e-7","999888777666.0,1.601998367183e-7" })
+	public void testConvertKnownElectronvoltsToJoules(double input, double expectation) {
+		final double result = Energy.Electronvolts.toJoules(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromElectronvoltsToBtuAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Energy.Electronvolts.toBtu(value);
+		final double convertBack = Energy.Btu.toElectronvolts(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "100020003000100020003000.0,15.188741377060267723","999888777666999888777666.0,151.84014791315084381","12345678912341234567891234.0,1874.7782293466862029" })
+	public void testConvertKnownElectronvoltsToBtu(double input, double expectation) {
+		final double result = Energy.Electronvolts.toBtu(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromElectronvoltsToCaloriesAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Energy.Electronvolts.toCalories(value);
+		final double convertBack = Energy.Calories.toElectronvolts(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "666333111999.0,2.5515853167503e-8","999888777666555.0,3.8288679904011702e-5","12345678901234.0,4.727523282641506e-7" })
+	public void testConvertKnownElectronvoltsToCalories(double input, double expectation) {
+		final double result = Energy.Electronvolts.toCalories(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromElectronvoltsToUSThermsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Energy.Electronvolts.toUSTherms(value);
+		final double convertBack = Energy.USTherms.toElectronvolts(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "666333111999.0,1.0118737258101e-10","999888777666555.0,1.5184014791308327e-7","12345678901234.0,1.874778227659974e-9" })
+	public void testConvertKnownElectronvoltsToUSTherms(double input, double expectation) {
+		final double result = Energy.Electronvolts.toUSTherms(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromElectronvoltsToWattHoursAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Energy.Electronvolts.toWattHours(value);
+		final double convertBack = Energy.WattHours.toElectronvolts(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "100900700100.0,4.490576030342e-12","9000800070006000.0,4.00579748289276988e-7","12345678987654321.0,5.494432653620188248e-7" })
+	public void testConvertKnownElectronvoltsToWattHours(double input, double expectation) {
+		final double result = Energy.Electronvolts.toWattHours(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromElectronvoltsToKilowattHoursAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Energy.Electronvolts.toKilowattHours(value);
+		final double convertBack = Energy.KilowattHours.toElectronvolts(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "100900700100.0,4.490576030342e-15","999988887777.0,4.4504410034909e-14","12345678987654321.0,5.494432653620187834e-10" })
+	public void testConvertKnownElectronvoltsToKilowattHours(double input, double expectation) {
+		final double result = Energy.Electronvolts.toKilowattHours(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromElectronvoltsToFootPoundsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Energy.Electronvolts.toFootPounds(value);
+		final double convertBack = Energy.FootPounds.toElectronvolts(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "100900700100.0,1.1923484070355e-8","999988887777.0,1.1816916594359e-7","12345678987654321.0,0.0014588948005427860004" })
+	public void testConvertKnownElectronvoltsToFootPounds(double input, double expectation) {
+		final double result = Energy.Electronvolts.toFootPounds(input);
 		assertEquals(expectation, result, 0.01);
 	}
 
@@ -351,6 +505,20 @@ public class EnergyTests {
 	}
 
 	@Property(tries = 100)
+	public void testFromFootPoundsToElectronvoltsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Energy.FootPounds.toElectronvolts(value);
+		final double convertBack = Energy.Electronvolts.toFootPounds(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.00123,10408691651641586.0","0.0009,7616115842664575.0","0.00000888,75145676314290.469" })
+	public void testConvertKnownFootPoundsToElectronvolts(double input, double expectation) {
+		final double result = Energy.FootPounds.toElectronvolts(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
 	public void testFromJoulesToKilojoulesAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
 		final double convertTo = Energy.Joules.toKilojoules(value);
 		final double convertBack = Energy.Kilojoules.toJoules(convertTo);
@@ -459,6 +627,20 @@ public class EnergyTests {
 	@CsvSource({ "900.0,663.806","10.2,7.523134","6.7,4.94167" })
 	public void testConvertKnownJoulesToFootPounds(double input, double expectation) {
 		final double result = Energy.Joules.toFootPounds(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromJoulesToElectronvoltsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Energy.Joules.toElectronvolts(value);
+		final double convertBack = Energy.Electronvolts.toJoules(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.00000888,55424602968504.0","0.00001234,77020225296322.0","0.00000666,41568452226378.0" })
+	public void testConvertKnownJoulesToElectronvolts(double input, double expectation) {
+		final double result = Energy.Joules.toElectronvolts(input);
 		assertEquals(expectation, result, 0.01);
 	}
 
@@ -575,6 +757,20 @@ public class EnergyTests {
 	}
 
 	@Property(tries = 100)
+	public void testFromKilocaloriesToElectronvoltsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Energy.Kilocalories.toElectronvolts(value);
+		final double convertBack = Energy.Electronvolts.toKilocalories(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.0000000666,1740388069688132.2","0.000002,52263905996640608.0","0.000000999,26105821045321988.0" })
+	public void testConvertKnownKilocaloriesToElectronvolts(double input, double expectation) {
+		final double result = Energy.Kilocalories.toElectronvolts(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
 	public void testFromKilojoulesToKilocaloriesAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
 		final double convertTo = Energy.Kilojoules.toKilocalories(value);
 		final double convertBack = Energy.Kilocalories.toKilojoules(convertTo);
@@ -683,6 +879,20 @@ public class EnergyTests {
 	@CsvSource({ "100.9,74420.00579","2.4,1770.15","0.9,663.806" })
 	public void testConvertKnownKilojoulesToFootPounds(double input, double expectation) {
 		final double result = Energy.Kilojoules.toFootPounds(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromKilojoulesToElectronvoltsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Energy.Kilojoules.toElectronvolts(value);
+		final double convertBack = Energy.Electronvolts.toKilojoules(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.000000999,6235268234766989.0","0.0000002,1248301948902300.0","0.00567,3.5389360251380204E+19" })
+	public void testConvertKnownKilojoulesToElectronvolts(double input, double expectation) {
+		final double result = Energy.Kilojoules.toElectronvolts(input);
 		assertEquals(expectation, result, 0.01);
 	}
 
@@ -799,6 +1009,20 @@ public class EnergyTests {
 	}
 
 	@Property(tries = 100)
+	public void testFromKilowattHoursToElectronvoltsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Energy.KilowattHours.toElectronvolts(value);
+		final double convertBack = Energy.Electronvolts.toKilowattHours(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.000008,179755440000000000000.0","0.0000000128,2.8760870400000003E+17","0.0000000001,2246943000000000.2" })
+	public void testConvertKnownKilowattHoursToElectronvolts(double input, double expectation) {
+		final double result = Energy.KilowattHours.toElectronvolts(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
 	public void testFromUSThermsToKilojoulesAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
 		final double convertTo = Energy.USTherms.toKilojoules(value);
 		final double convertBack = Energy.Kilojoules.toUSTherms(convertTo);
@@ -911,6 +1135,20 @@ public class EnergyTests {
 	}
 
 	@Property(tries = 100)
+	public void testFromUSThermsToElectronvoltsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Energy.USTherms.toElectronvolts(value);
+		final double convertBack = Energy.Electronvolts.toUSTherms(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.0000009,592520940098199000000.0","0.000000001339,8.815394875460983E+17","0.0000000000666,43846549567266728.0" })
+	public void testConvertKnownUSThermsToElectronvolts(double input, double expectation) {
+		final double result = Energy.USTherms.toElectronvolts(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
 	public void testFromWattHoursToKilojoulesAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
 		final double convertTo = Energy.WattHours.toKilojoules(value);
 		final double convertBack = Energy.Kilojoules.toWattHours(convertTo);
@@ -1019,6 +1257,20 @@ public class EnergyTests {
 	@CsvSource({ "1.5,3982.829","0.3,796.567","90.1,239235.3219" })
 	public void testConvertKnownWattHoursToFootPounds(double input, double expectation) {
 		final double result = Energy.WattHours.toFootPounds(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromWattHoursToElectronvoltsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Energy.WattHours.toElectronvolts(value);
+		final double convertBack = Energy.Electronvolts.toWattHours(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.0000000000666,1496463565615.39","0.000000008,179755383257104.03","0.0000123,2.7637390175779744E+17" })
+	public void testConvertKnownWattHoursToElectronvolts(double input, double expectation) {
+		final double result = Energy.WattHours.toElectronvolts(input);
 		assertEquals(expectation, result, 0.01);
 	}
 
