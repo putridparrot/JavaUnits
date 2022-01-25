@@ -31,37 +31,37 @@ public final class FuelEconomy {
 			return value * 2.82481;
 		}
 		/**
-		 * Converts the supplied Kilometre Per Litre value to Litres per 100 Kilometres
+		 * Converts the supplied Kilometre Per Litre value to Litres Per 100 Kilometres
 		 * @param value The Kilometre Per Litre input value
-		 * @return The value in Litres per 100 Kilometres
+		 * @return The value in Litres Per 100 Kilometres
 		 */
-		public static double toLitresper100Kilometres(double value) {
+		public static double toLitresPer100Kilometres(double value) {
 			return 100.0 / value;
 		}
 	}
 	/**
-	 * Litres per 100 Kilometres conversion functions
+	 * Litres Per 100 Kilometres conversion functions
 	 */
-	public static class Litresper100Kilometres {
+	public static class LitresPer100Kilometres {
 		/**
-		 * Converts the supplied Litres per 100 Kilometres value to Kilometre Per Litre
-		 * @param value The Litres per 100 Kilometres input value
+		 * Converts the supplied Litres Per 100 Kilometres value to Kilometre Per Litre
+		 * @param value The Litres Per 100 Kilometres input value
 		 * @return The value in Kilometre Per Litre
 		 */
 		public static double toKilometrePerLitre(double value) {
 			return 100.0 / value;
 		}
 		/**
-		 * Converts the supplied Litres per 100 Kilometres value to Miles Per Gallon
-		 * @param value The Litres per 100 Kilometres input value
+		 * Converts the supplied Litres Per 100 Kilometres value to Miles Per Gallon
+		 * @param value The Litres Per 100 Kilometres input value
 		 * @return The value in Miles Per Gallon
 		 */
 		public static double toMilesPerGallon(double value) {
 			return 282.481 / value;
 		}
 		/**
-		 * Converts the supplied Litres per 100 Kilometres value to US Miles Per Gallon
-		 * @param value The Litres per 100 Kilometres input value
+		 * Converts the supplied Litres Per 100 Kilometres value to US Miles Per Gallon
+		 * @param value The Litres Per 100 Kilometres input value
 		 * @return The value in US Miles Per Gallon
 		 */
 		public static double toUSMilesPerGallon(double value) {
@@ -89,11 +89,11 @@ public final class FuelEconomy {
 			return value / 1.20095;
 		}
 		/**
-		 * Converts the supplied Miles Per Gallon value to Litres per 100 Kilometres
+		 * Converts the supplied Miles Per Gallon value to Litres Per 100 Kilometres
 		 * @param value The Miles Per Gallon input value
-		 * @return The value in Litres per 100 Kilometres
+		 * @return The value in Litres Per 100 Kilometres
 		 */
-		public static double toLitresper100Kilometres(double value) {
+		public static double toLitresPer100Kilometres(double value) {
 			return 282.481 / value;
 		}
 	}
@@ -118,11 +118,11 @@ public final class FuelEconomy {
 			return value * 1.20095;
 		}
 		/**
-		 * Converts the supplied US Miles Per Gallon value to Litres per 100 Kilometres
+		 * Converts the supplied US Miles Per Gallon value to Litres Per 100 Kilometres
 		 * @param value The US Miles Per Gallon input value
-		 * @return The value in Litres per 100 Kilometres
+		 * @return The value in Litres Per 100 Kilometres
 		 */
-		public static double toLitresper100Kilometres(double value) {
+		public static double toLitresPer100Kilometres(double value) {
 			return 235.215 / value;
 		}
 	}

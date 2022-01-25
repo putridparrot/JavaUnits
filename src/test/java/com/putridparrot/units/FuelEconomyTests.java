@@ -43,58 +43,58 @@ public class FuelEconomyTests {
 	}
 
 	@Property(tries = 100)
-	public void testFromKilometrePerLitreToLitresper100KilometresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
-		final double convertTo = FuelEconomy.KilometrePerLitre.toLitresper100Kilometres(value);
-		final double convertBack = FuelEconomy.Litresper100Kilometres.toKilometrePerLitre(convertTo);
+	public void testFromKilometrePerLitreToLitresPer100KilometresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = FuelEconomy.KilometrePerLitre.toLitresPer100Kilometres(value);
+		final double convertBack = FuelEconomy.LitresPer100Kilometres.toKilometrePerLitre(convertTo);
 		assertEquals(value, convertBack, 0.01);
 	}
 
 	@ParameterizedTest
 	@CsvSource({ "109.0,0.917431","0.8,125.0","2.3,43.4783" })
-	public void testConvertKnownKilometrePerLitreToLitresper100Kilometres(double input, double expectation) {
-		final double result = FuelEconomy.KilometrePerLitre.toLitresper100Kilometres(input);
+	public void testConvertKnownKilometrePerLitreToLitresPer100Kilometres(double input, double expectation) {
+		final double result = FuelEconomy.KilometrePerLitre.toLitresPer100Kilometres(input);
 		assertEquals(expectation, result, 0.01);
 	}
 
 	@Property(tries = 100)
-	public void testFromLitresper100KilometresToKilometrePerLitreAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
-		final double convertTo = FuelEconomy.Litresper100Kilometres.toKilometrePerLitre(value);
-		final double convertBack = FuelEconomy.KilometrePerLitre.toLitresper100Kilometres(convertTo);
+	public void testFromLitresPer100KilometresToKilometrePerLitreAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = FuelEconomy.LitresPer100Kilometres.toKilometrePerLitre(value);
+		final double convertBack = FuelEconomy.KilometrePerLitre.toLitresPer100Kilometres(convertTo);
 		assertEquals(value, convertBack, 0.01);
 	}
 
 	@ParameterizedTest
 	@CsvSource({ "0.7,142.857","109.0,0.917431","0.012,8333.3333" })
-	public void testConvertKnownLitresper100KilometresToKilometrePerLitre(double input, double expectation) {
-		final double result = FuelEconomy.Litresper100Kilometres.toKilometrePerLitre(input);
+	public void testConvertKnownLitresPer100KilometresToKilometrePerLitre(double input, double expectation) {
+		final double result = FuelEconomy.LitresPer100Kilometres.toKilometrePerLitre(input);
 		assertEquals(expectation, result, 0.01);
 	}
 
 	@Property(tries = 100)
-	public void testFromLitresper100KilometresToMilesPerGallonAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
-		final double convertTo = FuelEconomy.Litresper100Kilometres.toMilesPerGallon(value);
-		final double convertBack = FuelEconomy.MilesPerGallon.toLitresper100Kilometres(convertTo);
+	public void testFromLitresPer100KilometresToMilesPerGallonAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = FuelEconomy.LitresPer100Kilometres.toMilesPerGallon(value);
+		final double convertBack = FuelEconomy.MilesPerGallon.toLitresPer100Kilometres(convertTo);
 		assertEquals(value, convertBack, 0.01);
 	}
 
 	@ParameterizedTest
 	@CsvSource({ "107.0,2.64001","0.8,353.101","0.02,14124.05" })
-	public void testConvertKnownLitresper100KilometresToMilesPerGallon(double input, double expectation) {
-		final double result = FuelEconomy.Litresper100Kilometres.toMilesPerGallon(input);
+	public void testConvertKnownLitresPer100KilometresToMilesPerGallon(double input, double expectation) {
+		final double result = FuelEconomy.LitresPer100Kilometres.toMilesPerGallon(input);
 		assertEquals(expectation, result, 0.01);
 	}
 
 	@Property(tries = 100)
-	public void testFromLitresper100KilometresToUSMilesPerGallonAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
-		final double convertTo = FuelEconomy.Litresper100Kilometres.toUSMilesPerGallon(value);
-		final double convertBack = FuelEconomy.USMilesPerGallon.toLitresper100Kilometres(convertTo);
+	public void testFromLitresPer100KilometresToUSMilesPerGallonAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = FuelEconomy.LitresPer100Kilometres.toUSMilesPerGallon(value);
+		final double convertBack = FuelEconomy.USMilesPerGallon.toLitresPer100Kilometres(convertTo);
 		assertEquals(value, convertBack, 0.01);
 	}
 
 	@ParameterizedTest
 	@CsvSource({ "12.0,19.6012","0.3,784.049","1.5,156.81" })
-	public void testConvertKnownLitresper100KilometresToUSMilesPerGallon(double input, double expectation) {
-		final double result = FuelEconomy.Litresper100Kilometres.toUSMilesPerGallon(input);
+	public void testConvertKnownLitresPer100KilometresToUSMilesPerGallon(double input, double expectation) {
+		final double result = FuelEconomy.LitresPer100Kilometres.toUSMilesPerGallon(input);
 		assertEquals(expectation, result, 0.01);
 	}
 
@@ -127,16 +127,16 @@ public class FuelEconomyTests {
 	}
 
 	@Property(tries = 100)
-	public void testFromMilesPerGallonToLitresper100KilometresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
-		final double convertTo = FuelEconomy.MilesPerGallon.toLitresper100Kilometres(value);
-		final double convertBack = FuelEconomy.Litresper100Kilometres.toMilesPerGallon(convertTo);
+	public void testFromMilesPerGallonToLitresPer100KilometresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = FuelEconomy.MilesPerGallon.toLitresPer100Kilometres(value);
+		final double convertBack = FuelEconomy.LitresPer100Kilometres.toMilesPerGallon(convertTo);
 		assertEquals(value, convertBack, 0.01);
 	}
 
 	@ParameterizedTest
 	@CsvSource({ "22.3,12.66731","0.4,706.202","5.2,54.3233" })
-	public void testConvertKnownMilesPerGallonToLitresper100Kilometres(double input, double expectation) {
-		final double result = FuelEconomy.MilesPerGallon.toLitresper100Kilometres(input);
+	public void testConvertKnownMilesPerGallonToLitresPer100Kilometres(double input, double expectation) {
+		final double result = FuelEconomy.MilesPerGallon.toLitresPer100Kilometres(input);
 		assertEquals(expectation, result, 0.01);
 	}
 
@@ -169,16 +169,16 @@ public class FuelEconomyTests {
 	}
 
 	@Property(tries = 100)
-	public void testFromUSMilesPerGallonToLitresper100KilometresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
-		final double convertTo = FuelEconomy.USMilesPerGallon.toLitresper100Kilometres(value);
-		final double convertBack = FuelEconomy.Litresper100Kilometres.toUSMilesPerGallon(convertTo);
+	public void testFromUSMilesPerGallonToLitresPer100KilometresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = FuelEconomy.USMilesPerGallon.toLitresPer100Kilometres(value);
+		final double convertBack = FuelEconomy.LitresPer100Kilometres.toUSMilesPerGallon(convertTo);
 		assertEquals(value, convertBack, 0.01);
 	}
 
 	@ParameterizedTest
 	@CsvSource({ "111.0,2.11905","0.4,588.036","5.2,45.2336" })
-	public void testConvertKnownUSMilesPerGallonToLitresper100Kilometres(double input, double expectation) {
-		final double result = FuelEconomy.USMilesPerGallon.toLitresper100Kilometres(input);
+	public void testConvertKnownUSMilesPerGallonToLitresPer100Kilometres(double input, double expectation) {
+		final double result = FuelEconomy.USMilesPerGallon.toLitresPer100Kilometres(input);
 		assertEquals(expectation, result, 0.01);
 	}
 
