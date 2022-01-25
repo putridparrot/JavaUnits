@@ -36,7 +36,7 @@ public class EnergyTests {
 	}
 
 	@ParameterizedTest
-	@CsvSource({ "67.9,17.12196","109.9,27.7009516484","5000.0,1260.279874814" })
+	@CsvSource({ "67.9,17.12196","109.9,27.712867639325825","5000.0,1260.8220036090" })
 	public void testConvertKnownBtuToKilocalories(double input, double expectation) {
 		final double result = Energy.Btu.toKilocalories(input);
 		assertEquals(expectation, result, 0.01);
@@ -64,7 +64,7 @@ public class EnergyTests {
 	}
 
 	@ParameterizedTest
-	@CsvSource({ "56.0,14121.184","123.0,31016.172","0.9,226.9476" })
+	@CsvSource({ "56.0,14121.20644042079","123.0,31016.221288781402","0.9,226.9476" })
 	public void testConvertKnownBtuToCalories(double input, double expectation) {
 		final double result = Energy.Btu.toCalories(input);
 		assertEquals(expectation, result, 0.01);
@@ -680,7 +680,7 @@ public class EnergyTests {
 	}
 
 	@ParameterizedTest
-	@CsvSource({ "3.4,13.4833","109.0,432.4436269206","22.89,90.8131616" })
+	@CsvSource({ "3.4,13.4833","109.0,432.2576846216055","22.89,90.77411377053717" })
 	public void testConvertKnownKilocaloriesToBtu(double input, double expectation) {
 		final double result = Energy.Kilocalories.toBtu(input);
 		assertEquals(expectation, result, 0.01);
@@ -1044,7 +1044,7 @@ public class EnergyTests {
 	}
 
 	@ParameterizedTest
-	@CsvSource({ "1.1,27731.44","0.04,1008.417","0.0123,310.088174" })
+	@CsvSource({ "1.1,27731.484079398004","0.04,1008.417","0.0123,310.088174" })
 	public void testConvertKnownUSThermsToKilocalories(double input, double expectation) {
 		final double result = Energy.USTherms.toKilocalories(input);
 		assertEquals(expectation, result, 0.01);

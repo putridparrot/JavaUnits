@@ -68,7 +68,7 @@ public final class Area {
 		 * @return The value in Hectares
 		 */
 		public static double toHectares(double value) {
-			return value / 2.471;
+			return value / 2.4710538146717;
 		}
 	}
 	/**
@@ -129,7 +129,7 @@ public final class Area {
 		 * @return The value in Acres
 		 */
 		public static double toAcres(double value) {
-			return value * 2.471;
+			return value * 2.4710538146717;
 		}
 	}
 	/**
