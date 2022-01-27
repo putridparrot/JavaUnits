@@ -177,7 +177,7 @@ public final class DataTransferRate {
 		 * @return The value in Mebibits Per Second
 		 */
 		public static double toMebibitsPerSecond(double value) {
-			return value * 954.0;
+			return value * 953.67431640625;
 		}
 	}
 	/**
@@ -315,7 +315,7 @@ public final class DataTransferRate {
 		 * @return The value in KiloBytes Per Second
 		 */
 		public static double toKiloBytesPerSecond(double value) {
-			return value / 7.812;
+			return value / 7.8125;
 		}
 		/**
 		 * Converts the supplied Kibibits Per Second value to MegaBytes Per Second
@@ -509,7 +509,7 @@ public final class DataTransferRate {
 		 * @return The value in Kibibits Per Second
 		 */
 		public static double toKibibitsPerSecond(double value) {
-			return value * 7.812;
+			return value * 7.8125;
 		}
 		/**
 		 * Converts the supplied KiloBytes Per Second value to Mebibits Per Second
@@ -554,7 +554,7 @@ public final class DataTransferRate {
 		 * @return The value in GigaBits Per Second
 		 */
 		public static double toGigaBitsPerSecond(double value) {
-			return value / 954.0;
+			return value / 953.67431640625;
 		}
 		/**
 		 * Converts the supplied Mebibits Per Second value to TeraBits Per Second

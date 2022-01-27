@@ -177,7 +177,7 @@ public final class DataStorage {
 		 * @return The value in Mebibits
 		 */
 		public static double toMebibits(double value) {
-			return value * 954.0;
+			return value * 953.67431640625;
 		}
 	}
 	/**
@@ -315,7 +315,7 @@ public final class DataStorage {
 		 * @return The value in Kilobytes
 		 */
 		public static double toKilobytes(double value) {
-			return value / 7.812;
+			return value / 7.8125;
 		}
 		/**
 		 * Converts the supplied Kibibits value to Megabytes
@@ -509,7 +509,7 @@ public final class DataStorage {
 		 * @return The value in Kibibits
 		 */
 		public static double toKibibits(double value) {
-			return value * 7.812;
+			return value * 7.8125;
 		}
 		/**
 		 * Converts the supplied Kilobytes value to Mebibits
@@ -554,7 +554,7 @@ public final class DataStorage {
 		 * @return The value in Gigabits
 		 */
 		public static double toGigabits(double value) {
-			return value / 954.0;
+			return value / 953.67431640625;
 		}
 		/**
 		 * Converts the supplied Mebibits value to Terabits

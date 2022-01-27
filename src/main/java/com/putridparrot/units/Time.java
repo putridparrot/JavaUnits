@@ -190,7 +190,7 @@ public final class Time {
 		 * @return The value in Weeks
 		 */
 		public static double toWeeks(double value) {
-			return value * 521.0;
+			return value * 521.429;
 		}
 		/**
 		 * Converts the supplied Decades value to Months
@@ -551,7 +551,7 @@ public final class Time {
 		 * @return The value in Decades
 		 */
 		public static double toDecades(double value) {
-			return value / 521.0;
+			return value / 521.429;
 		}
 		/**
 		 * Converts the supplied Weeks value to Centuries

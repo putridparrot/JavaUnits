@@ -288,7 +288,7 @@ public class DataStorageTests {
 	}
 
 	@ParameterizedTest
-	@CsvSource({ "0.002,1.9073486","0.9,858.6","6.1,5819.4" })
+	@CsvSource({ "0.002,1.9073486","0.9,858.30688476562","6.1,5817.413330078125" })
 	public void testConvertKnownGigabitsToMebibits(double input, double expectation) {
 		final double result = DataStorage.Gigabits.toMebibits(input);
 		assertEquals(expectation, result, 0.01);
@@ -834,7 +834,7 @@ public class DataStorageTests {
 	}
 
 	@ParameterizedTest
-	@CsvSource({ "0.009,0.0703125","6e+3,46872.0","1.23,9.609375" })
+	@CsvSource({ "0.009,0.0703125","6e+3,46875.0","1.23,9.609375" })
 	public void testConvertKnownKilobytesToKibibits(double input, double expectation) {
 		final double result = DataStorage.Kilobytes.toKibibits(input);
 		assertEquals(expectation, result, 0.01);

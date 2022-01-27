@@ -288,7 +288,7 @@ public class DataTransferRateTests {
 	}
 
 	@ParameterizedTest
-	@CsvSource({ "0.002,1.9073486","0.9,858.6","6.1,5819.4" })
+	@CsvSource({ "0.002,1.9073486","0.9,858.3068847656","6.1,5817.413330078" })
 	public void testConvertKnownGigaBitsPerSecondToMebibitsPerSecond(double input, double expectation) {
 		final double result = DataTransferRate.GigaBitsPerSecond.toMebibitsPerSecond(input);
 		assertEquals(expectation, result, 0.01);
@@ -834,7 +834,7 @@ public class DataTransferRateTests {
 	}
 
 	@ParameterizedTest
-	@CsvSource({ "0.009,0.0703125","6e+3,46872.0","1.23,9.609375" })
+	@CsvSource({ "0.009,0.0703125","6e+3,46875.0","1.23,9.609375" })
 	public void testConvertKnownKiloBytesPerSecondToKibibitsPerSecond(double input, double expectation) {
 		final double result = DataTransferRate.KiloBytesPerSecond.toKibibitsPerSecond(input);
 		assertEquals(expectation, result, 0.01);
