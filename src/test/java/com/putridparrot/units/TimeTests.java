@@ -15,6 +15,27 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TimeTests {
 	@Property(tries = 100)
+	public void testFromCenturiesToNanosecondsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Time.Centuries.toNanoseconds(value);
+		final double convertBack = Time.Nanoseconds.toCenturies(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromCenturiesToMicrosecondsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Time.Centuries.toMicroseconds(value);
+		final double convertBack = Time.Microseconds.toCenturies(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromCenturiesToMillisecondsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Time.Centuries.toMilliseconds(value);
+		final double convertBack = Time.Milliseconds.toCenturies(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@Property(tries = 100)
 	public void testFromCenturiesToSecondsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
 		final double convertTo = Time.Centuries.toSeconds(value);
 		final double convertBack = Time.Seconds.toCenturies(convertTo);
@@ -68,6 +89,34 @@ public class TimeTests {
 		final double convertTo = Time.Centuries.toDecades(value);
 		final double convertBack = Time.Decades.toCenturies(convertTo);
 		assertEquals(value, convertBack, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromDaysToNanosecondsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Time.Days.toNanoseconds(value);
+		final double convertBack = Time.Nanoseconds.toDays(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromDaysToMicrosecondsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Time.Days.toMicroseconds(value);
+		final double convertBack = Time.Microseconds.toDays(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromDaysToMillisecondsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Time.Days.toMilliseconds(value);
+		final double convertBack = Time.Milliseconds.toDays(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.0009,77760.0","0.03,2592000.0","0.006,518400.0" })
+	public void testConvertKnownDaysToMilliseconds(double input, double expectation) {
+		final double result = Time.Days.toMilliseconds(input);
+		assertEquals(expectation, result, 0.01);
 	}
 
 	@Property(tries = 100)
@@ -169,6 +218,27 @@ public class TimeTests {
 	}
 
 	@Property(tries = 100)
+	public void testFromDecadesToNanosecondsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Time.Decades.toNanoseconds(value);
+		final double convertBack = Time.Nanoseconds.toDecades(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromDecadesToMicrosecondsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Time.Decades.toMicroseconds(value);
+		final double convertBack = Time.Microseconds.toDecades(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromDecadesToMillisecondsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Time.Decades.toMilliseconds(value);
+		final double convertBack = Time.Milliseconds.toDecades(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@Property(tries = 100)
 	public void testFromDecadesToSecondsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
 		final double convertTo = Time.Decades.toSeconds(value);
 		final double convertBack = Time.Seconds.toDecades(convertTo);
@@ -222,6 +292,34 @@ public class TimeTests {
 		final double convertTo = Time.Decades.toCenturies(value);
 		final double convertBack = Time.Centuries.toDecades(convertTo);
 		assertEquals(value, convertBack, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromHoursToNanosecondsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Time.Hours.toNanoseconds(value);
+		final double convertBack = Time.Nanoseconds.toHours(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromHoursToMicrosecondsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Time.Hours.toMicroseconds(value);
+		final double convertBack = Time.Microseconds.toHours(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromHoursToMillisecondsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Time.Hours.toMilliseconds(value);
+		final double convertBack = Time.Milliseconds.toHours(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.006,21600.0","0.09,324000.0","0.007,25200.0" })
+	public void testConvertKnownHoursToMilliseconds(double input, double expectation) {
+		final double result = Time.Hours.toMilliseconds(input);
+		assertEquals(expectation, result, 0.01);
 	}
 
 	@Property(tries = 100)
@@ -323,6 +421,237 @@ public class TimeTests {
 	}
 
 	@Property(tries = 100)
+	public void testFromMicrosecondsToNanosecondsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Time.Microseconds.toNanoseconds(value);
+		final double convertBack = Time.Nanoseconds.toMicroseconds(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromMicrosecondsToMillisecondsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Time.Microseconds.toMilliseconds(value);
+		final double convertBack = Time.Milliseconds.toMicroseconds(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromMicrosecondsToSecondsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Time.Microseconds.toSeconds(value);
+		final double convertBack = Time.Seconds.toMicroseconds(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromMicrosecondsToMinutesAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Time.Microseconds.toMinutes(value);
+		final double convertBack = Time.Minutes.toMicroseconds(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromMicrosecondsToHoursAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Time.Microseconds.toHours(value);
+		final double convertBack = Time.Hours.toMicroseconds(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromMicrosecondsToDaysAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Time.Microseconds.toDays(value);
+		final double convertBack = Time.Days.toMicroseconds(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromMicrosecondsToWeeksAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Time.Microseconds.toWeeks(value);
+		final double convertBack = Time.Weeks.toMicroseconds(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromMicrosecondsToMonthsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Time.Microseconds.toMonths(value);
+		final double convertBack = Time.Months.toMicroseconds(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromMicrosecondsToYearsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Time.Microseconds.toYears(value);
+		final double convertBack = Time.Years.toMicroseconds(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromMicrosecondsToDecadesAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Time.Microseconds.toDecades(value);
+		final double convertBack = Time.Decades.toMicroseconds(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromMicrosecondsToCenturiesAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Time.Microseconds.toCenturies(value);
+		final double convertBack = Time.Centuries.toMicroseconds(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromMillisecondsToNanosecondsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Time.Milliseconds.toNanoseconds(value);
+		final double convertBack = Time.Nanoseconds.toMilliseconds(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromMillisecondsToMicrosecondsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Time.Milliseconds.toMicroseconds(value);
+		final double convertBack = Time.Microseconds.toMilliseconds(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromMillisecondsToSecondsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Time.Milliseconds.toSeconds(value);
+		final double convertBack = Time.Seconds.toMilliseconds(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "8.0,0.008","780.0,0.78","900.0,0.9" })
+	public void testConvertKnownMillisecondsToSeconds(double input, double expectation) {
+		final double result = Time.Milliseconds.toSeconds(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromMillisecondsToMinutesAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Time.Milliseconds.toMinutes(value);
+		final double convertBack = Time.Minutes.toMilliseconds(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "900.0,0.015","67000.0,1.1166667","1234567.0,20.57611667" })
+	public void testConvertKnownMillisecondsToMinutes(double input, double expectation) {
+		final double result = Time.Milliseconds.toMinutes(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromMillisecondsToHoursAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Time.Milliseconds.toHours(value);
+		final double convertBack = Time.Hours.toMilliseconds(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "1234567.0,0.3429352778","100900.0,0.0280277778","46000.0,0.012777778" })
+	public void testConvertKnownMillisecondsToHours(double input, double expectation) {
+		final double result = Time.Milliseconds.toHours(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromMillisecondsToDaysAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Time.Milliseconds.toDays(value);
+		final double convertBack = Time.Days.toMilliseconds(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "9000000.0,0.1041666667","123456789.0,1.42889802083","89008900.0,1.0301956019" })
+	public void testConvertKnownMillisecondsToDays(double input, double expectation) {
+		final double result = Time.Milliseconds.toDays(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromMillisecondsToWeeksAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Time.Milliseconds.toWeeks(value);
+		final double convertBack = Time.Weeks.toMilliseconds(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "89008900.0,0.14717080026","1234567890.0,2.041282886905","100200300.0,0.165675099206" })
+	public void testConvertKnownMillisecondsToWeeks(double input, double expectation) {
+		final double result = Time.Milliseconds.toWeeks(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromMillisecondsToMonthsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Time.Milliseconds.toMonths(value);
+		final double convertBack = Time.Months.toMilliseconds(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "100200300400.0,38.102653412154631","90001000.0,0.034246918329","8888888888.0,3.382374104552" })
+	public void testConvertKnownMillisecondsToMonths(double input, double expectation) {
+		final double result = Time.Milliseconds.toMonths(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromMillisecondsToYearsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Time.Milliseconds.toYears(value);
+		final double convertBack = Time.Years.toMilliseconds(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "8888888888.0,0.28167767558793383","123456789123.0,3.9121899074093087","900080007000.0,28.522399977032002" })
+	public void testConvertKnownMillisecondsToYears(double input, double expectation) {
+		final double result = Time.Milliseconds.toYears(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromMillisecondsToDecadesAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Time.Milliseconds.toDecades(value);
+		final double convertBack = Time.Decades.toMilliseconds(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromMillisecondsToCenturiesAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Time.Milliseconds.toCenturies(value);
+		final double convertBack = Time.Centuries.toMilliseconds(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromMinutesToNanosecondsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Time.Minutes.toNanoseconds(value);
+		final double convertBack = Time.Nanoseconds.toMinutes(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromMinutesToMicrosecondsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Time.Minutes.toMicroseconds(value);
+		final double convertBack = Time.Microseconds.toMinutes(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromMinutesToMillisecondsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Time.Minutes.toMilliseconds(value);
+		final double convertBack = Time.Milliseconds.toMinutes(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.007,420.0","0.8,48000.0","9.0,540000.0" })
+	public void testConvertKnownMinutesToMilliseconds(double input, double expectation) {
+		final double result = Time.Minutes.toMilliseconds(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
 	public void testFromMinutesToSecondsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
 		final double convertTo = Time.Minutes.toSeconds(value);
 		final double convertBack = Time.Seconds.toMinutes(convertTo);
@@ -418,6 +747,34 @@ public class TimeTests {
 		final double convertTo = Time.Minutes.toCenturies(value);
 		final double convertBack = Time.Centuries.toMinutes(convertTo);
 		assertEquals(value, convertBack, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromMonthsToNanosecondsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Time.Months.toNanoseconds(value);
+		final double convertBack = Time.Nanoseconds.toMonths(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromMonthsToMicrosecondsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Time.Months.toMicroseconds(value);
+		final double convertBack = Time.Microseconds.toMonths(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromMonthsToMillisecondsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Time.Months.toMilliseconds(value);
+		final double convertBack = Time.Milliseconds.toMonths(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.00034,894113.64","0.001,2629746.0","0.006,15778476.0" })
+	public void testConvertKnownMonthsToMilliseconds(double input, double expectation) {
+		final double result = Time.Months.toMilliseconds(input);
+		assertEquals(expectation, result, 0.01);
 	}
 
 	@Property(tries = 100)
@@ -519,6 +876,146 @@ public class TimeTests {
 	}
 
 	@Property(tries = 100)
+	public void testFromNanosecondsToMicrosecondsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Time.Nanoseconds.toMicroseconds(value);
+		final double convertBack = Time.Microseconds.toNanoseconds(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "1234.0,1.234","90.9,0.0909","70000.0,70.0" })
+	public void testConvertKnownNanosecondsToMicroseconds(double input, double expectation) {
+		final double result = Time.Nanoseconds.toMicroseconds(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromNanosecondsToMillisecondsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Time.Nanoseconds.toMilliseconds(value);
+		final double convertBack = Time.Milliseconds.toNanoseconds(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "70000.0,0.07","123456.0,0.123456","900900.0,0.9009" })
+	public void testConvertKnownNanosecondsToMilliseconds(double input, double expectation) {
+		final double result = Time.Nanoseconds.toMilliseconds(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromNanosecondsToSecondsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Time.Nanoseconds.toSeconds(value);
+		final double convertBack = Time.Seconds.toNanoseconds(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "900000000.0,0.9","123456789.0,0.123456789","800400700.0,0.8004007" })
+	public void testConvertKnownNanosecondsToSeconds(double input, double expectation) {
+		final double result = Time.Nanoseconds.toSeconds(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromNanosecondsToMinutesAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Time.Nanoseconds.toMinutes(value);
+		final double convertBack = Time.Minutes.toNanoseconds(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "1234567890.0,0.0205761315","800400700.0,0.0133400116667","800100800.0,0.0133350133333" })
+	public void testConvertKnownNanosecondsToMinutes(double input, double expectation) {
+		final double result = Time.Nanoseconds.toMinutes(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromNanosecondsToHoursAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Time.Nanoseconds.toHours(value);
+		final double convertBack = Time.Hours.toNanoseconds(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "1234567890123.0,0.3429355250341667","900800700600.0,0.250222416833333","66677788999.0,0.018521608055278" })
+	public void testConvertKnownNanosecondsToHours(double input, double expectation) {
+		final double result = Time.Nanoseconds.toHours(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromNanosecondsToDaysAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Time.Nanoseconds.toDays(value);
+		final double convertBack = Time.Days.toNanoseconds(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromNanosecondsToWeeksAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Time.Nanoseconds.toWeeks(value);
+		final double convertBack = Time.Weeks.toNanoseconds(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromNanosecondsToMonthsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Time.Nanoseconds.toMonths(value);
+		final double convertBack = Time.Months.toNanoseconds(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromNanosecondsToYearsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Time.Nanoseconds.toYears(value);
+		final double convertBack = Time.Years.toNanoseconds(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromNanosecondsToDecadesAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Time.Nanoseconds.toDecades(value);
+		final double convertBack = Time.Decades.toNanoseconds(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromNanosecondsToCenturiesAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Time.Nanoseconds.toCenturies(value);
+		final double convertBack = Time.Centuries.toNanoseconds(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromSecondsToNanosecondsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Time.Seconds.toNanoseconds(value);
+		final double convertBack = Time.Nanoseconds.toSeconds(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromSecondsToMicrosecondsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Time.Seconds.toMicroseconds(value);
+		final double convertBack = Time.Microseconds.toSeconds(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromSecondsToMillisecondsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Time.Seconds.toMilliseconds(value);
+		final double convertBack = Time.Milliseconds.toSeconds(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "9.0,9000.0","3.1,3100.0","0.9,900.0" })
+	public void testConvertKnownSecondsToMilliseconds(double input, double expectation) {
+		final double result = Time.Seconds.toMilliseconds(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
 	public void testFromSecondsToMinutesAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
 		final double convertTo = Time.Seconds.toMinutes(value);
 		final double convertBack = Time.Minutes.toSeconds(convertTo);
@@ -617,6 +1114,34 @@ public class TimeTests {
 	}
 
 	@Property(tries = 100)
+	public void testFromWeeksToNanosecondsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Time.Weeks.toNanoseconds(value);
+		final double convertBack = Time.Nanoseconds.toWeeks(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromWeeksToMicrosecondsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Time.Weeks.toMicroseconds(value);
+		final double convertBack = Time.Microseconds.toWeeks(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromWeeksToMillisecondsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Time.Weeks.toMilliseconds(value);
+		final double convertBack = Time.Milliseconds.toWeeks(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.001,604800.0","0.005,3024000.0","0.0009,544320.0" })
+	public void testConvertKnownWeeksToMilliseconds(double input, double expectation) {
+		final double result = Time.Weeks.toMilliseconds(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
 	public void testFromWeeksToSecondsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
 		final double convertTo = Time.Weeks.toSeconds(value);
 		final double convertBack = Time.Seconds.toWeeks(convertTo);
@@ -712,6 +1237,34 @@ public class TimeTests {
 		final double convertTo = Time.Weeks.toCenturies(value);
 		final double convertBack = Time.Centuries.toWeeks(convertTo);
 		assertEquals(value, convertBack, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromYearsToNanosecondsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Time.Years.toNanoseconds(value);
+		final double convertBack = Time.Nanoseconds.toYears(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromYearsToMicrosecondsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Time.Years.toMicroseconds(value);
+		final double convertBack = Time.Microseconds.toYears(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromYearsToMillisecondsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Time.Years.toMilliseconds(value);
+		final double convertBack = Time.Milliseconds.toYears(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.001,31556952.0","0.0009,28401256.8","0.00034,10729363.680000002" })
+	public void testConvertKnownYearsToMilliseconds(double input, double expectation) {
+		final double result = Time.Years.toMilliseconds(input);
+		assertEquals(expectation, result, 0.01);
 	}
 
 	@Property(tries = 100)

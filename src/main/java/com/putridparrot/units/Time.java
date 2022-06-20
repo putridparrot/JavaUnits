@@ -15,6 +15,30 @@ public final class Time {
 	 */
 	public static class Centuries {
 		/**
+		 * Converts the supplied Centuries value to Nanoseconds
+		 * @param value The Centuries input value
+		 * @return The value in Nanoseconds
+		 */
+		public static double toNanoseconds(double value) {
+			return value * 3.154e+18;
+		}
+		/**
+		 * Converts the supplied Centuries value to Microseconds
+		 * @param value The Centuries input value
+		 * @return The value in Microseconds
+		 */
+		public static double toMicroseconds(double value) {
+			return value * 3.154e+15;
+		}
+		/**
+		 * Converts the supplied Centuries value to Milliseconds
+		 * @param value The Centuries input value
+		 * @return The value in Milliseconds
+		 */
+		public static double toMilliseconds(double value) {
+			return value * 3.154e+12;
+		}
+		/**
 		 * Converts the supplied Centuries value to Seconds
 		 * @param value The Centuries input value
 		 * @return The value in Seconds
@@ -83,6 +107,30 @@ public final class Time {
 	 * Days conversion functions
 	 */
 	public static class Days {
+		/**
+		 * Converts the supplied Days value to Nanoseconds
+		 * @param value The Days input value
+		 * @return The value in Nanoseconds
+		 */
+		public static double toNanoseconds(double value) {
+			return value * 8.64e+13;
+		}
+		/**
+		 * Converts the supplied Days value to Microseconds
+		 * @param value The Days input value
+		 * @return The value in Microseconds
+		 */
+		public static double toMicroseconds(double value) {
+			return value * 8.64e+10;
+		}
+		/**
+		 * Converts the supplied Days value to Milliseconds
+		 * @param value The Days input value
+		 * @return The value in Milliseconds
+		 */
+		public static double toMilliseconds(double value) {
+			return value * 8.64e+7;
+		}
 		/**
 		 * Converts the supplied Days value to Seconds
 		 * @param value The Days input value
@@ -153,6 +201,30 @@ public final class Time {
 	 */
 	public static class Decades {
 		/**
+		 * Converts the supplied Decades value to Nanoseconds
+		 * @param value The Decades input value
+		 * @return The value in Nanoseconds
+		 */
+		public static double toNanoseconds(double value) {
+			return value * 3.154e+17;
+		}
+		/**
+		 * Converts the supplied Decades value to Microseconds
+		 * @param value The Decades input value
+		 * @return The value in Microseconds
+		 */
+		public static double toMicroseconds(double value) {
+			return value * 3.154e+14;
+		}
+		/**
+		 * Converts the supplied Decades value to Milliseconds
+		 * @param value The Decades input value
+		 * @return The value in Milliseconds
+		 */
+		public static double toMilliseconds(double value) {
+			return value * 3.154e+11;
+		}
+		/**
 		 * Converts the supplied Decades value to Seconds
 		 * @param value The Decades input value
 		 * @return The value in Seconds
@@ -222,6 +294,30 @@ public final class Time {
 	 */
 	public static class Hours {
 		/**
+		 * Converts the supplied Hours value to Nanoseconds
+		 * @param value The Hours input value
+		 * @return The value in Nanoseconds
+		 */
+		public static double toNanoseconds(double value) {
+			return value * 3.6e+12;
+		}
+		/**
+		 * Converts the supplied Hours value to Microseconds
+		 * @param value The Hours input value
+		 * @return The value in Microseconds
+		 */
+		public static double toMicroseconds(double value) {
+			return value * 3.6e+9;
+		}
+		/**
+		 * Converts the supplied Hours value to Milliseconds
+		 * @param value The Hours input value
+		 * @return The value in Milliseconds
+		 */
+		public static double toMilliseconds(double value) {
+			return value * 3.6e+6;
+		}
+		/**
 		 * Converts the supplied Hours value to Seconds
 		 * @param value The Hours input value
 		 * @return The value in Seconds
@@ -287,9 +383,219 @@ public final class Time {
 		}
 	}
 	/**
+	 * Microseconds conversion functions
+	 */
+	public static class Microseconds {
+		/**
+		 * Converts the supplied Microseconds value to Nanoseconds
+		 * @param value The Microseconds input value
+		 * @return The value in Nanoseconds
+		 */
+		public static double toNanoseconds(double value) {
+			return value * 1000.0;
+		}
+		/**
+		 * Converts the supplied Microseconds value to Milliseconds
+		 * @param value The Microseconds input value
+		 * @return The value in Milliseconds
+		 */
+		public static double toMilliseconds(double value) {
+			return value / 1000.0;
+		}
+		/**
+		 * Converts the supplied Microseconds value to Seconds
+		 * @param value The Microseconds input value
+		 * @return The value in Seconds
+		 */
+		public static double toSeconds(double value) {
+			return value / 1e+6;
+		}
+		/**
+		 * Converts the supplied Microseconds value to Minutes
+		 * @param value The Microseconds input value
+		 * @return The value in Minutes
+		 */
+		public static double toMinutes(double value) {
+			return value / 6e+7;
+		}
+		/**
+		 * Converts the supplied Microseconds value to Hours
+		 * @param value The Microseconds input value
+		 * @return The value in Hours
+		 */
+		public static double toHours(double value) {
+			return value / 3.6e+9;
+		}
+		/**
+		 * Converts the supplied Microseconds value to Days
+		 * @param value The Microseconds input value
+		 * @return The value in Days
+		 */
+		public static double toDays(double value) {
+			return value / 8.64e+10;
+		}
+		/**
+		 * Converts the supplied Microseconds value to Weeks
+		 * @param value The Microseconds input value
+		 * @return The value in Weeks
+		 */
+		public static double toWeeks(double value) {
+			return value / 6.048e+11;
+		}
+		/**
+		 * Converts the supplied Microseconds value to Months
+		 * @param value The Microseconds input value
+		 * @return The value in Months
+		 */
+		public static double toMonths(double value) {
+			return value / 2629746000000.0;
+		}
+		/**
+		 * Converts the supplied Microseconds value to Years
+		 * @param value The Microseconds input value
+		 * @return The value in Years
+		 */
+		public static double toYears(double value) {
+			return value / 3.154e+13;
+		}
+		/**
+		 * Converts the supplied Microseconds value to Decades
+		 * @param value The Microseconds input value
+		 * @return The value in Decades
+		 */
+		public static double toDecades(double value) {
+			return value / 3.154e+14;
+		}
+		/**
+		 * Converts the supplied Microseconds value to Centuries
+		 * @param value The Microseconds input value
+		 * @return The value in Centuries
+		 */
+		public static double toCenturies(double value) {
+			return value / 3.154e+15;
+		}
+	}
+	/**
+	 * Milliseconds conversion functions
+	 */
+	public static class Milliseconds {
+		/**
+		 * Converts the supplied Milliseconds value to Nanoseconds
+		 * @param value The Milliseconds input value
+		 * @return The value in Nanoseconds
+		 */
+		public static double toNanoseconds(double value) {
+			return value * 1e+6;
+		}
+		/**
+		 * Converts the supplied Milliseconds value to Microseconds
+		 * @param value The Milliseconds input value
+		 * @return The value in Microseconds
+		 */
+		public static double toMicroseconds(double value) {
+			return value * 1000.0;
+		}
+		/**
+		 * Converts the supplied Milliseconds value to Seconds
+		 * @param value The Milliseconds input value
+		 * @return The value in Seconds
+		 */
+		public static double toSeconds(double value) {
+			return value / 1000.0;
+		}
+		/**
+		 * Converts the supplied Milliseconds value to Minutes
+		 * @param value The Milliseconds input value
+		 * @return The value in Minutes
+		 */
+		public static double toMinutes(double value) {
+			return value / 60000.0;
+		}
+		/**
+		 * Converts the supplied Milliseconds value to Hours
+		 * @param value The Milliseconds input value
+		 * @return The value in Hours
+		 */
+		public static double toHours(double value) {
+			return value / 3.6e+6;
+		}
+		/**
+		 * Converts the supplied Milliseconds value to Days
+		 * @param value The Milliseconds input value
+		 * @return The value in Days
+		 */
+		public static double toDays(double value) {
+			return value / 8.64e+7;
+		}
+		/**
+		 * Converts the supplied Milliseconds value to Weeks
+		 * @param value The Milliseconds input value
+		 * @return The value in Weeks
+		 */
+		public static double toWeeks(double value) {
+			return value / 6.048e+8;
+		}
+		/**
+		 * Converts the supplied Milliseconds value to Months
+		 * @param value The Milliseconds input value
+		 * @return The value in Months
+		 */
+		public static double toMonths(double value) {
+			return value / 2629746000.0;
+		}
+		/**
+		 * Converts the supplied Milliseconds value to Years
+		 * @param value The Milliseconds input value
+		 * @return The value in Years
+		 */
+		public static double toYears(double value) {
+			return value / 31556952000.0;
+		}
+		/**
+		 * Converts the supplied Milliseconds value to Decades
+		 * @param value The Milliseconds input value
+		 * @return The value in Decades
+		 */
+		public static double toDecades(double value) {
+			return value / 3.154e+11;
+		}
+		/**
+		 * Converts the supplied Milliseconds value to Centuries
+		 * @param value The Milliseconds input value
+		 * @return The value in Centuries
+		 */
+		public static double toCenturies(double value) {
+			return value / 3.154e+12;
+		}
+	}
+	/**
 	 * Minutes conversion functions
 	 */
 	public static class Minutes {
+		/**
+		 * Converts the supplied Minutes value to Nanoseconds
+		 * @param value The Minutes input value
+		 * @return The value in Nanoseconds
+		 */
+		public static double toNanoseconds(double value) {
+			return value * 6e+10;
+		}
+		/**
+		 * Converts the supplied Minutes value to Microseconds
+		 * @param value The Minutes input value
+		 * @return The value in Microseconds
+		 */
+		public static double toMicroseconds(double value) {
+			return value * 6e+7;
+		}
+		/**
+		 * Converts the supplied Minutes value to Milliseconds
+		 * @param value The Minutes input value
+		 * @return The value in Milliseconds
+		 */
+		public static double toMilliseconds(double value) {
+			return value * 60000.0;
+		}
 		/**
 		 * Converts the supplied Minutes value to Seconds
 		 * @param value The Minutes input value
@@ -360,6 +666,30 @@ public final class Time {
 	 */
 	public static class Months {
 		/**
+		 * Converts the supplied Months value to Nanoseconds
+		 * @param value The Months input value
+		 * @return The value in Nanoseconds
+		 */
+		public static double toNanoseconds(double value) {
+			return value * 2629746000000000.0;
+		}
+		/**
+		 * Converts the supplied Months value to Microseconds
+		 * @param value The Months input value
+		 * @return The value in Microseconds
+		 */
+		public static double toMicroseconds(double value) {
+			return value * 2629746000000.0;
+		}
+		/**
+		 * Converts the supplied Months value to Milliseconds
+		 * @param value The Months input value
+		 * @return The value in Milliseconds
+		 */
+		public static double toMilliseconds(double value) {
+			return value * 2629746000.0;
+		}
+		/**
 		 * Converts the supplied Months value to Seconds
 		 * @param value The Months input value
 		 * @return The value in Seconds
@@ -425,9 +755,126 @@ public final class Time {
 		}
 	}
 	/**
+	 * Nanoseconds conversion functions
+	 */
+	public static class Nanoseconds {
+		/**
+		 * Converts the supplied Nanoseconds value to Microseconds
+		 * @param value The Nanoseconds input value
+		 * @return The value in Microseconds
+		 */
+		public static double toMicroseconds(double value) {
+			return value / 1000.0;
+		}
+		/**
+		 * Converts the supplied Nanoseconds value to Milliseconds
+		 * @param value The Nanoseconds input value
+		 * @return The value in Milliseconds
+		 */
+		public static double toMilliseconds(double value) {
+			return value / 1e+6;
+		}
+		/**
+		 * Converts the supplied Nanoseconds value to Seconds
+		 * @param value The Nanoseconds input value
+		 * @return The value in Seconds
+		 */
+		public static double toSeconds(double value) {
+			return value / 1e+9;
+		}
+		/**
+		 * Converts the supplied Nanoseconds value to Minutes
+		 * @param value The Nanoseconds input value
+		 * @return The value in Minutes
+		 */
+		public static double toMinutes(double value) {
+			return value / 6e+10;
+		}
+		/**
+		 * Converts the supplied Nanoseconds value to Hours
+		 * @param value The Nanoseconds input value
+		 * @return The value in Hours
+		 */
+		public static double toHours(double value) {
+			return value / 3.6e+12;
+		}
+		/**
+		 * Converts the supplied Nanoseconds value to Days
+		 * @param value The Nanoseconds input value
+		 * @return The value in Days
+		 */
+		public static double toDays(double value) {
+			return value / 8.64e+13;
+		}
+		/**
+		 * Converts the supplied Nanoseconds value to Weeks
+		 * @param value The Nanoseconds input value
+		 * @return The value in Weeks
+		 */
+		public static double toWeeks(double value) {
+			return value / 6.048e+14;
+		}
+		/**
+		 * Converts the supplied Nanoseconds value to Months
+		 * @param value The Nanoseconds input value
+		 * @return The value in Months
+		 */
+		public static double toMonths(double value) {
+			return value / 2629746000000000.0;
+		}
+		/**
+		 * Converts the supplied Nanoseconds value to Years
+		 * @param value The Nanoseconds input value
+		 * @return The value in Years
+		 */
+		public static double toYears(double value) {
+			return value / 3.154e+16;
+		}
+		/**
+		 * Converts the supplied Nanoseconds value to Decades
+		 * @param value The Nanoseconds input value
+		 * @return The value in Decades
+		 */
+		public static double toDecades(double value) {
+			return value / 3.154e+17;
+		}
+		/**
+		 * Converts the supplied Nanoseconds value to Centuries
+		 * @param value The Nanoseconds input value
+		 * @return The value in Centuries
+		 */
+		public static double toCenturies(double value) {
+			return value / 3.154e+18;
+		}
+	}
+	/**
 	 * Seconds conversion functions
 	 */
 	public static class Seconds {
+		/**
+		 * Converts the supplied Seconds value to Nanoseconds
+		 * @param value The Seconds input value
+		 * @return The value in Nanoseconds
+		 */
+		public static double toNanoseconds(double value) {
+			return value * 1e+9;
+		}
+		/**
+		 * Converts the supplied Seconds value to Microseconds
+		 * @param value The Seconds input value
+		 * @return The value in Microseconds
+		 */
+		public static double toMicroseconds(double value) {
+			return value * 1e+6;
+		}
+		/**
+		 * Converts the supplied Seconds value to Milliseconds
+		 * @param value The Seconds input value
+		 * @return The value in Milliseconds
+		 */
+		public static double toMilliseconds(double value) {
+			return value * 1000.0;
+		}
 		/**
 		 * Converts the supplied Seconds value to Minutes
 		 * @param value The Seconds input value
@@ -498,6 +945,30 @@ public final class Time {
 	 */
 	public static class Weeks {
 		/**
+		 * Converts the supplied Weeks value to Nanoseconds
+		 * @param value The Weeks input value
+		 * @return The value in Nanoseconds
+		 */
+		public static double toNanoseconds(double value) {
+			return value * 6.048e+14;
+		}
+		/**
+		 * Converts the supplied Weeks value to Microseconds
+		 * @param value The Weeks input value
+		 * @return The value in Microseconds
+		 */
+		public static double toMicroseconds(double value) {
+			return value * 6.048e+11;
+		}
+		/**
+		 * Converts the supplied Weeks value to Milliseconds
+		 * @param value The Weeks input value
+		 * @return The value in Milliseconds
+		 */
+		public static double toMilliseconds(double value) {
+			return value * 6.048e+8;
+		}
+		/**
 		 * Converts the supplied Weeks value to Seconds
 		 * @param value The Weeks input value
 		 * @return The value in Seconds
@@ -566,6 +1037,30 @@ public final class Time {
 	 * Years conversion functions
 	 */
 	public static class Years {
+		/**
+		 * Converts the supplied Years value to Nanoseconds
+		 * @param value The Years input value
+		 * @return The value in Nanoseconds
+		 */
+		public static double toNanoseconds(double value) {
+			return value * 3.154e+16;
+		}
+		/**
+		 * Converts the supplied Years value to Microseconds
+		 * @param value The Years input value
+		 * @return The value in Microseconds
+		 */
+		public static double toMicroseconds(double value) {
+			return value * 3.154e+13;
+		}
+		/**
+		 * Converts the supplied Years value to Milliseconds
+		 * @param value The Years input value
+		 * @return The value in Milliseconds
+		 */
+		public static double toMilliseconds(double value) {
+			return value * 31556952000.0;
+		}
 		/**
 		 * Converts the supplied Years value to Seconds
 		 * @param value The Years input value
