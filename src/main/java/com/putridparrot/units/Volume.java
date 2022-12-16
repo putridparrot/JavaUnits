@@ -11,6 +11,477 @@ package com.putridparrot.units;
  */
 public final class Volume {
 	/**
+	 * Cubic Feet conversion functions
+	 */
+	public static class CubicFeet {
+		/**
+		 * Converts the supplied Cubic Feet value to Millilitres
+		 * @param value The Cubic Feet input value
+		 * @return The value in Millilitres
+		 */
+		public static double toMillilitres(double value) {
+			return value * 28316.8;
+		}
+		/**
+		 * Converts the supplied Cubic Feet value to Litres
+		 * @param value The Cubic Feet input value
+		 * @return The value in Litres
+		 */
+		public static double toLitres(double value) {
+			return value * 28.3168;
+		}
+		/**
+		 * Converts the supplied Cubic Feet value to Kilolitres
+		 * @param value The Cubic Feet input value
+		 * @return The value in Kilolitres
+		 */
+		public static double toKilolitres(double value) {
+			return value / 35.3147;
+		}
+		/**
+		 * Converts the supplied Cubic Feet value to Teaspoons
+		 * @param value The Cubic Feet input value
+		 * @return The value in Teaspoons
+		 */
+		public static double toTeaspoons(double value) {
+			return value * 4783.74;
+		}
+		/**
+		 * Converts the supplied Cubic Feet value to Tablespoons
+		 * @param value The Cubic Feet input value
+		 * @return The value in Tablespoons
+		 */
+		public static double toTablespoons(double value) {
+			return value * 1594.58;
+		}
+		/**
+		 * Converts the supplied Cubic Feet value to Quarts
+		 * @param value The Cubic Feet input value
+		 * @return The value in Quarts
+		 */
+		public static double toQuarts(double value) {
+			return value * 24.9153;
+		}
+		/**
+		 * Converts the supplied Cubic Feet value to Pints
+		 * @param value The Cubic Feet input value
+		 * @return The value in Pints
+		 */
+		public static double toPints(double value) {
+			return value * 49.8307;
+		}
+		/**
+		 * Converts the supplied Cubic Feet value to Gallons
+		 * @param value The Cubic Feet input value
+		 * @return The value in Gallons
+		 */
+		public static double toGallons(double value) {
+			return value * 6.22884;
+		}
+		/**
+		 * Converts the supplied Cubic Feet value to Fluid Ounces
+		 * @param value The Cubic Feet input value
+		 * @return The value in Fluid Ounces
+		 */
+		public static double toFluidOunces(double value) {
+			return value * 996.614;
+		}
+		/**
+		 * Converts the supplied Cubic Feet value to US Teaspoons
+		 * @param value The Cubic Feet input value
+		 * @return The value in US Teaspoons
+		 */
+		public static double toUSTeaspoons(double value) {
+			return value * 5745.04;
+		}
+		/**
+		 * Converts the supplied Cubic Feet value to US Tablespoons
+		 * @param value The Cubic Feet input value
+		 * @return The value in US Tablespoons
+		 */
+		public static double toUSTablespoons(double value) {
+			return value * 1915.01;
+		}
+		/**
+		 * Converts the supplied Cubic Feet value to US Quarts
+		 * @param value The Cubic Feet input value
+		 * @return The value in US Quarts
+		 */
+		public static double toUSQuarts(double value) {
+			return value * 29.9221;
+		}
+		/**
+		 * Converts the supplied Cubic Feet value to US Pints
+		 * @param value The Cubic Feet input value
+		 * @return The value in US Pints
+		 */
+		public static double toUSPints(double value) {
+			return value * 59.8442;
+		}
+		/**
+		 * Converts the supplied Cubic Feet value to US Gallons
+		 * @param value The Cubic Feet input value
+		 * @return The value in US Gallons
+		 */
+		public static double toUSGallons(double value) {
+			return value * 7.48052;
+		}
+		/**
+		 * Converts the supplied Cubic Feet value to US Fluid Ounces
+		 * @param value The Cubic Feet input value
+		 * @return The value in US Fluid Ounces
+		 */
+		public static double toUSFluidOunces(double value) {
+			return value * 957.506;
+		}
+		/**
+		 * Converts the supplied Cubic Feet value to US Cups
+		 * @param value The Cubic Feet input value
+		 * @return The value in US Cups
+		 */
+		public static double toUSCups(double value) {
+			return value * 117.987;
+		}
+		/**
+		 * Converts the supplied Cubic Feet value to Cubic Metres
+		 * @param value The Cubic Feet input value
+		 * @return The value in Cubic Metres
+		 */
+		public static double toCubicMetres(double value) {
+			return value / 35.3147;
+		}
+		/**
+		 * Converts the supplied Cubic Feet value to Cubic Inches
+		 * @param value The Cubic Feet input value
+		 * @return The value in Cubic Inches
+		 */
+		public static double toCubicInches(double value) {
+			return value * 1728.0;
+		}
+		/**
+		 * Converts the supplied Cubic Feet value to Oil Barrels
+		 * @param value The Cubic Feet input value
+		 * @return The value in Oil Barrels
+		 */
+		public static double toOilBarrels(double value) {
+			return value / 5.61458;
+		}
+	}
+	/**
+	 * Cubic Inches conversion functions
+	 */
+	public static class CubicInches {
+		/**
+		 * Converts the supplied Cubic Inches value to Millilitres
+		 * @param value The Cubic Inches input value
+		 * @return The value in Millilitres
+		 */
+		public static double toMillilitres(double value) {
+			return value * 16.3871;
+		}
+		/**
+		 * Converts the supplied Cubic Inches value to Litres
+		 * @param value The Cubic Inches input value
+		 * @return The value in Litres
+		 */
+		public static double toLitres(double value) {
+			return value / 61.0237;
+		}
+		/**
+		 * Converts the supplied Cubic Inches value to Kilolitres
+		 * @param value The Cubic Inches input value
+		 * @return The value in Kilolitres
+		 */
+		public static double toKilolitres(double value) {
+			return value / 61023.7;
+		}
+		/**
+		 * Converts the supplied Cubic Inches value to Teaspoons
+		 * @param value The Cubic Inches input value
+		 * @return The value in Teaspoons
+		 */
+		public static double toTeaspoons(double value) {
+			return value * 2.76837;
+		}
+		/**
+		 * Converts the supplied Cubic Inches value to Tablespoons
+		 * @param value The Cubic Inches input value
+		 * @return The value in Tablespoons
+		 */
+		public static double toTablespoons(double value) {
+			return value / 1.08367;
+		}
+		/**
+		 * Converts the supplied Cubic Inches value to Quarts
+		 * @param value The Cubic Inches input value
+		 * @return The value in Quarts
+		 */
+		public static double toQuarts(double value) {
+			return value / 69.3549;
+		}
+		/**
+		 * Converts the supplied Cubic Inches value to Pints
+		 * @param value The Cubic Inches input value
+		 * @return The value in Pints
+		 */
+		public static double toPints(double value) {
+			return value / 34.6774;
+		}
+		/**
+		 * Converts the supplied Cubic Inches value to Gallons
+		 * @param value The Cubic Inches input value
+		 * @return The value in Gallons
+		 */
+		public static double toGallons(double value) {
+			return value / 277.419;
+		}
+		/**
+		 * Converts the supplied Cubic Inches value to Fluid Ounces
+		 * @param value The Cubic Inches input value
+		 * @return The value in Fluid Ounces
+		 */
+		public static double toFluidOunces(double value) {
+			return value / 1.73387;
+		}
+		/**
+		 * Converts the supplied Cubic Inches value to US Teaspoons
+		 * @param value The Cubic Inches input value
+		 * @return The value in US Teaspoons
+		 */
+		public static double toUSTeaspoons(double value) {
+			return value * 3.32468;
+		}
+		/**
+		 * Converts the supplied Cubic Inches value to US Tablespoons
+		 * @param value The Cubic Inches input value
+		 * @return The value in US Tablespoons
+		 */
+		public static double toUSTablespoons(double value) {
+			return value * 1.10823;
+		}
+		/**
+		 * Converts the supplied Cubic Inches value to US Quarts
+		 * @param value The Cubic Inches input value
+		 * @return The value in US Quarts
+		 */
+		public static double toUSQuarts(double value) {
+			return value / 57.75;
+		}
+		/**
+		 * Converts the supplied Cubic Inches value to US Pints
+		 * @param value The Cubic Inches input value
+		 * @return The value in US Pints
+		 */
+		public static double toUSPints(double value) {
+			return value / 28.875;
+		}
+		/**
+		 * Converts the supplied Cubic Inches value to US Gallons
+		 * @param value The Cubic Inches input value
+		 * @return The value in US Gallons
+		 */
+		public static double toUSGallons(double value) {
+			return value / 231.0;
+		}
+		/**
+		 * Converts the supplied Cubic Inches value to US Fluid Ounces
+		 * @param value The Cubic Inches input value
+		 * @return The value in US Fluid Ounces
+		 */
+		public static double toUSFluidOunces(double value) {
+			return value / 1.80469;
+		}
+		/**
+		 * Converts the supplied Cubic Inches value to US Cups
+		 * @param value The Cubic Inches input value
+		 * @return The value in US Cups
+		 */
+		public static double toUSCups(double value) {
+			return value / 14.6457;
+		}
+		/**
+		 * Converts the supplied Cubic Inches value to Cubic Metres
+		 * @param value The Cubic Inches input value
+		 * @return The value in Cubic Metres
+		 */
+		public static double toCubicMetres(double value) {
+			return value / 61023.7;
+		}
+		/**
+		 * Converts the supplied Cubic Inches value to Cubic Feet
+		 * @param value The Cubic Inches input value
+		 * @return The value in Cubic Feet
+		 */
+		public static double toCubicFeet(double value) {
+			return value / 1728.0;
+		}
+		/**
+		 * Converts the supplied Cubic Inches value to Oil Barrels
+		 * @param value The Cubic Inches input value
+		 * @return The value in Oil Barrels
+		 */
+		public static double toOilBarrels(double value) {
+			return value / 9702.0;
+		}
+	}
+	/**
+	 * Cubic Metres conversion functions
+	 */
+	public static class CubicMetres {
+		/**
+		 * Converts the supplied Cubic Metres value to Millilitres
+		 * @param value The Cubic Metres input value
+		 * @return The value in Millilitres
+		 */
+		public static double toMillilitres(double value) {
+			return value * 1000000.0;
+		}
+		/**
+		 * Converts the supplied Cubic Metres value to Litres
+		 * @param value The Cubic Metres input value
+		 * @return The value in Litres
+		 */
+		public static double toLitres(double value) {
+			return value * 1000.0;
+		}
+		/**
+		 * Converts the supplied Cubic Metres value to Kilolitres
+		 * @param value The Cubic Metres input value
+		 * @return The value in Kilolitres
+		 */
+		public static double toKilolitres(double value) {
+			return value * 1.0;
+		}
+		/**
+		 * Converts the supplied Cubic Metres value to Teaspoons
+		 * @param value The Cubic Metres input value
+		 * @return The value in Teaspoons
+		 */
+		public static double toTeaspoons(double value) {
+			return value * 168936.0;
+		}
+		/**
+		 * Converts the supplied Cubic Metres value to Tablespoons
+		 * @param value The Cubic Metres input value
+		 * @return The value in Tablespoons
+		 */
+		public static double toTablespoons(double value) {
+			return value * 56312.1;
+		}
+		/**
+		 * Converts the supplied Cubic Metres value to Quarts
+		 * @param value The Cubic Metres input value
+		 * @return The value in Quarts
+		 */
+		public static double toQuarts(double value) {
+			return value * 879.877;
+		}
+		/**
+		 * Converts the supplied Cubic Metres value to Pints
+		 * @param value The Cubic Metres input value
+		 * @return The value in Pints
+		 */
+		public static double toPints(double value) {
+			return value * 1759.75;
+		}
+		/**
+		 * Converts the supplied Cubic Metres value to Gallons
+		 * @param value The Cubic Metres input value
+		 * @return The value in Gallons
+		 */
+		public static double toGallons(double value) {
+			return value * 219.969;
+		}
+		/**
+		 * Converts the supplied Cubic Metres value to Fluid Ounces
+		 * @param value The Cubic Metres input value
+		 * @return The value in Fluid Ounces
+		 */
+		public static double toFluidOunces(double value) {
+			return value * 35195.1;
+		}
+		/**
+		 * Converts the supplied Cubic Metres value to US Teaspoons
+		 * @param value The Cubic Metres input value
+		 * @return The value in US Teaspoons
+		 */
+		public static double toUSTeaspoons(double value) {
+			return value * 202884.0;
+		}
+		/**
+		 * Converts the supplied Cubic Metres value to US Tablespoons
+		 * @param value The Cubic Metres input value
+		 * @return The value in US Tablespoons
+		 */
+		public static double toUSTablespoons(double value) {
+			return value * 67628.0;
+		}
+		/**
+		 * Converts the supplied Cubic Metres value to US Quarts
+		 * @param value The Cubic Metres input value
+		 * @return The value in US Quarts
+		 */
+		public static double toUSQuarts(double value) {
+			return value * 1056.69;
+		}
+		/**
+		 * Converts the supplied Cubic Metres value to US Pints
+		 * @param value The Cubic Metres input value
+		 * @return The value in US Pints
+		 */
+		public static double toUSPints(double value) {
+			return value * 2113.38;
+		}
+		/**
+		 * Converts the supplied Cubic Metres value to US Gallons
+		 * @param value The Cubic Metres input value
+		 * @return The value in US Gallons
+		 */
+		public static double toUSGallons(double value) {
+			return value * 264.172;
+		}
+		/**
+		 * Converts the supplied Cubic Metres value to US Fluid Ounces
+		 * @param value The Cubic Metres input value
+		 * @return The value in US Fluid Ounces
+		 */
+		public static double toUSFluidOunces(double value) {
+			return value * 33814.0;
+		}
+		/**
+		 * Converts the supplied Cubic Metres value to US Cups
+		 * @param value The Cubic Metres input value
+		 * @return The value in US Cups
+		 */
+		public static double toUSCups(double value) {
+			return value * 4166.67;
+		}
+		/**
+		 * Converts the supplied Cubic Metres value to Cubic Feet
+		 * @param value The Cubic Metres input value
+		 * @return The value in Cubic Feet
+		 */
+		public static double toCubicFeet(double value) {
+			return value * 35.3147;
+		}
+		/**
+		 * Converts the supplied Cubic Metres value to Cubic Inches
+		 * @param value The Cubic Metres input value
+		 * @return The value in Cubic Inches
+		 */
+		public static double toCubicInches(double value) {
+			return value * 61023.7;
+		}
+		/**
+		 * Converts the supplied Cubic Metres value to Oil Barrels
+		 * @param value The Cubic Metres input value
+		 * @return The value in Oil Barrels
+		 */
+		public static double toOilBarrels(double value) {
+			return value * 6.28981;
+		}
+	}
+	/**
 	 * Fluid Ounces conversion functions
 	 */
 	public static class FluidOunces {
@@ -133,6 +604,38 @@ public final class Volume {
 		 */
 		public static double toUSCups(double value) {
 			return value / 8.3267384046639071232;
+		}
+		/**
+		 * Converts the supplied Fluid Ounces value to Cubic Metres
+		 * @param value The Fluid Ounces input value
+		 * @return The value in Cubic Metres
+		 */
+		public static double toCubicMetres(double value) {
+			return value / 35195.1;
+		}
+		/**
+		 * Converts the supplied Fluid Ounces value to Cubic Feet
+		 * @param value The Fluid Ounces input value
+		 * @return The value in Cubic Feet
+		 */
+		public static double toCubicFeet(double value) {
+			return value / 996.614;
+		}
+		/**
+		 * Converts the supplied Fluid Ounces value to Cubic Inches
+		 * @param value The Fluid Ounces input value
+		 * @return The value in Cubic Inches
+		 */
+		public static double toCubicInches(double value) {
+			return value * 1.73387;
+		}
+		/**
+		 * Converts the supplied Fluid Ounces value to Oil Barrels
+		 * @param value The Fluid Ounces input value
+		 * @return The value in Oil Barrels
+		 */
+		public static double toOilBarrels(double value) {
+			return value / 5595.57;
 		}
 	}
 	/**
@@ -259,6 +762,38 @@ public final class Volume {
 		public static double toUSCups(double value) {
 			return value / 0.052042115029149417472;
 		}
+		/**
+		 * Converts the supplied Gallons value to Cubic Metres
+		 * @param value The Gallons input value
+		 * @return The value in Cubic Metres
+		 */
+		public static double toCubicMetres(double value) {
+			return value / 219.969;
+		}
+		/**
+		 * Converts the supplied Gallons value to Cubic Feet
+		 * @param value The Gallons input value
+		 * @return The value in Cubic Feet
+		 */
+		public static double toCubicFeet(double value) {
+			return value / 6.22884;
+		}
+		/**
+		 * Converts the supplied Gallons value to Cubic Inches
+		 * @param value The Gallons input value
+		 * @return The value in Cubic Inches
+		 */
+		public static double toCubicInches(double value) {
+			return value * 277.419;
+		}
+		/**
+		 * Converts the supplied Gallons value to Oil Barrels
+		 * @param value The Gallons input value
+		 * @return The value in Oil Barrels
+		 */
+		public static double toOilBarrels(double value) {
+			return value / 34.9723;
+		}
 	}
 	/**
 	 * Kilolitres conversion functions
@@ -383,6 +918,38 @@ public final class Volume {
 		 */
 		public static double toUSCups(double value) {
 			return value / 0.000236588236499999989;
+		}
+		/**
+		 * Converts the supplied Kilolitres value to Cubic Metres
+		 * @param value The Kilolitres input value
+		 * @return The value in Cubic Metres
+		 */
+		public static double toCubicMetres(double value) {
+			return value * 1.0;
+		}
+		/**
+		 * Converts the supplied Kilolitres value to Cubic Feet
+		 * @param value The Kilolitres input value
+		 * @return The value in Cubic Feet
+		 */
+		public static double toCubicFeet(double value) {
+			return value * 35.3147;
+		}
+		/**
+		 * Converts the supplied Kilolitres value to Cubic Inches
+		 * @param value The Kilolitres input value
+		 * @return The value in Cubic Inches
+		 */
+		public static double toCubicInches(double value) {
+			return value * 61023.7;
+		}
+		/**
+		 * Converts the supplied Kilolitres value to Oil Barrels
+		 * @param value The Kilolitres input value
+		 * @return The value in Oil Barrels
+		 */
+		public static double toOilBarrels(double value) {
+			return value * 6.28981;
 		}
 	}
 	/**
@@ -509,6 +1076,38 @@ public final class Volume {
 		public static double toUSCups(double value) {
 			return value / 0.23658823649999998976;
 		}
+		/**
+		 * Converts the supplied Litres value to Cubic Metres
+		 * @param value The Litres input value
+		 * @return The value in Cubic Metres
+		 */
+		public static double toCubicMetres(double value) {
+			return value / 1000.0;
+		}
+		/**
+		 * Converts the supplied Litres value to Cubic Feet
+		 * @param value The Litres input value
+		 * @return The value in Cubic Feet
+		 */
+		public static double toCubicFeet(double value) {
+			return value / 28.3168;
+		}
+		/**
+		 * Converts the supplied Litres value to Cubic Inches
+		 * @param value The Litres input value
+		 * @return The value in Cubic Inches
+		 */
+		public static double toCubicInches(double value) {
+			return value * 61.0237;
+		}
+		/**
+		 * Converts the supplied Litres value to Oil Barrels
+		 * @param value The Litres input value
+		 * @return The value in Oil Barrels
+		 */
+		public static double toOilBarrels(double value) {
+			return value / 158.987;
+		}
 	}
 	/**
 	 * Millilitres conversion functions
@@ -633,6 +1232,195 @@ public final class Volume {
 		 */
 		public static double toUSCups(double value) {
 			return value / 236.58823649999998976;
+		}
+		/**
+		 * Converts the supplied Millilitres value to Cubic Metres
+		 * @param value The Millilitres input value
+		 * @return The value in Cubic Metres
+		 */
+		public static double toCubicMetres(double value) {
+			return value / 1000000.0;
+		}
+		/**
+		 * Converts the supplied Millilitres value to Cubic Feet
+		 * @param value The Millilitres input value
+		 * @return The value in Cubic Feet
+		 */
+		public static double toCubicFeet(double value) {
+			return value / 28316.8;
+		}
+		/**
+		 * Converts the supplied Millilitres value to Cubic Inches
+		 * @param value The Millilitres input value
+		 * @return The value in Cubic Inches
+		 */
+		public static double toCubicInches(double value) {
+			return value / 16.3871;
+		}
+		/**
+		 * Converts the supplied Millilitres value to Oil Barrels
+		 * @param value The Millilitres input value
+		 * @return The value in Oil Barrels
+		 */
+		public static double toOilBarrels(double value) {
+			return value / 158987.0;
+		}
+	}
+	/**
+	 * Oil Barrels conversion functions
+	 */
+	public static class OilBarrels {
+		/**
+		 * Converts the supplied Oil Barrels value to Millilitres
+		 * @param value The Oil Barrels input value
+		 * @return The value in Millilitres
+		 */
+		public static double toMillilitres(double value) {
+			return value * 158987.0;
+		}
+		/**
+		 * Converts the supplied Oil Barrels value to Litres
+		 * @param value The Oil Barrels input value
+		 * @return The value in Litres
+		 */
+		public static double toLitres(double value) {
+			return value * 158.987;
+		}
+		/**
+		 * Converts the supplied Oil Barrels value to Kilolitres
+		 * @param value The Oil Barrels input value
+		 * @return The value in Kilolitres
+		 */
+		public static double toKilolitres(double value) {
+			return value / 6.28981;
+		}
+		/**
+		 * Converts the supplied Oil Barrels value to Teaspoons
+		 * @param value The Oil Barrels input value
+		 * @return The value in Teaspoons
+		 */
+		public static double toTeaspoons(double value) {
+			return value * 26858.7;
+		}
+		/**
+		 * Converts the supplied Oil Barrels value to Tablespoons
+		 * @param value The Oil Barrels input value
+		 * @return The value in Tablespoons
+		 */
+		public static double toTablespoons(double value) {
+			return value * 8952.91;
+		}
+		/**
+		 * Converts the supplied Oil Barrels value to Quarts
+		 * @param value The Oil Barrels input value
+		 * @return The value in Quarts
+		 */
+		public static double toQuarts(double value) {
+			return value * 139.889;
+		}
+		/**
+		 * Converts the supplied Oil Barrels value to Pints
+		 * @param value The Oil Barrels input value
+		 * @return The value in Pints
+		 */
+		public static double toPints(double value) {
+			return value * 279.779;
+		}
+		/**
+		 * Converts the supplied Oil Barrels value to Gallons
+		 * @param value The Oil Barrels input value
+		 * @return The value in Gallons
+		 */
+		public static double toGallons(double value) {
+			return value * 34.9723;
+		}
+		/**
+		 * Converts the supplied Oil Barrels value to Fluid Ounces
+		 * @param value The Oil Barrels input value
+		 * @return The value in Fluid Ounces
+		 */
+		public static double toFluidOunces(double value) {
+			return value * 5595.57;
+		}
+		/**
+		 * Converts the supplied Oil Barrels value to US Teaspoons
+		 * @param value The Oil Barrels input value
+		 * @return The value in US Teaspoons
+		 */
+		public static double toUSTeaspoons(double value) {
+			return value * 32256.0;
+		}
+		/**
+		 * Converts the supplied Oil Barrels value to US Tablespoons
+		 * @param value The Oil Barrels input value
+		 * @return The value in US Tablespoons
+		 */
+		public static double toUSTablespoons(double value) {
+			return value * 10752.0;
+		}
+		/**
+		 * Converts the supplied Oil Barrels value to US Quarts
+		 * @param value The Oil Barrels input value
+		 * @return The value in US Quarts
+		 */
+		public static double toUSQuarts(double value) {
+			return value * 168.0;
+		}
+		/**
+		 * Converts the supplied Oil Barrels value to US Pints
+		 * @param value The Oil Barrels input value
+		 * @return The value in US Pints
+		 */
+		public static double toUSPints(double value) {
+			return value * 336.0;
+		}
+		/**
+		 * Converts the supplied Oil Barrels value to US Gallons
+		 * @param value The Oil Barrels input value
+		 * @return The value in US Gallons
+		 */
+		public static double toUSGallons(double value) {
+			return value * 42.0;
+		}
+		/**
+		 * Converts the supplied Oil Barrels value to US Fluid Ounces
+		 * @param value The Oil Barrels input value
+		 * @return The value in US Fluid Ounces
+		 */
+		public static double toUSFluidOunces(double value) {
+			return value * 5376.0;
+		}
+		/**
+		 * Converts the supplied Oil Barrels value to US Cups
+		 * @param value The Oil Barrels input value
+		 * @return The value in US Cups
+		 */
+		public static double toUSCups(double value) {
+			return value * 662.447;
+		}
+		/**
+		 * Converts the supplied Oil Barrels value to Cubic Metres
+		 * @param value The Oil Barrels input value
+		 * @return The value in Cubic Metres
+		 */
+		public static double toCubicMetres(double value) {
+			return value / 6.28981;
+		}
+		/**
+		 * Converts the supplied Oil Barrels value to Cubic Feet
+		 * @param value The Oil Barrels input value
+		 * @return The value in Cubic Feet
+		 */
+		public static double toCubicFeet(double value) {
+			return value * 5.61458;
+		}
+		/**
+		 * Converts the supplied Oil Barrels value to Cubic Inches
+		 * @param value The Oil Barrels input value
+		 * @return The value in Cubic Inches
+		 */
+		public static double toCubicInches(double value) {
+			return value * 9702.0;
 		}
 	}
 	/**
@@ -759,6 +1547,38 @@ public final class Volume {
 		public static double toUSCups(double value) {
 			return value / 0.41633692023319535616;
 		}
+		/**
+		 * Converts the supplied Pints value to Cubic Metres
+		 * @param value The Pints input value
+		 * @return The value in Cubic Metres
+		 */
+		public static double toCubicMetres(double value) {
+			return value / 1759.75;
+		}
+		/**
+		 * Converts the supplied Pints value to Cubic Feet
+		 * @param value The Pints input value
+		 * @return The value in Cubic Feet
+		 */
+		public static double toCubicFeet(double value) {
+			return value / 49.8307;
+		}
+		/**
+		 * Converts the supplied Pints value to Cubic Inches
+		 * @param value The Pints input value
+		 * @return The value in Cubic Inches
+		 */
+		public static double toCubicInches(double value) {
+			return value * 34.6774;
+		}
+		/**
+		 * Converts the supplied Pints value to Oil Barrels
+		 * @param value The Pints input value
+		 * @return The value in Oil Barrels
+		 */
+		public static double toOilBarrels(double value) {
+			return value / 279.779;
+		}
 	}
 	/**
 	 * Quarts conversion functions
@@ -883,6 +1703,38 @@ public final class Volume {
 		 */
 		public static double toUSCups(double value) {
 			return value / 0.20816846011659767808;
+		}
+		/**
+		 * Converts the supplied Quarts value to Cubic Metres
+		 * @param value The Quarts input value
+		 * @return The value in Cubic Metres
+		 */
+		public static double toCubicMetres(double value) {
+			return value / 879.877;
+		}
+		/**
+		 * Converts the supplied Quarts value to Cubic Feet
+		 * @param value The Quarts input value
+		 * @return The value in Cubic Feet
+		 */
+		public static double toCubicFeet(double value) {
+			return value / 24.9153;
+		}
+		/**
+		 * Converts the supplied Quarts value to Cubic Inches
+		 * @param value The Quarts input value
+		 * @return The value in Cubic Inches
+		 */
+		public static double toCubicInches(double value) {
+			return value * 69.3549;
+		}
+		/**
+		 * Converts the supplied Quarts value to Oil Barrels
+		 * @param value The Quarts input value
+		 * @return The value in Oil Barrels
+		 */
+		public static double toOilBarrels(double value) {
+			return value / 139.889;
 		}
 	}
 	/**
@@ -1009,6 +1861,38 @@ public final class Volume {
 		public static double toUSCups(double value) {
 			return value / 13.322781447462250496;
 		}
+		/**
+		 * Converts the supplied Tablespoons value to Cubic Metres
+		 * @param value The Tablespoons input value
+		 * @return The value in Cubic Metres
+		 */
+		public static double toCubicMetres(double value) {
+			return value / 56312.1;
+		}
+		/**
+		 * Converts the supplied Tablespoons value to Cubic Feet
+		 * @param value The Tablespoons input value
+		 * @return The value in Cubic Feet
+		 */
+		public static double toCubicFeet(double value) {
+			return value / 1594.58;
+		}
+		/**
+		 * Converts the supplied Tablespoons value to Cubic Inches
+		 * @param value The Tablespoons input value
+		 * @return The value in Cubic Inches
+		 */
+		public static double toCubicInches(double value) {
+			return value * 1.08367;
+		}
+		/**
+		 * Converts the supplied Tablespoons value to Oil Barrels
+		 * @param value The Tablespoons input value
+		 * @return The value in Oil Barrels
+		 */
+		public static double toOilBarrels(double value) {
+			return value / 8952.91;
+		}
 	}
 	/**
 	 * Teaspoons conversion functions
@@ -1133,6 +2017,38 @@ public final class Volume {
 		 */
 		public static double toUSCups(double value) {
 			return value / 39.968344342386753536;
+		}
+		/**
+		 * Converts the supplied Teaspoons value to Cubic Metres
+		 * @param value The Teaspoons input value
+		 * @return The value in Cubic Metres
+		 */
+		public static double toCubicMetres(double value) {
+			return value / 168936.0;
+		}
+		/**
+		 * Converts the supplied Teaspoons value to Cubic Feet
+		 * @param value The Teaspoons input value
+		 * @return The value in Cubic Feet
+		 */
+		public static double toCubicFeet(double value) {
+			return value / 4783.74;
+		}
+		/**
+		 * Converts the supplied Teaspoons value to Cubic Inches
+		 * @param value The Teaspoons input value
+		 * @return The value in Cubic Inches
+		 */
+		public static double toCubicInches(double value) {
+			return value / 2.76837;
+		}
+		/**
+		 * Converts the supplied Teaspoons value to Oil Barrels
+		 * @param value The Teaspoons input value
+		 * @return The value in Oil Barrels
+		 */
+		public static double toOilBarrels(double value) {
+			return value / 26858.7;
 		}
 	}
 	/**
@@ -1259,6 +2175,38 @@ public final class Volume {
 		public static double toUSFluidOunces(double value) {
 			return value * 8.0;
 		}
+		/**
+		 * Converts the supplied US Cups value to Cubic Metres
+		 * @param value The US Cups input value
+		 * @return The value in Cubic Metres
+		 */
+		public static double toCubicMetres(double value) {
+			return value / 4166.67;
+		}
+		/**
+		 * Converts the supplied US Cups value to Cubic Feet
+		 * @param value The US Cups input value
+		 * @return The value in Cubic Feet
+		 */
+		public static double toCubicFeet(double value) {
+			return value / 117.987;
+		}
+		/**
+		 * Converts the supplied US Cups value to Cubic Inches
+		 * @param value The US Cups input value
+		 * @return The value in Cubic Inches
+		 */
+		public static double toCubicInches(double value) {
+			return value * 14.6457;
+		}
+		/**
+		 * Converts the supplied US Cups value to Oil Barrels
+		 * @param value The US Cups input value
+		 * @return The value in Oil Barrels
+		 */
+		public static double toOilBarrels(double value) {
+			return value / 662.447;
+		}
 	}
 	/**
 	 * US Fluid Ounces conversion functions
@@ -1383,6 +2331,38 @@ public final class Volume {
 		 */
 		public static double toUSCups(double value) {
 			return value / 8.0;
+		}
+		/**
+		 * Converts the supplied US Fluid Ounces value to Cubic Metres
+		 * @param value The US Fluid Ounces input value
+		 * @return The value in Cubic Metres
+		 */
+		public static double toCubicMetres(double value) {
+			return value / 33814.0;
+		}
+		/**
+		 * Converts the supplied US Fluid Ounces value to Cubic Feet
+		 * @param value The US Fluid Ounces input value
+		 * @return The value in Cubic Feet
+		 */
+		public static double toCubicFeet(double value) {
+			return value / 957.506;
+		}
+		/**
+		 * Converts the supplied US Fluid Ounces value to Cubic Inches
+		 * @param value The US Fluid Ounces input value
+		 * @return The value in Cubic Inches
+		 */
+		public static double toCubicInches(double value) {
+			return value * 1.80469;
+		}
+		/**
+		 * Converts the supplied US Fluid Ounces value to Oil Barrels
+		 * @param value The US Fluid Ounces input value
+		 * @return The value in Oil Barrels
+		 */
+		public static double toOilBarrels(double value) {
+			return value / 5376.0;
 		}
 	}
 	/**
@@ -1509,6 +2489,38 @@ public final class Volume {
 		public static double toUSCups(double value) {
 			return value * 16.0;
 		}
+		/**
+		 * Converts the supplied US Gallons value to Cubic Metres
+		 * @param value The US Gallons input value
+		 * @return The value in Cubic Metres
+		 */
+		public static double toCubicMetres(double value) {
+			return value / 264.172;
+		}
+		/**
+		 * Converts the supplied US Gallons value to Cubic Feet
+		 * @param value The US Gallons input value
+		 * @return The value in Cubic Feet
+		 */
+		public static double toCubicFeet(double value) {
+			return value / 7.48052;
+		}
+		/**
+		 * Converts the supplied US Gallons value to Cubic Inches
+		 * @param value The US Gallons input value
+		 * @return The value in Cubic Inches
+		 */
+		public static double toCubicInches(double value) {
+			return value * 231.0;
+		}
+		/**
+		 * Converts the supplied US Gallons value to Oil Barrels
+		 * @param value The US Gallons input value
+		 * @return The value in Oil Barrels
+		 */
+		public static double toOilBarrels(double value) {
+			return value / 42.0;
+		}
 	}
 	/**
 	 * US Pints conversion functions
@@ -1633,6 +2645,38 @@ public final class Volume {
 		 */
 		public static double toUSCups(double value) {
 			return value * 2.0;
+		}
+		/**
+		 * Converts the supplied US Pints value to Cubic Metres
+		 * @param value The US Pints input value
+		 * @return The value in Cubic Metres
+		 */
+		public static double toCubicMetres(double value) {
+			return value / 2113.38;
+		}
+		/**
+		 * Converts the supplied US Pints value to Cubic Feet
+		 * @param value The US Pints input value
+		 * @return The value in Cubic Feet
+		 */
+		public static double toCubicFeet(double value) {
+			return value / 59.8442;
+		}
+		/**
+		 * Converts the supplied US Pints value to Cubic Inches
+		 * @param value The US Pints input value
+		 * @return The value in Cubic Inches
+		 */
+		public static double toCubicInches(double value) {
+			return value * 28.875;
+		}
+		/**
+		 * Converts the supplied US Pints value to Oil Barrels
+		 * @param value The US Pints input value
+		 * @return The value in Oil Barrels
+		 */
+		public static double toOilBarrels(double value) {
+			return value / 336.0;
 		}
 	}
 	/**
@@ -1759,6 +2803,38 @@ public final class Volume {
 		public static double toUSCups(double value) {
 			return value * 4.0;
 		}
+		/**
+		 * Converts the supplied US Quarts value to Cubic Metres
+		 * @param value The US Quarts input value
+		 * @return The value in Cubic Metres
+		 */
+		public static double toCubicMetres(double value) {
+			return value / 1056.69;
+		}
+		/**
+		 * Converts the supplied US Quarts value to Cubic Feet
+		 * @param value The US Quarts input value
+		 * @return The value in Cubic Feet
+		 */
+		public static double toCubicFeet(double value) {
+			return value / 29.9221;
+		}
+		/**
+		 * Converts the supplied US Quarts value to Cubic Inches
+		 * @param value The US Quarts input value
+		 * @return The value in Cubic Inches
+		 */
+		public static double toCubicInches(double value) {
+			return value * 57.75;
+		}
+		/**
+		 * Converts the supplied US Quarts value to Oil Barrels
+		 * @param value The US Quarts input value
+		 * @return The value in Oil Barrels
+		 */
+		public static double toOilBarrels(double value) {
+			return value / 168.0;
+		}
 	}
 	/**
 	 * US Tablespoons conversion functions
@@ -1884,6 +2960,38 @@ public final class Volume {
 		public static double toUSCups(double value) {
 			return value / 16.0;
 		}
+		/**
+		 * Converts the supplied US Tablespoons value to Cubic Metres
+		 * @param value The US Tablespoons input value
+		 * @return The value in Cubic Metres
+		 */
+		public static double toCubicMetres(double value) {
+			return value / 67628.0;
+		}
+		/**
+		 * Converts the supplied US Tablespoons value to Cubic Feet
+		 * @param value The US Tablespoons input value
+		 * @return The value in Cubic Feet
+		 */
+		public static double toCubicFeet(double value) {
+			return value / 1915.01;
+		}
+		/**
+		 * Converts the supplied US Tablespoons value to Cubic Inches
+		 * @param value The US Tablespoons input value
+		 * @return The value in Cubic Inches
+		 */
+		public static double toCubicInches(double value) {
+			return value / 1.10823;
+		}
+		/**
+		 * Converts the supplied US Tablespoons value to Oil Barrels
+		 * @param value The US Tablespoons input value
+		 * @return The value in Oil Barrels
+		 */
+		public static double toOilBarrels(double value) {
+			return value / 10752.0;
+		}
 	}
 	/**
 	 * US Teaspoons conversion functions
@@ -2008,6 +3116,38 @@ public final class Volume {
 		 */
 		public static double toUSCups(double value) {
 			return value / 48.0;
+		}
+		/**
+		 * Converts the supplied US Teaspoons value to Cubic Metres
+		 * @param value The US Teaspoons input value
+		 * @return The value in Cubic Metres
+		 */
+		public static double toCubicMetres(double value) {
+			return value / 202884.0;
+		}
+		/**
+		 * Converts the supplied US Teaspoons value to Cubic Feet
+		 * @param value The US Teaspoons input value
+		 * @return The value in Cubic Feet
+		 */
+		public static double toCubicFeet(double value) {
+			return value / 5745.04;
+		}
+		/**
+		 * Converts the supplied US Teaspoons value to Cubic Inches
+		 * @param value The US Teaspoons input value
+		 * @return The value in Cubic Inches
+		 */
+		public static double toCubicInches(double value) {
+			return value / 3.32468;
+		}
+		/**
+		 * Converts the supplied US Teaspoons value to Oil Barrels
+		 * @param value The US Teaspoons input value
+		 * @return The value in Oil Barrels
+		 */
+		public static double toOilBarrels(double value) {
+			return value / 32256.0;
 		}
 	}
 }

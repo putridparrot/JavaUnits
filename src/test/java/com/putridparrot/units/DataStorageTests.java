@@ -554,7 +554,7 @@ public class DataStorageTests {
 	}
 
 	@ParameterizedTest
-	@CsvSource({ "120000000.0,0.01536","88e12,11264.0","9000000.0,0.009216" })
+	@CsvSource({ "120000000.0,0.01536","88e12,11264.0","9000000.0,0.001152" })
 	public void testConvertKnownKibibitsToTerabytes(double input, double expectation) {
 		final double result = DataStorage.Kibibits.toTerabytes(input);
 		assertEquals(expectation, result, 0.01);

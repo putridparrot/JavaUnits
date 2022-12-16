@@ -15,6 +15,804 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class VolumeTests {
 	@Property(tries = 100)
+	public void testFromCubicFeetToMillilitresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.CubicFeet.toMillilitres(value);
+		final double convertBack = Volume.Millilitres.toCubicFeet(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.08,2265.348","6.0,169900.79","0.2393275,6776.988" })
+	public void testConvertKnownCubicFeetToMillilitres(double input, double expectation) {
+		final double result = Volume.CubicFeet.toMillilitres(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromCubicFeetToLitresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.CubicFeet.toLitres(value);
+		final double convertBack = Volume.Litres.toCubicFeet(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.3,8.49505","6.0,169.901","56.0,1585.74" })
+	public void testConvertKnownCubicFeetToLitres(double input, double expectation) {
+		final double result = Volume.CubicFeet.toLitres(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromCubicFeetToKilolitresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.CubicFeet.toKilolitres(value);
+		final double convertBack = Volume.Kilolitres.toCubicFeet(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "300.0,8.49505","141.259,4.0","111.0,3.14317" })
+	public void testConvertKnownCubicFeetToKilolitres(double input, double expectation) {
+		final double result = Volume.CubicFeet.toKilolitres(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromCubicFeetToTeaspoonsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.CubicFeet.toTeaspoons(value);
+		final double convertBack = Volume.Teaspoons.toCubicFeet(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.3,1435.12","4.0,19134.95","67.0,320510.579" })
+	public void testConvertKnownCubicFeetToTeaspoons(double input, double expectation) {
+		final double result = Volume.CubicFeet.toTeaspoons(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromCubicFeetToTablespoonsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.CubicFeet.toTablespoons(value);
+		final double convertBack = Volume.Tablespoons.toCubicFeet(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.7,1116.21","1.1,1754.04","0.494174,788.0" })
+	public void testConvertKnownCubicFeetToTablespoons(double input, double expectation) {
+		final double result = Volume.CubicFeet.toTablespoons(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromCubicFeetToQuartsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.CubicFeet.toQuarts(value);
+		final double convertBack = Volume.Quarts.toCubicFeet(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.6,14.9492","0.20068,5.0","0.301019,7.5" })
+	public void testConvertKnownCubicFeetToQuarts(double input, double expectation) {
+		final double result = Volume.CubicFeet.toQuarts(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromCubicFeetToPintsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.CubicFeet.toPints(value);
+		final double convertBack = Volume.Pints.toCubicFeet(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.6,29.8984","0.88299,44.0","18.0612,900.0" })
+	public void testConvertKnownCubicFeetToPints(double input, double expectation) {
+		final double result = Volume.CubicFeet.toPints(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromCubicFeetToGallonsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.CubicFeet.toGallons(value);
+		final double convertBack = Volume.Gallons.toCubicFeet(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "3.0,18.6865","2.08707,13.0","14.1278,88.0" })
+	public void testConvertKnownCubicFeetToGallons(double input, double expectation) {
+		final double result = Volume.CubicFeet.toGallons(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromCubicFeetToFluidOuncesAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.CubicFeet.toFluidOunces(value);
+		final double convertBack = Volume.FluidOunces.toCubicFeet(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "14.0,13952.6","7.0,6976.3","0.34777769,346.6" })
+	public void testConvertKnownCubicFeetToFluidOunces(double input, double expectation) {
+		final double result = Volume.CubicFeet.toFluidOunces(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromCubicFeetToUSTeaspoonsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.CubicFeet.toUSTeaspoons(value);
+		final double convertBack = Volume.USTeaspoons.toCubicFeet(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "5.0,28725.2","0.4,2298.02","9.2,52854.3679" })
+	public void testConvertKnownCubicFeetToUSTeaspoons(double input, double expectation) {
+		final double result = Volume.CubicFeet.toUSTeaspoons(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromCubicFeetToUSTablespoonsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.CubicFeet.toUSTablespoons(value);
+		final double convertBack = Volume.USTablespoons.toCubicFeet(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "1.4,2681.02","4.0,7660.04","0.6443821,1234.0" })
+	public void testConvertKnownCubicFeetToUSTablespoons(double input, double expectation) {
+		final double result = Volume.CubicFeet.toUSTablespoons(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromCubicFeetToUSQuartsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.CubicFeet.toUSQuarts(value);
+		final double convertBack = Volume.USQuarts.toCubicFeet(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "6.0,179.532","12.0,359.065","25.9674,777.0" })
+	public void testConvertKnownCubicFeetToUSQuarts(double input, double expectation) {
+		final double result = Volume.CubicFeet.toUSQuarts(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromCubicFeetToUSPintsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.CubicFeet.toUSPints(value);
+		final double convertBack = Volume.USPints.toCubicFeet(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "6.9,412.925","23.0,1376.42","14.8385,888.0" })
+	public void testConvertKnownCubicFeetToUSPints(double input, double expectation) {
+		final double result = Volume.CubicFeet.toUSPints(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromCubicFeetToUSGallonsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.CubicFeet.toUSGallons(value);
+		final double convertBack = Volume.USGallons.toCubicFeet(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "77.0,576.0","45.0,336.623","4.0,29.9221" })
+	public void testConvertKnownCubicFeetToUSGallons(double input, double expectation) {
+		final double result = Volume.CubicFeet.toUSGallons(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromCubicFeetToUSFluidOuncesAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.CubicFeet.toUSFluidOunces(value);
+		final double convertBack = Volume.USFluidOunces.toCubicFeet(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "20.0,19150.119","0.359266,344.0","0.699734,670.0" })
+	public void testConvertKnownCubicFeetToUSFluidOunces(double input, double expectation) {
+		final double result = Volume.CubicFeet.toUSFluidOunces(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromCubicFeetToUSCupsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.CubicFeet.toUSCups(value);
+		final double convertBack = Volume.USCups.toCubicFeet(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "77.0,9084.99","8.0,943.895","4.79714,566.0" })
+	public void testConvertKnownCubicFeetToUSCups(double input, double expectation) {
+		final double result = Volume.CubicFeet.toUSCups(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromCubicFeetToCubicMetresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.CubicFeet.toCubicMetres(value);
+		final double convertBack = Volume.CubicMetres.toCubicFeet(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "28.2517,0.8","45.0,1.27426","2719.23,77.0" })
+	public void testConvertKnownCubicFeetToCubicMetres(double input, double expectation) {
+		final double result = Volume.CubicFeet.toCubicMetres(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromCubicFeetToCubicInchesAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.CubicFeet.toCubicInches(value);
+		final double convertBack = Volume.CubicInches.toCubicFeet(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "6.8,11750.4","5666.0,9790848.0","0.7,1209.6" })
+	public void testConvertKnownCubicFeetToCubicInches(double input, double expectation) {
+		final double result = Volume.CubicFeet.toCubicInches(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromCubicFeetToOilBarrelsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.CubicFeet.toOilBarrels(value);
+		final double convertBack = Volume.OilBarrels.toCubicFeet(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "67.0,11.9332","44.0,7.83673","67.375,12.0" })
+	public void testConvertKnownCubicFeetToOilBarrels(double input, double expectation) {
+		final double result = Volume.CubicFeet.toOilBarrels(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromCubicInchesToMillilitresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.CubicInches.toMillilitres(value);
+		final double convertBack = Volume.Millilitres.toCubicInches(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "3.9,63.9095","4.0,65.5483","5.37009,88.0" })
+	public void testConvertKnownCubicInchesToMillilitres(double input, double expectation) {
+		final double result = Volume.CubicInches.toMillilitres(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromCubicInchesToLitresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.CubicInches.toLitres(value);
+		final double convertBack = Volume.Litres.toCubicInches(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "560.0,9.17676","555.0,9.09482","7444.9,122.0" })
+	public void testConvertKnownCubicInchesToLitres(double input, double expectation) {
+		final double result = Volume.CubicInches.toLitres(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromCubicInchesToKilolitresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.CubicInches.toKilolitres(value);
+		final double convertBack = Volume.Kilolitres.toCubicInches(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "560.0,0.009176","5555.0,0.09103014","100000.0,1.6387064" })
+	public void testConvertKnownCubicInchesToKilolitres(double input, double expectation) {
+		final double result = Volume.CubicInches.toKilolitres(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromCubicInchesToTeaspoonsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.CubicInches.toTeaspoons(value);
+		final double convertBack = Volume.Teaspoons.toCubicInches(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "5.0,13.8419","6.0,16.6102","11.5591,32.0" })
+	public void testConvertKnownCubicInchesToTeaspoons(double input, double expectation) {
+		final double result = Volume.CubicInches.toTeaspoons(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromCubicInchesToTablespoonsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.CubicInches.toTablespoons(value);
+		final double convertBack = Volume.Tablespoons.toCubicInches(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "34.0,31.3749","11.9204,11.0","99.0,91.3562246" })
+	public void testConvertKnownCubicInchesToTablespoons(double input, double expectation) {
+		final double result = Volume.CubicInches.toTablespoons(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromCubicInchesToQuartsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.CubicInches.toQuarts(value);
+		final double convertBack = Volume.Quarts.toCubicInches(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "800.0,11.5349","77.0,1.11023","4577.42,66.0" })
+	public void testConvertKnownCubicInchesToQuarts(double input, double expectation) {
+		final double result = Volume.CubicInches.toQuarts(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromCubicInchesToPintsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.CubicInches.toPints(value);
+		final double convertBack = Volume.Pints.toCubicInches(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "89.5,2.58093","23095.2,666.0","2670.16,77.0" })
+	public void testConvertKnownCubicInchesToPints(double input, double expectation) {
+		final double result = Volume.CubicInches.toPints(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromCubicInchesToGallonsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.CubicInches.toGallons(value);
+		final double convertBack = Volume.Gallons.toCubicInches(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "900.0,3.24419","666.0,2.4007","21361.3,77.0" })
+	public void testConvertKnownCubicInchesToGallons(double input, double expectation) {
+		final double result = Volume.CubicInches.toGallons(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromCubicInchesToFluidOuncesAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.CubicInches.toFluidOunces(value);
+		final double convertBack = Volume.FluidOunces.toCubicInches(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "77.0,44.4093","55.0,31.7209","27.7419,16.0" })
+	public void testConvertKnownCubicInchesToFluidOunces(double input, double expectation) {
+		final double result = Volume.CubicInches.toFluidOunces(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromCubicInchesToUSTeaspoonsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.CubicInches.toUSTeaspoons(value);
+		final double convertBack = Volume.USTeaspoons.toCubicInches(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "678.0,2254.13","55.0,182.857","26.4687,88.0" })
+	public void testConvertKnownCubicInchesToUSTeaspoons(double input, double expectation) {
+		final double result = Volume.CubicInches.toUSTeaspoons(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromCubicInchesToUSTablespoonsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.CubicInches.toUSTablespoons(value);
+		final double convertBack = Volume.USTablespoons.toCubicInches(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "66.0,73.1429","55.0,60.9524","10.8281,12.0" })
+	public void testConvertKnownCubicInchesToUSTablespoons(double input, double expectation) {
+		final double result = Volume.CubicInches.toUSTablespoons(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromCubicInchesToUSQuartsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.CubicInches.toUSQuarts(value);
+		final double convertBack = Volume.USQuarts.toCubicInches(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "345.0,5.97403","33.0,0.571429","3176.25,55.0" })
+	public void testConvertKnownCubicInchesToUSQuarts(double input, double expectation) {
+		final double result = Volume.CubicInches.toUSQuarts(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromCubicInchesToUSPintsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.CubicInches.toUSPints(value);
+		final double convertBack = Volume.USPints.toCubicInches(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "89.0,3.08225","3176.25,110.0","462.0,16.0" })
+	public void testConvertKnownCubicInchesToUSPints(double input, double expectation) {
+		final double result = Volume.CubicInches.toUSPints(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromCubicInchesToUSGallonsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.CubicInches.toUSGallons(value);
+		final double convertBack = Volume.USGallons.toCubicInches(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "600.0,2.5974","462,2.0","899.0,3.89177" })
+	public void testConvertKnownCubicInchesToUSGallons(double input, double expectation) {
+		final double result = Volume.CubicInches.toUSGallons(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromCubicInchesToUSFluidOuncesAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.CubicInches.toUSFluidOunces(value);
+		final double convertBack = Volume.USFluidOunces.toCubicInches(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "900.0,498.700607","777.0,430.544858","178.664,98.99982822" })
+	public void testConvertKnownCubicInchesToUSFluidOunces(double input, double expectation) {
+		final double result = Volume.CubicInches.toUSFluidOunces(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromCubicInchesToUSCupsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.CubicInches.toUSCups(value);
+		final double convertBack = Volume.USCups.toCubicInches(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "7.0,0.477956","77.0,5.25752","123.0,8.39837" })
+	public void testConvertKnownCubicInchesToUSCups(double input, double expectation) {
+		final double result = Volume.CubicInches.toUSCups(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromCubicInchesToCubicMetresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.CubicInches.toCubicMetres(value);
+		final double convertBack = Volume.CubicMetres.toCubicInches(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "24409.5,0.4","7777.0,0.1274422","366142,6.0" })
+	public void testConvertKnownCubicInchesToCubicMetres(double input, double expectation) {
+		final double result = Volume.CubicInches.toCubicMetres(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromCubicInchesToCubicFeetAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.CubicInches.toCubicFeet(value);
+		final double convertBack = Volume.CubicFeet.toCubicInches(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "11750.4,6.8","57024.0,33.0","1234.0,0.7141204" })
+	public void testConvertKnownCubicInchesToCubicFeet(double input, double expectation) {
+		final double result = Volume.CubicInches.toCubicFeet(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromCubicInchesToOilBarrelsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.CubicInches.toOilBarrels(value);
+		final double convertBack = Volume.OilBarrels.toCubicInches(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "90000.0,9.2764378","8888.0,0.9160998","11642.4,1.2" })
+	public void testConvertKnownCubicInchesToOilBarrels(double input, double expectation) {
+		final double result = Volume.CubicInches.toOilBarrels(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromCubicMetresToMillilitresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.CubicMetres.toMillilitres(value);
+		final double convertBack = Volume.Millilitres.toCubicMetres(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.01,10000.0","0.2306735,230673.5","0.009,9000.0" })
+	public void testConvertKnownCubicMetresToMillilitres(double input, double expectation) {
+		final double result = Volume.CubicMetres.toMillilitres(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromCubicMetresToLitresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.CubicMetres.toLitres(value);
+		final double convertBack = Volume.Litres.toCubicMetres(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.1,100.0","0.009,9.0","0.08989,89.89" })
+	public void testConvertKnownCubicMetresToLitres(double input, double expectation) {
+		final double result = Volume.CubicMetres.toLitres(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromCubicMetresToKilolitresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.CubicMetres.toKilolitres(value);
+		final double convertBack = Volume.Kilolitres.toCubicMetres(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.9,0.9","100.9,100.9","666.9,666.9" })
+	public void testConvertKnownCubicMetresToKilolitres(double input, double expectation) {
+		final double result = Volume.CubicMetres.toKilolitres(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromCubicMetresToTeaspoonsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.CubicMetres.toTeaspoons(value);
+		final double convertBack = Volume.Teaspoons.toCubicMetres(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.1,16893.6","3.0,506808.0","0.91,153731.76" })
+	public void testConvertKnownCubicMetresToTeaspoons(double input, double expectation) {
+		final double result = Volume.CubicMetres.toTeaspoons(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromCubicMetresToTablespoonsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.CubicMetres.toTablespoons(value);
+		final double convertBack = Volume.Tablespoons.toCubicMetres(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.9,50680.8899","0.1,5631.21","9.0,506808.89" })
+	public void testConvertKnownCubicMetresToTablespoons(double input, double expectation) {
+		final double result = Volume.CubicMetres.toTablespoons(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromCubicMetresToQuartsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.CubicMetres.toQuarts(value);
+		final double convertBack = Volume.Quarts.toCubicMetres(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.8,703.902","0.4,351.951","6.0,5279.26" })
+	public void testConvertKnownCubicMetresToQuarts(double input, double expectation) {
+		final double result = Volume.CubicMetres.toQuarts(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromCubicMetresToPintsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.CubicMetres.toPints(value);
+		final double convertBack = Volume.Pints.toCubicMetres(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.7,1231.83","4.5,7918.875","0.06,105.5852" })
+	public void testConvertKnownCubicMetresToPints(double input, double expectation) {
+		final double result = Volume.CubicMetres.toPints(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromCubicMetresToGallonsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.CubicMetres.toGallons(value);
+		final double convertBack = Volume.Gallons.toCubicMetres(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.2,43.9938","0.4,87.9877","0.0272765,6.0" })
+	public void testConvertKnownCubicMetresToGallons(double input, double expectation) {
+		final double result = Volume.CubicMetres.toGallons(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromCubicMetresToFluidOuncesAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.CubicMetres.toFluidOunces(value);
+		final double convertBack = Volume.FluidOunces.toCubicMetres(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.7,24636.569","0.09,3167.557","4.0,140780.399" })
+	public void testConvertKnownCubicMetresToFluidOunces(double input, double expectation) {
+		final double result = Volume.CubicMetres.toFluidOunces(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromCubicMetresToUSTeaspoonsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.CubicMetres.toUSTeaspoons(value);
+		final double convertBack = Volume.USTeaspoons.toCubicMetres(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.5,101442.0","2,405768.0","0.3,60865.199" })
+	public void testConvertKnownCubicMetresToUSTeaspoons(double input, double expectation) {
+		final double result = Volume.CubicMetres.toUSTeaspoons(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromCubicMetresToUSTablespoonsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.CubicMetres.toUSTablespoons(value);
+		final double convertBack = Volume.USTablespoons.toCubicMetres(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.2,13525.6","0.9,60865.2","2.0,135256.0" })
+	public void testConvertKnownCubicMetresToUSTablespoons(double input, double expectation) {
+		final double result = Volume.CubicMetres.toUSTablespoons(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromCubicMetresToUSQuartsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.CubicMetres.toUSQuarts(value);
+		final double convertBack = Volume.USQuarts.toCubicMetres(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.2,211.338","4.0,4226.76","0.851718,900.0" })
+	public void testConvertKnownCubicMetresToUSQuarts(double input, double expectation) {
+		final double result = Volume.CubicMetres.toUSQuarts(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromCubicMetresToUSPintsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.CubicMetres.toUSPints(value);
+		final double convertBack = Volume.USPints.toCubicMetres(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.4,845.351","7.0,14793.66","6.0,12680.280" })
+	public void testConvertKnownCubicMetresToUSPints(double input, double expectation) {
+		final double result = Volume.CubicMetres.toUSPints(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromCubicMetresToUSGallonsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.CubicMetres.toUSGallons(value);
+		final double convertBack = Volume.USGallons.toCubicMetres(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.7,184.92","0.851718,225.0","0.02,5.283441" })
+	public void testConvertKnownCubicMetresToUSGallons(double input, double expectation) {
+		final double result = Volume.CubicMetres.toUSGallons(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromCubicMetresToUSFluidOuncesAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.CubicMetres.toUSFluidOunces(value);
+		final double convertBack = Volume.USFluidOunces.toCubicMetres(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.9,30432.6","0.3,10144.2","3.3,111586.2" })
+	public void testConvertKnownCubicMetresToUSFluidOunces(double input, double expectation) {
+		final double result = Volume.CubicMetres.toUSFluidOunces(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromCubicMetresToUSCupsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.CubicMetres.toUSCups(value);
+		final double convertBack = Volume.USCups.toCubicMetres(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "7.0,29166.7","11.0,45833.37","66.0,275000.22" })
+	public void testConvertKnownCubicMetresToUSCups(double input, double expectation) {
+		final double result = Volume.CubicMetres.toUSCups(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromCubicMetresToCubicFeetAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.CubicMetres.toCubicFeet(value);
+		final double convertBack = Volume.CubicFeet.toCubicMetres(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.8,28.2517","5.0,176.573","12.12,428.014163" })
+	public void testConvertKnownCubicMetresToCubicFeet(double input, double expectation) {
+		final double result = Volume.CubicMetres.toCubicFeet(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromCubicMetresToCubicInchesAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.CubicMetres.toCubicInches(value);
+		final double convertBack = Volume.CubicInches.toCubicMetres(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.4,24409.48","3.0,183071.099","0.99,60413.4629" })
+	public void testConvertKnownCubicMetresToCubicInches(double input, double expectation) {
+		final double result = Volume.CubicMetres.toCubicInches(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromCubicMetresToOilBarrelsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.CubicMetres.toOilBarrels(value);
+		final double convertBack = Volume.OilBarrels.toCubicMetres(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.09,0.566083","5.0,31.4491","1.2,7.547772" })
+	public void testConvertKnownCubicMetresToOilBarrels(double input, double expectation) {
+		final double result = Volume.CubicMetres.toOilBarrels(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
 	public void testFromFluidOuncesToMillilitresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
 		final double convertTo = Volume.FluidOunces.toMillilitres(value);
 		final double convertBack = Volume.Millilitres.toFluidOunces(convertTo);
@@ -221,6 +1019,62 @@ public class VolumeTests {
 	@CsvSource({ "6.0,0.72057","1800.0,216.171","6.9,0.828655" })
 	public void testConvertKnownFluidOuncesToUSCups(double input, double expectation) {
 		final double result = Volume.FluidOunces.toUSCups(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromFluidOuncesToCubicMetresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.FluidOunces.toCubicMetres(value);
+		final double convertBack = Volume.CubicMetres.toFluidOunces(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "316756.0,9.00000284","8000.0,0.2273043690","123456.0,3.5077610" })
+	public void testConvertKnownFluidOuncesToCubicMetres(double input, double expectation) {
+		final double result = Volume.FluidOunces.toCubicMetres(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromFluidOuncesToCubicFeetAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.FluidOunces.toCubicFeet(value);
+		final double convertBack = Volume.CubicFeet.toFluidOunces(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "888.0,0.891017","100900.0,101.242841","678.0,0.680304" })
+	public void testConvertKnownFluidOuncesToCubicFeet(double input, double expectation) {
+		final double result = Volume.FluidOunces.toCubicFeet(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromFluidOuncesToCubicInchesAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.FluidOunces.toCubicInches(value);
+		final double convertBack = Volume.CubicInches.toFluidOunces(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "7.0,12.1371","900,1560.48","6.0,10.4032" })
+	public void testConvertKnownFluidOuncesToCubicInches(double input, double expectation) {
+		final double result = Volume.FluidOunces.toCubicInches(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromFluidOuncesToOilBarrelsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.FluidOunces.toOilBarrels(value);
+		final double convertBack = Volume.OilBarrels.toFluidOunces(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "430859.0,77.0","777.0,0.13886","1234.0,0.2205316" })
+	public void testConvertKnownFluidOuncesToOilBarrels(double input, double expectation) {
+		final double result = Volume.FluidOunces.toOilBarrels(input);
 		assertEquals(expectation, result, 0.01);
 	}
 
@@ -435,6 +1289,62 @@ public class VolumeTests {
 	}
 
 	@Property(tries = 100)
+	public void testFromGallonsToCubicMetresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.Gallons.toCubicMetres(value);
+		final double convertBack = Volume.CubicMetres.toGallons(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "9898.62,45.0","12345.0,56.121481","80.0,0.363687" })
+	public void testConvertKnownGallonsToCubicMetres(double input, double expectation) {
+		final double result = Volume.Gallons.toCubicMetres(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromGallonsToCubicFeetAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.Gallons.toCubicFeet(value);
+		final double convertBack = Volume.CubicFeet.toGallons(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "55.0,8.8299","90.5,14.5292","123.0,19.7469" })
+	public void testConvertKnownGallonsToCubicFeet(double input, double expectation) {
+		final double result = Volume.Gallons.toCubicFeet(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromGallonsToCubicInchesAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.Gallons.toCubicInches(value);
+		final double convertBack = Volume.CubicInches.toGallons(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "66.0,18309.6539","2.4007,666.0","77.0,21361.2629" })
+	public void testConvertKnownGallonsToCubicInches(double input, double expectation) {
+		final double result = Volume.Gallons.toCubicInches(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromGallonsToOilBarrelsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.Gallons.toOilBarrels(value);
+		final double convertBack = Volume.OilBarrels.toGallons(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "174.862,5.0","19409.6,555.0","24.4806,0.7" })
+	public void testConvertKnownGallonsToOilBarrels(double input, double expectation) {
+		final double result = Volume.Gallons.toOilBarrels(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
 	public void testFromKilolitresToMillilitresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
 		final double convertTo = Volume.Kilolitres.toMillilitres(value);
 		final double convertBack = Volume.Millilitres.toKilolitres(convertTo);
@@ -641,6 +1551,62 @@ public class VolumeTests {
 	@CsvSource({ "12.0,50721.03405276","0.8,3381.4","6.2,26205.86759392" })
 	public void testConvertKnownKilolitresToUSCups(double input, double expectation) {
 		final double result = Volume.Kilolitres.toUSCups(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromKilolitresToCubicMetresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.Kilolitres.toCubicMetres(value);
+		final double convertBack = Volume.CubicMetres.toKilolitres(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "1000.0,1000.0","0.9,0.9","6.09,6.09" })
+	public void testConvertKnownKilolitresToCubicMetres(double input, double expectation) {
+		final double result = Volume.Kilolitres.toCubicMetres(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromKilolitresToCubicFeetAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.Kilolitres.toCubicFeet(value);
+		final double convertBack = Volume.CubicFeet.toKilolitres(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.0566337,2.0","7.9,278.986","88.0,3107.69" })
+	public void testConvertKnownKilolitresToCubicFeet(double input, double expectation) {
+		final double result = Volume.Kilolitres.toCubicFeet(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromKilolitresToCubicInchesAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.Kilolitres.toCubicInches(value);
+		final double convertBack = Volume.CubicInches.toKilolitres(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "6.0,366142.19999","0.1,6102.37","0.8,48818.959" })
+	public void testConvertKnownKilolitresToCubicInches(double input, double expectation) {
+		final double result = Volume.Kilolitres.toCubicInches(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromKilolitresToOilBarrelsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.Kilolitres.toOilBarrels(value);
+		final double convertBack = Volume.OilBarrels.toKilolitres(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.476962,3.0","4.0,25.1592","6.0,37.7389" })
+	public void testConvertKnownKilolitresToOilBarrels(double input, double expectation) {
+		final double result = Volume.Kilolitres.toOilBarrels(input);
 		assertEquals(expectation, result, 0.01);
 	}
 
@@ -855,6 +1821,62 @@ public class VolumeTests {
 	}
 
 	@Property(tries = 100)
+	public void testFromLitresToCubicMetresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.Litres.toCubicMetres(value);
+		final double convertBack = Volume.CubicMetres.toLitres(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "400.5,0.4005","900.0,0.9","6090.0,6.09" })
+	public void testConvertKnownLitresToCubicMetres(double input, double expectation) {
+		final double result = Volume.Litres.toCubicMetres(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromLitresToCubicFeetAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.Litres.toCubicFeet(value);
+		final double convertBack = Volume.CubicFeet.toLitres(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "5.0,0.176573","84.9505,3.0","6.0,0.211888" })
+	public void testConvertKnownLitresToCubicFeet(double input, double expectation) {
+		final double result = Volume.Litres.toCubicFeet(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromLitresToCubicInchesAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.Litres.toCubicInches(value);
+		final double convertBack = Volume.CubicInches.toLitres(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "666.0,40641.7842","788.0,48086.675599","4.0,244.095" })
+	public void testConvertKnownLitresToCubicInches(double input, double expectation) {
+		final double result = Volume.Litres.toCubicInches(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromLitresToOilBarrelsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.Litres.toOilBarrels(value);
+		final double convertBack = Volume.OilBarrels.toLitres(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "8744.3,55.0","1234.0,7.761626","953.924,6.0" })
+	public void testConvertKnownLitresToOilBarrels(double input, double expectation) {
+		final double result = Volume.Litres.toOilBarrels(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
 	public void testFromMillilitresToLitresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
 		final double convertTo = Volume.Millilitres.toLitres(value);
 		final double convertBack = Volume.Litres.toMillilitres(convertTo);
@@ -1061,6 +2083,328 @@ public class VolumeTests {
 	@CsvSource({ "348.0,1.47091","12.9,0.05452511","700.0,2.95873" })
 	public void testConvertKnownMillilitresToUSCups(double input, double expectation) {
 		final double result = Volume.Millilitres.toUSCups(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromMillilitresToCubicMetresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.Millilitres.toCubicMetres(value);
+		final double convertBack = Volume.CubicMetres.toMillilitres(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "9999999.0,9.999999","123456.0,0.123456","400500.0,0.4005" })
+	public void testConvertKnownMillilitresToCubicMetres(double input, double expectation) {
+		final double result = Volume.Millilitres.toCubicMetres(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromMillilitresToCubicFeetAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.Millilitres.toCubicFeet(value);
+		final double convertBack = Volume.CubicFeet.toMillilitres(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "254852.0,9.0","6000.0,0.211888","70792.1,2.5" })
+	public void testConvertKnownMillilitresToCubicFeet(double input, double expectation) {
+		final double result = Volume.Millilitres.toCubicFeet(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromMillilitresToCubicInchesAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.Millilitres.toCubicInches(value);
+		final double convertBack = Volume.CubicInches.toMillilitres(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "777.0,47.4154","98.3224,5.999987","12.0,0.732285" })
+	public void testConvertKnownMillilitresToCubicInches(double input, double expectation) {
+		final double result = Volume.Millilitres.toCubicInches(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromMillilitresToOilBarrelsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.Millilitres.toOilBarrels(value);
+		final double convertBack = Volume.OilBarrels.toMillilitres(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "47696.2,0.3","143089.0,0.9","317.97459,0.002" })
+	public void testConvertKnownMillilitresToOilBarrels(double input, double expectation) {
+		final double result = Volume.Millilitres.toOilBarrels(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromOilBarrelsToMillilitresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.OilBarrels.toMillilitres(value);
+		final double convertBack = Volume.Millilitres.toOilBarrels(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.8,127189.6","6.0,953922.0","0.06289182,9998.981786" })
+	public void testConvertKnownOilBarrelsToMillilitres(double input, double expectation) {
+		final double result = Volume.OilBarrels.toMillilitres(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromOilBarrelsToLitresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.OilBarrels.toLitres(value);
+		final double convertBack = Volume.Litres.toOilBarrels(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "12.0,1907.85","6.0,953.924","77.0,12242.0" })
+	public void testConvertKnownOilBarrelsToLitres(double input, double expectation) {
+		final double result = Volume.OilBarrels.toLitres(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromOilBarrelsToKilolitresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.OilBarrels.toKilolitres(value);
+		final double convertBack = Volume.Kilolitres.toOilBarrels(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "12.0,1.90785","8.0,1.2719","77.0,12.242" })
+	public void testConvertKnownOilBarrelsToKilolitres(double input, double expectation) {
+		final double result = Volume.OilBarrels.toKilolitres(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromOilBarrelsToTeaspoonsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.OilBarrels.toTeaspoons(value);
+		final double convertBack = Volume.Teaspoons.toOilBarrels(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.6,16115.219","4.0,107434.8","6.7,179953.29" })
+	public void testConvertKnownOilBarrelsToTeaspoons(double input, double expectation) {
+		final double result = Volume.OilBarrels.toTeaspoons(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromOilBarrelsToTablespoonsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.OilBarrels.toTablespoons(value);
+		final double convertBack = Volume.Tablespoons.toOilBarrels(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.7,6267.04","8.0,71623.279","10.052487,89999.011387" })
+	public void testConvertKnownOilBarrelsToTablespoons(double input, double expectation) {
+		final double result = Volume.OilBarrels.toTablespoons(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromOilBarrelsToQuartsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.OilBarrels.toQuarts(value);
+		final double convertBack = Volume.Quarts.toOilBarrels(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "88.0,12310.232","12.0,1678.67","6.0,839.336" })
+	public void testConvertKnownOilBarrelsToQuarts(double input, double expectation) {
+		final double result = Volume.OilBarrels.toQuarts(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromOilBarrelsToPintsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.OilBarrels.toPints(value);
+		final double convertBack = Volume.Pints.toOilBarrels(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "8.0,2238.23","6.0,1678.67","0.275218,77.0" })
+	public void testConvertKnownOilBarrelsToPints(double input, double expectation) {
+		final double result = Volume.OilBarrels.toPints(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromOilBarrelsToGallonsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.OilBarrels.toGallons(value);
+		final double convertBack = Volume.Gallons.toOilBarrels(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "4.0,139.889","6.0,209.834","18.0,629.502" })
+	public void testConvertKnownOilBarrelsToGallons(double input, double expectation) {
+		final double result = Volume.OilBarrels.toGallons(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromOilBarrelsToFluidOuncesAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.OilBarrels.toFluidOunces(value);
+		final double convertBack = Volume.FluidOunces.toOilBarrels(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.5,2797.79","6.0,33573.4199","77.0,430858.889" })
+	public void testConvertKnownOilBarrelsToFluidOunces(double input, double expectation) {
+		final double result = Volume.OilBarrels.toFluidOunces(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromOilBarrelsToUSTeaspoonsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.OilBarrels.toUSTeaspoons(value);
+		final double convertBack = Volume.USTeaspoons.toOilBarrels(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.3,9676.8","7.0,225792.0","1.5,48384.0" })
+	public void testConvertKnownOilBarrelsToUSTeaspoons(double input, double expectation) {
+		final double result = Volume.OilBarrels.toUSTeaspoons(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromOilBarrelsToUSTablespoonsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.OilBarrels.toUSTablespoons(value);
+		final double convertBack = Volume.USTablespoons.toOilBarrels(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.2,2150.4","6.0,64512.0","77.0,827904.0" })
+	public void testConvertKnownOilBarrelsToUSTablespoons(double input, double expectation) {
+		final double result = Volume.OilBarrels.toUSTablespoons(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromOilBarrelsToUSQuartsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.OilBarrels.toUSQuarts(value);
+		final double convertBack = Volume.USQuarts.toOilBarrels(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "4.5,756.0","77.0,12936.0","0.7,117.6" })
+	public void testConvertKnownOilBarrelsToUSQuarts(double input, double expectation) {
+		final double result = Volume.OilBarrels.toUSQuarts(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromOilBarrelsToUSPintsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.OilBarrels.toUSPints(value);
+		final double convertBack = Volume.USPints.toOilBarrels(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "7.8,2620.8","0.7,235.2","3.0,1008.0" })
+	public void testConvertKnownOilBarrelsToUSPints(double input, double expectation) {
+		final double result = Volume.OilBarrels.toUSPints(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromOilBarrelsToUSGallonsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.OilBarrels.toUSGallons(value);
+		final double convertBack = Volume.USGallons.toOilBarrels(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "78.0,3276.0","3.0,126.0","777.0,32634.0" })
+	public void testConvertKnownOilBarrelsToUSGallons(double input, double expectation) {
+		final double result = Volume.OilBarrels.toUSGallons(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromOilBarrelsToUSFluidOuncesAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.OilBarrels.toUSFluidOunces(value);
+		final double convertBack = Volume.USFluidOunces.toOilBarrels(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "4.9,26342.4","0.4,2150.4","3.0,16128.0" })
+	public void testConvertKnownOilBarrelsToUSFluidOunces(double input, double expectation) {
+		final double result = Volume.OilBarrels.toUSFluidOunces(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromOilBarrelsToUSCupsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.OilBarrels.toUSCups(value);
+		final double convertBack = Volume.USCups.toOilBarrels(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "55.0,36434.5849","0.686847,455.0","9.2,6094.51" })
+	public void testConvertKnownOilBarrelsToUSCups(double input, double expectation) {
+		final double result = Volume.OilBarrels.toUSCups(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromOilBarrelsToCubicMetresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.OilBarrels.toCubicMetres(value);
+		final double convertBack = Volume.CubicMetres.toOilBarrels(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "7.0,1.1129112","3.0,0.476962","78.0,12.401" })
+	public void testConvertKnownOilBarrelsToCubicMetres(double input, double expectation) {
+		final double result = Volume.OilBarrels.toCubicMetres(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromOilBarrelsToCubicFeetAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.OilBarrels.toCubicFeet(value);
+		final double convertBack = Volume.CubicFeet.toOilBarrels(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "88.0,494.083","3.0,16.8438","11.0,61.7604" })
+	public void testConvertKnownOilBarrelsToCubicFeet(double input, double expectation) {
+		final double result = Volume.OilBarrels.toCubicFeet(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromOilBarrelsToCubicInchesAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.OilBarrels.toCubicInches(value);
+		final double convertBack = Volume.CubicInches.toOilBarrels(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "100.4,974080.8","5.0,48510.0","66.0,640332.0" })
+	public void testConvertKnownOilBarrelsToCubicInches(double input, double expectation) {
+		final double result = Volume.OilBarrels.toCubicInches(input);
 		assertEquals(expectation, result, 0.01);
 	}
 
@@ -1275,6 +2619,62 @@ public class VolumeTests {
 	}
 
 	@Property(tries = 100)
+	public void testFromPintsToCubicMetresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.Pints.toCubicMetres(value);
+		final double convertBack = Volume.CubicMetres.toPints(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "21117.0,12.0","14078.0,8.0","9999.0,5.682044" })
+	public void testConvertKnownPintsToCubicMetres(double input, double expectation) {
+		final double result = Volume.Pints.toCubicMetres(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromPintsToCubicFeetAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.Pints.toCubicFeet(value);
+		final double convertBack = Volume.CubicFeet.toPints(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "44.0,0.88299","1234.0,24.76386","8000.0,160.5436" })
+	public void testConvertKnownPintsToCubicFeet(double input, double expectation) {
+		final double result = Volume.Pints.toCubicFeet(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromPintsToCubicInchesAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.Pints.toCubicInches(value);
+		final double convertBack = Volume.CubicInches.toPints(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "5.0,173.387","777.0,26944.33979","35.58511,1234.0" })
+	public void testConvertKnownPintsToCubicInches(double input, double expectation) {
+		final double result = Volume.Pints.toCubicInches(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromPintsToOilBarrelsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.Pints.toOilBarrels(value);
+		final double convertBack = Volume.OilBarrels.toPints(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "1398.89,5.0","122.0,0.436059","559.557,2.0" })
+	public void testConvertKnownPintsToOilBarrels(double input, double expectation) {
+		final double result = Volume.Pints.toOilBarrels(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
 	public void testFromQuartsToMillilitresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
 		final double convertTo = Volume.Quarts.toMillilitres(value);
 		final double convertBack = Volume.Millilitres.toQuarts(convertTo);
@@ -1481,6 +2881,62 @@ public class VolumeTests {
 	@CsvSource({ "2.0,9.6076","800.9,3847.3632","0.23,1.104874" })
 	public void testConvertKnownQuartsToUSCups(double input, double expectation) {
 		final double result = Volume.Quarts.toUSCups(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromQuartsToCubicMetresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.Quarts.toCubicMetres(value);
+		final double convertBack = Volume.CubicMetres.toQuarts(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "7918.89,9.0","1200.0,1.363827","8000.0,9.09218" })
+	public void testConvertKnownQuartsToCubicMetres(double input, double expectation) {
+		final double result = Volume.Quarts.toCubicMetres(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromQuartsToCubicFeetAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.Quarts.toCubicFeet(value);
+		final double convertBack = Volume.CubicFeet.toQuarts(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "20.0,0.802718","800.0,32.1087","67.0,2.68911" })
+	public void testConvertKnownQuartsToCubicFeet(double input, double expectation) {
+		final double result = Volume.Quarts.toCubicFeet(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromQuartsToCubicInchesAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.Quarts.toCubicInches(value);
+		final double convertBack = Volume.CubicInches.toQuarts(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "777.0,53888.75729","8.16093,566.0","76.0,5270.97" })
+	public void testConvertKnownQuartsToCubicInches(double input, double expectation) {
+		final double result = Volume.Quarts.toCubicInches(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromQuartsToOilBarrelsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.Quarts.toOilBarrels(value);
+		final double convertBack = Volume.OilBarrels.toQuarts(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "839.336,6.0","41.9668,0.3","22.0,0.157267" })
+	public void testConvertKnownQuartsToOilBarrels(double input, double expectation) {
+		final double result = Volume.Quarts.toOilBarrels(input);
 		assertEquals(expectation, result, 0.01);
 	}
 
@@ -1695,6 +3151,62 @@ public class VolumeTests {
 	}
 
 	@Property(tries = 100)
+	public void testFromTablespoonsToCubicMetresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.Tablespoons.toCubicMetres(value);
+		final double convertBack = Volume.CubicMetres.toTablespoons(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "10000.0,0.1775817","3378.726,0.059999995422","800009.0,14.2066969" })
+	public void testConvertKnownTablespoonsToCubicMetres(double input, double expectation) {
+		final double result = Volume.Tablespoons.toCubicMetres(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromTablespoonsToCubicFeetAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.Tablespoons.toCubicFeet(value);
+		final double convertBack = Volume.CubicFeet.toTablespoons(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "780.0,0.489157","6378.32,4.0","8451.28,5.3" })
+	public void testConvertKnownTablespoonsToCubicFeet(double input, double expectation) {
+		final double result = Volume.Tablespoons.toCubicFeet(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromTablespoonsToCubicInchesAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.Tablespoons.toCubicInches(value);
+		final double convertBack = Volume.CubicInches.toTablespoons(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "66.0,71.5222","123.0,133.291","56.0,60.6855" })
+	public void testConvertKnownTablespoonsToCubicInches(double input, double expectation) {
+		final double result = Volume.Tablespoons.toCubicInches(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromTablespoonsToOilBarrelsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.Tablespoons.toOilBarrels(value);
+		final double convertBack = Volume.OilBarrels.toTablespoons(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "44764.5,5.0","12222.0,1.3651429","800.0,0.0893564" })
+	public void testConvertKnownTablespoonsToOilBarrels(double input, double expectation) {
+		final double result = Volume.Tablespoons.toOilBarrels(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
 	public void testFromTeaspoonsToMillilitresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
 		final double convertTo = Volume.Teaspoons.toMillilitres(value);
 		final double convertBack = Volume.Millilitres.toTeaspoons(convertTo);
@@ -1856,7 +3368,7 @@ public class VolumeTests {
 	}
 
 	@ParameterizedTest
-	@CsvSource({ "106.0,1.32605","34.0,0.425337","6.21,0.07656059" })
+	@CsvSource({ "106.0,1.32605","34.0,0.425337","6.21,0.07768648" })
 	public void testConvertKnownTeaspoonsToUSPints(double input, double expectation) {
 		final double result = Volume.Teaspoons.toUSPints(input);
 		assertEquals(expectation, result, 0.01);
@@ -1901,6 +3413,62 @@ public class VolumeTests {
 	@CsvSource({ "8000.0,200.1584","34.0,0.850673","109.9,2.7496761" })
 	public void testConvertKnownTeaspoonsToUSCups(double input, double expectation) {
 		final double result = Volume.Teaspoons.toUSCups(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromTeaspoonsToCubicMetresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.Teaspoons.toCubicMetres(value);
+		final double convertBack = Volume.CubicMetres.toTeaspoons(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "152043.0,0.9","3378.726,0.02","8000.0,0.04735512" })
+	public void testConvertKnownTeaspoonsToCubicMetres(double input, double expectation) {
+		final double result = Volume.Teaspoons.toCubicMetres(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromTeaspoonsToCubicFeetAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.Teaspoons.toCubicFeet(value);
+		final double convertBack = Volume.CubicFeet.toTeaspoons(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "600.0,0.125425","1234.0,0.257957","880.0,0.183956" })
+	public void testConvertKnownTeaspoonsToCubicFeet(double input, double expectation) {
+		final double result = Volume.Teaspoons.toCubicFeet(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromTeaspoonsToCubicInchesAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.Teaspoons.toCubicInches(value);
+		final double convertBack = Volume.CubicInches.toTeaspoons(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "8.0,2.88979","12.0,4.33468","666.0,240.575" })
+	public void testConvertKnownTeaspoonsToCubicInches(double input, double expectation) {
+		final double result = Volume.Teaspoons.toCubicInches(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromTeaspoonsToOilBarrelsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.Teaspoons.toOilBarrels(value);
+		final double convertBack = Volume.OilBarrels.toTeaspoons(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "10743.5,0.4","107435.0,4.0","134294.0,5.0" })
+	public void testConvertKnownTeaspoonsToOilBarrels(double input, double expectation) {
+		final double result = Volume.Teaspoons.toOilBarrels(input);
 		assertEquals(expectation, result, 0.01);
 	}
 
@@ -2115,6 +3683,62 @@ public class VolumeTests {
 	}
 
 	@Property(tries = 100)
+	public void testFromUSCupsToCubicMetresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.USCups.toCubicMetres(value);
+		final double convertBack = Volume.CubicMetres.toUSCups(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "4555.0,1.0932","100900.0,24.216","7800.0,1.872" })
+	public void testConvertKnownUSCupsToCubicMetres(double input, double expectation) {
+		final double result = Volume.USCups.toCubicMetres(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromUSCupsToCubicFeetAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.USCups.toCubicFeet(value);
+		final double convertBack = Volume.CubicFeet.toUSCups(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "88.0,0.745846","471.947,4.0","123.0,1.04249" })
+	public void testConvertKnownUSCupsToCubicFeet(double input, double expectation) {
+		final double result = Volume.USCups.toCubicFeet(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromUSCupsToCubicInchesAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.USCups.toCubicInches(value);
+		final double convertBack = Volume.CubicInches.toUSCups(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "6.0,87.8742","2.3,33.6851","0.9,13.1811" })
+	public void testConvertKnownUSCupsToCubicInches(double input, double expectation) {
+		final double result = Volume.USCups.toCubicInches(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromUSCupsToOilBarrelsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.USCups.toOilBarrels(value);
+		final double convertBack = Volume.OilBarrels.toUSCups(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "43721.5,66.0","1111.0,1.677115","3312.24,5.0" })
+	public void testConvertKnownUSCupsToOilBarrels(double input, double expectation) {
+		final double result = Volume.USCups.toOilBarrels(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
 	public void testFromUSFluidOuncesToMillilitresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
 		final double convertTo = Volume.USFluidOunces.toMillilitres(value);
 		final double convertBack = Volume.Millilitres.toUSFluidOunces(convertTo);
@@ -2321,6 +3945,62 @@ public class VolumeTests {
 	@CsvSource({ "45.0,5.625","66.9,8.3625","0.29,0.03625" })
 	public void testConvertKnownUSFluidOuncesToUSCups(double input, double expectation) {
 		final double result = Volume.USFluidOunces.toUSCups(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromUSFluidOuncesToCubicMetresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.USFluidOunces.toCubicMetres(value);
+		final double convertBack = Volume.CubicMetres.toUSFluidOunces(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "800900.0,23.6854398","789.0,0.0233335","100100.0,2.96031031" })
+	public void testConvertKnownUSFluidOuncesToCubicMetres(double input, double expectation) {
+		final double result = Volume.USFluidOunces.toCubicMetres(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromUSFluidOuncesToCubicFeetAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.USFluidOunces.toCubicFeet(value);
+		final double convertBack = Volume.CubicFeet.toUSFluidOunces(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "344.0,0.359266","8009.0,8.364434","3830.03,4.0" })
+	public void testConvertKnownUSFluidOuncesToCubicFeet(double input, double expectation) {
+		final double result = Volume.USFluidOunces.toCubicFeet(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromUSFluidOuncesToCubicInchesAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.USFluidOunces.toCubicInches(value);
+		final double convertBack = Volume.CubicInches.toUSFluidOunces(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "66.0,119.109","900.0,1624.22","8.0,14.4375" })
+	public void testConvertKnownUSFluidOuncesToCubicInches(double input, double expectation) {
+		final double result = Volume.USFluidOunces.toCubicInches(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromUSFluidOuncesToOilBarrelsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.USFluidOunces.toOilBarrels(value);
+		final double convertBack = Volume.OilBarrels.toUSFluidOunces(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "32256.0,6.0","1899.0,0.3532366","6988.8,1.3" })
+	public void testConvertKnownUSFluidOuncesToOilBarrels(double input, double expectation) {
+		final double result = Volume.USFluidOunces.toOilBarrels(input);
 		assertEquals(expectation, result, 0.01);
 	}
 
@@ -2535,6 +4215,62 @@ public class VolumeTests {
 	}
 
 	@Property(tries = 100)
+	public void testFromUSGallonsToCubicMetresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.USGallons.toCubicMetres(value);
+		final double convertBack = Volume.CubicMetres.toUSGallons(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "1849.2,7.0","87.0,0.329331","123456.0,467.331797" })
+	public void testConvertKnownUSGallonsToCubicMetres(double input, double expectation) {
+		final double result = Volume.USGallons.toCubicMetres(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromUSGallonsToCubicFeetAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.USGallons.toCubicFeet(value);
+		final double convertBack = Volume.CubicFeet.toUSGallons(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "6.0,0.802083","24.0,3.20833","5.0,0.668403" })
+	public void testConvertKnownUSGallonsToCubicFeet(double input, double expectation) {
+		final double result = Volume.USGallons.toCubicFeet(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromUSGallonsToCubicInchesAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.USGallons.toCubicInches(value);
+		final double convertBack = Volume.CubicInches.toUSGallons(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "6.0,1386.0","190.0,43890.0","55.0,12705.0" })
+	public void testConvertKnownUSGallonsToCubicInches(double input, double expectation) {
+		final double result = Volume.USGallons.toCubicInches(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromUSGallonsToOilBarrelsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.USGallons.toOilBarrels(value);
+		final double convertBack = Volume.OilBarrels.toUSGallons(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "966.0,23.0","1234.0,29.38095","16.8,0.4" })
+	public void testConvertKnownUSGallonsToOilBarrels(double input, double expectation) {
+		final double result = Volume.USGallons.toOilBarrels(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
 	public void testFromUSPintsToMillilitresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
 		final double convertTo = Volume.USPints.toMillilitres(value);
 		final double convertBack = Volume.Millilitres.toUSPints(convertTo);
@@ -2741,6 +4477,62 @@ public class VolumeTests {
 	@CsvSource({ "23.9,47.8","1009.0,2018.0","45.9,91.8" })
 	public void testConvertKnownUSPintsToUSCups(double input, double expectation) {
 		final double result = Volume.USPints.toUSCups(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromUSPintsToCubicMetresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.USPints.toCubicMetres(value);
+		final double convertBack = Volume.CubicMetres.toUSPints(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "14793.6,7.0","700.0,0.331224","123456.0,58.4164747" })
+	public void testConvertKnownUSPintsToCubicMetres(double input, double expectation) {
+		final double result = Volume.USPints.toCubicMetres(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromUSPintsToCubicFeetAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.USPints.toCubicFeet(value);
+		final double convertBack = Volume.CubicFeet.toUSPints(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "66.0,1.10286","2692.99,45.0","123.0,2.05534" })
+	public void testConvertKnownUSPintsToCubicFeet(double input, double expectation) {
+		final double result = Volume.USPints.toCubicFeet(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromUSPintsToCubicInchesAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.USPints.toCubicInches(value);
+		final double convertBack = Volume.CubicInches.toUSPints(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "66.0,1905.75","900.0,25987.5","6.7,193.463" })
+	public void testConvertKnownUSPintsToCubicInches(double input, double expectation) {
+		final double result = Volume.USPints.toCubicInches(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromUSPintsToOilBarrelsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.USPints.toOilBarrels(value);
+		final double convertBack = Volume.OilBarrels.toUSPints(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "223776.0,666.0","1234.0,3.672619","302.4,0.9" })
+	public void testConvertKnownUSPintsToOilBarrels(double input, double expectation) {
+		final double result = Volume.USPints.toOilBarrels(input);
 		assertEquals(expectation, result, 0.01);
 	}
 
@@ -2955,6 +4747,62 @@ public class VolumeTests {
 	}
 
 	@Property(tries = 100)
+	public void testFromUSQuartsToCubicMetresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.USQuarts.toCubicMetres(value);
+		final double convertBack = Volume.CubicMetres.toUSQuarts(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "8453.51,8.0","5000.0,4.731765","123456.0,116.832949" })
+	public void testConvertKnownUSQuartsToCubicMetres(double input, double expectation) {
+		final double result = Volume.USQuarts.toCubicMetres(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromUSQuartsToCubicFeetAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.USQuarts.toCubicFeet(value);
+		final double convertBack = Volume.CubicFeet.toUSQuarts(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "44.0,1.47049","2663.06,89.0","444.0,14.8385" })
+	public void testConvertKnownUSQuartsToCubicFeet(double input, double expectation) {
+		final double result = Volume.USQuarts.toCubicFeet(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromUSQuartsToCubicInchesAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.USQuarts.toCubicInches(value);
+		final double convertBack = Volume.CubicInches.toUSQuarts(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "44.0,2541.0","800.0,46200.0","6.0,346.5" })
+	public void testConvertKnownUSQuartsToCubicInches(double input, double expectation) {
+		final double result = Volume.USQuarts.toCubicInches(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromUSQuartsToOilBarrelsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.USQuarts.toOilBarrels(value);
+		final double convertBack = Volume.OilBarrels.toUSQuarts(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "9240.0,55.0","1344.0,8.0","207312.0,1234.0" })
+	public void testConvertKnownUSQuartsToOilBarrels(double input, double expectation) {
+		final double result = Volume.USQuarts.toOilBarrels(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
 	public void testFromUSTablespoonsToMillilitresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
 		final double convertTo = Volume.USTablespoons.toMillilitres(value);
 		final double convertBack = Volume.Millilitres.toUSTablespoons(convertTo);
@@ -3165,6 +5013,62 @@ public class VolumeTests {
 	}
 
 	@Property(tries = 100)
+	public void testFromUSTablespoonsToCubicMetresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.USTablespoons.toCubicMetres(value);
+		final double convertBack = Volume.CubicMetres.toUSTablespoons(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "541024.0,8.0","10200.0,0.150825","123456.0,1.82551483" })
+	public void testConvertKnownUSTablespoonsToCubicMetres(double input, double expectation) {
+		final double result = Volume.USTablespoons.toCubicMetres(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromUSTablespoonsToCubicFeetAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.USTablespoons.toCubicFeet(value);
+		final double convertBack = Volume.CubicFeet.toUSTablespoons(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "66.0,0.0344645","7660.05,4.0","1234.0,0.6443821" })
+	public void testConvertKnownUSTablespoonsToCubicFeet(double input, double expectation) {
+		final double result = Volume.USTablespoons.toCubicFeet(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromUSTablespoonsToCubicInchesAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.USTablespoons.toCubicInches(value);
+		final double convertBack = Volume.CubicInches.toUSTablespoons(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "900.0,812.109","10.0,9.02344","4.0,3.60938" })
+	public void testConvertKnownUSTablespoonsToCubicInches(double input, double expectation) {
+		final double result = Volume.USTablespoons.toCubicInches(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromUSTablespoonsToOilBarrelsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.USTablespoons.toOilBarrels(value);
+		final double convertBack = Volume.OilBarrels.toUSTablespoons(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "591360,55.0","4300.8,0.4","34406.4,3.2" })
+	public void testConvertKnownUSTablespoonsToOilBarrels(double input, double expectation) {
+		final double result = Volume.USTablespoons.toOilBarrels(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
 	public void testFromUSTeaspoonsToMillilitresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
 		final double convertTo = Volume.USTeaspoons.toMillilitres(value);
 		final double convertBack = Volume.Millilitres.toUSTeaspoons(convertTo);
@@ -3371,6 +5275,62 @@ public class VolumeTests {
 	@CsvSource({ "90.0,1.875","4500.8,93.7666363","0.9,0.01875" })
 	public void testConvertKnownUSTeaspoonsToUSCups(double input, double expectation) {
 		final double result = Volume.USTeaspoons.toUSCups(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromUSTeaspoonsToCubicMetresAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.USTeaspoons.toCubicMetres(value);
+		final double convertBack = Volume.CubicMetres.toUSTeaspoons(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "405768.0,2.0","80808.0,0.39829617","123456.0,0.608504748" })
+	public void testConvertKnownUSTeaspoonsToCubicMetres(double input, double expectation) {
+		final double result = Volume.USTeaspoons.toCubicMetres(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromUSTeaspoonsToCubicFeetAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.USTeaspoons.toCubicFeet(value);
+		final double convertBack = Volume.CubicFeet.toUSTeaspoons(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "2000.0,0.3481263","6894.05,1.2","12345.0,2.1488098" })
+	public void testConvertKnownUSTeaspoonsToCubicFeet(double input, double expectation) {
+		final double result = Volume.USTeaspoons.toCubicFeet(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromUSTeaspoonsToCubicInchesAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.USTeaspoons.toCubicInches(value);
+		final double convertBack = Volume.CubicInches.toUSTeaspoons(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "23.2727,7.0","219.429,66.0","39.8961,12.0" })
+	public void testConvertKnownUSTeaspoonsToCubicInches(double input, double expectation) {
+		final double result = Volume.USTeaspoons.toCubicInches(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromUSTeaspoonsToOilBarrelsAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Volume.USTeaspoons.toOilBarrels(value);
+		final double convertBack = Volume.OilBarrels.toUSTeaspoons(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "103219.0,3.2","6666.0,0.2066592","64512.0,2.0" })
+	public void testConvertKnownUSTeaspoonsToOilBarrels(double input, double expectation) {
+		final double result = Volume.USTeaspoons.toOilBarrels(input);
 		assertEquals(expectation, result, 0.01);
 	}
 
