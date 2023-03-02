@@ -470,7 +470,7 @@ public class VolumeTests {
 	}
 
 	@ParameterizedTest
-	@CsvSource({ "600.0,2.5974","462,2.0","899.0,3.89177" })
+	@CsvSource({ "600.0,2.5974","462.0,2.0","899.0,3.89177" })
 	public void testConvertKnownCubicInchesToUSGallons(double input, double expectation) {
 		final double result = Volume.CubicInches.toUSGallons(input);
 		assertEquals(expectation, result, 0.01);
@@ -512,7 +512,7 @@ public class VolumeTests {
 	}
 
 	@ParameterizedTest
-	@CsvSource({ "24409.5,0.4","7777.0,0.1274422","366142,6.0" })
+	@CsvSource({ "24409.5,0.4","7777.0,0.1274422","366142.0,6.0" })
 	public void testConvertKnownCubicInchesToCubicMetres(double input, double expectation) {
 		final double result = Volume.CubicInches.toCubicMetres(input);
 		assertEquals(expectation, result, 0.01);
@@ -680,7 +680,7 @@ public class VolumeTests {
 	}
 
 	@ParameterizedTest
-	@CsvSource({ "0.5,101442.0","2,405768.0","0.3,60865.199" })
+	@CsvSource({ "0.5,101442.0","2.0,405768.0","0.3,60865.199" })
 	public void testConvertKnownCubicMetresToUSTeaspoons(double input, double expectation) {
 		final double result = Volume.CubicMetres.toUSTeaspoons(input);
 		assertEquals(expectation, result, 0.01);
@@ -1058,7 +1058,7 @@ public class VolumeTests {
 	}
 
 	@ParameterizedTest
-	@CsvSource({ "7.0,12.1371","900,1560.48","6.0,10.4032" })
+	@CsvSource({ "7.0,12.1371","900.0,1560.48","6.0,10.4032" })
 	public void testConvertKnownFluidOuncesToCubicInches(double input, double expectation) {
 		final double result = Volume.FluidOunces.toCubicInches(input);
 		assertEquals(expectation, result, 0.01);
@@ -5062,7 +5062,7 @@ public class VolumeTests {
 	}
 
 	@ParameterizedTest
-	@CsvSource({ "591360,55.0","4300.8,0.4","34406.4,3.2" })
+	@CsvSource({ "591360.0,55.0","4300.8,0.4","34406.4,3.2" })
 	public void testConvertKnownUSTablespoonsToOilBarrels(double input, double expectation) {
 		final double result = Volume.USTablespoons.toOilBarrels(input);
 		assertEquals(expectation, result, 0.01);
