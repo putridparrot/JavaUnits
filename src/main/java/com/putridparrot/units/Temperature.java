@@ -38,6 +38,14 @@ public final class Temperature {
 		public static double toRankine(double value) {
 			return value * 9.0/5.0 + 491.67;
 		}
+		/**
+		 * Converts the supplied Celsius value to Reaumur
+		 * @param value The Celsius input value
+		 * @return The value in Reaumur
+		 */
+		public static double toReaumur(double value) {
+			return value / 1.25;
+		}
 	}
 	/**
 	 * Fahrenheit conversion functions
@@ -66,6 +74,14 @@ public final class Temperature {
 		 */
 		public static double toRankine(double value) {
 			return value + 459.67;
+		}
+		/**
+		 * Converts the supplied Fahrenheit value to Reaumur
+		 * @param value The Fahrenheit input value
+		 * @return The value in Reaumur
+		 */
+		public static double toReaumur(double value) {
+			return (value - 32.0) / 2.25;
 		}
 	}
 	/**
@@ -96,6 +112,14 @@ public final class Temperature {
 		public static double toRankine(double value) {
 			return value * 1.8;
 		}
+		/**
+		 * Converts the supplied Kelvin value to Reaumur
+		 * @param value The Kelvin input value
+		 * @return The value in Reaumur
+		 */
+		public static double toReaumur(double value) {
+			return (value - 273.15) / 1.25;
+		}
 	}
 	/**
 	 * Rankine conversion functions
@@ -124,6 +148,51 @@ public final class Temperature {
 		 */
 		public static double toKelvin(double value) {
 			return value / 1.8;
+		}
+		/**
+		 * Converts the supplied Rankine value to Reaumur
+		 * @param value The Rankine input value
+		 * @return The value in Reaumur
+		 */
+		public static double toReaumur(double value) {
+			return (value - 491.67) / 2.25;
+		}
+	}
+	/**
+	 * Reaumur conversion functions
+	 */
+	public static class Reaumur {
+		/**
+		 * Converts the supplied Reaumur value to Kelvin
+		 * @param value The Reaumur input value
+		 * @return The value in Kelvin
+		 */
+		public static double toKelvin(double value) {
+			return value * 1.25 + 273.15;
+		}
+		/**
+		 * Converts the supplied Reaumur value to Celsius
+		 * @param value The Reaumur input value
+		 * @return The value in Celsius
+		 */
+		public static double toCelsius(double value) {
+			return value * 1.25;
+		}
+		/**
+		 * Converts the supplied Reaumur value to Fahrenheit
+		 * @param value The Reaumur input value
+		 * @return The value in Fahrenheit
+		 */
+		public static double toFahrenheit(double value) {
+			return value * 2.25 + 32.0;
+		}
+		/**
+		 * Converts the supplied Reaumur value to Rankine
+		 * @param value The Reaumur input value
+		 * @return The value in Rankine
+		 */
+		public static double toRankine(double value) {
+			return value * 2.25 + 491.67;
 		}
 	}
 }

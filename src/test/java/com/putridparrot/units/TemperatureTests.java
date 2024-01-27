@@ -57,6 +57,20 @@ public class TemperatureTests {
 	}
 
 	@Property(tries = 100)
+	public void testFromCelsiusToReaumurAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Temperature.Celsius.toReaumur(value);
+		final double convertBack = Temperature.Reaumur.toCelsius(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "123.0,98.4","15.67,12.536","87.0,69.6" })
+	public void testConvertKnownCelsiusToReaumur(double input, double expectation) {
+		final double result = Temperature.Celsius.toReaumur(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
 	public void testFromFahrenheitToCelsiusAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
 		final double convertTo = Temperature.Fahrenheit.toCelsius(value);
 		final double convertBack = Temperature.Celsius.toFahrenheit(convertTo);
@@ -95,6 +109,20 @@ public class TemperatureTests {
 	@CsvSource({ "123.0,582.67","9.2,468.87","0.2,459.87" })
 	public void testConvertKnownFahrenheitToRankine(double input, double expectation) {
 		final double result = Temperature.Fahrenheit.toRankine(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromFahrenheitToReaumurAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Temperature.Fahrenheit.toReaumur(value);
+		final double convertBack = Temperature.Reaumur.toFahrenheit(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "67.0,15.555555556","1.6,-13.511111111","900.0,385.77777778" })
+	public void testConvertKnownFahrenheitToReaumur(double input, double expectation) {
+		final double result = Temperature.Fahrenheit.toReaumur(input);
 		assertEquals(expectation, result, 0.01);
 	}
 
@@ -141,6 +169,20 @@ public class TemperatureTests {
 	}
 
 	@Property(tries = 100)
+	public void testFromKelvinToReaumurAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Temperature.Kelvin.toReaumur(value);
+		final double convertBack = Temperature.Reaumur.toKelvin(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "900.0,501.48","1.3,-217.48","60.0,-170.52" })
+	public void testConvertKnownKelvinToReaumur(double input, double expectation) {
+		final double result = Temperature.Kelvin.toReaumur(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
 	public void testFromRankineToCelsiusAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
 		final double convertTo = Temperature.Rankine.toCelsius(value);
 		final double convertBack = Temperature.Celsius.toRankine(convertTo);
@@ -179,6 +221,76 @@ public class TemperatureTests {
 	@CsvSource({ "123.0,68.333333333","0.9,0.5","23.0,12.777777778" })
 	public void testConvertKnownRankineToKelvin(double input, double expectation) {
 		final double result = Temperature.Rankine.toKelvin(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromRankineToReaumurAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Temperature.Rankine.toReaumur(value);
+		final double convertBack = Temperature.Reaumur.toRankine(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "900.0,181.48","34.9,-203.00888889","0.7,-218.20888889" })
+	public void testConvertKnownRankineToReaumur(double input, double expectation) {
+		final double result = Temperature.Rankine.toReaumur(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromReaumurToKelvinAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Temperature.Reaumur.toKelvin(value);
+		final double convertBack = Temperature.Kelvin.toReaumur(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "128.0,433.15","7.4,282.4","1.5,275.025" })
+	public void testConvertKnownReaumurToKelvin(double input, double expectation) {
+		final double result = Temperature.Reaumur.toKelvin(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromReaumurToCelsiusAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Temperature.Reaumur.toCelsius(value);
+		final double convertBack = Temperature.Celsius.toReaumur(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "1.5,1.875","23.9,29.875","0.3,0.375" })
+	public void testConvertKnownReaumurToCelsius(double input, double expectation) {
+		final double result = Temperature.Reaumur.toCelsius(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromReaumurToFahrenheitAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Temperature.Reaumur.toFahrenheit(value);
+		final double convertBack = Temperature.Fahrenheit.toReaumur(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0.3,32.675","87.0,227.75","34.1,108.725" })
+	public void testConvertKnownReaumurToFahrenheit(double input, double expectation) {
+		final double result = Temperature.Reaumur.toFahrenheit(input);
+		assertEquals(expectation, result, 0.01);
+	}
+
+	@Property(tries = 100)
+	public void testFromReaumurToRankineAndBack(@ForAll @DoubleRange(min = -1E12, max = 1E12) double value) {
+		final double convertTo = Temperature.Reaumur.toRankine(value);
+		final double convertBack = Temperature.Rankine.toReaumur(convertTo);
+		assertEquals(value, convertBack, 0.01);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "34.1,568.395","10.6,515.52","1.9,495.945" })
+	public void testConvertKnownReaumurToRankine(double input, double expectation) {
+		final double result = Temperature.Reaumur.toRankine(input);
 		assertEquals(expectation, result, 0.01);
 	}
 
